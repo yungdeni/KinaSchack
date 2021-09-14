@@ -30,6 +30,7 @@ namespace KinaSchack
     {
         private CanvasBitmap _BG;
         private CanvasBitmap _piece;
+        private CanvasBitmap _piece2;
         private GameState _currentGameState;
         private int x, y;
         private bool debugMode;
@@ -44,7 +45,14 @@ namespace KinaSchack
             foreach (var pos in _currentGameState.GameBoard.positions)
             {
                 args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
-                args.DrawingSession.DrawImage(_piece, pos.bounds);
+                if(pos.Item1 == Board.boardstatus.Player2)
+                {
+                    args.DrawingSession.DrawImage(_piece, pos.bounds);
+                }
+                else if(pos.Item1 == Board.boardstatus.Player1)
+                {
+                    args.DrawingSession.DrawImage(_piece2, pos.bounds);
+                }
             }
             
 
@@ -60,6 +68,7 @@ namespace KinaSchack
         {
             _BG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin_Checkers_BG.png"));
             _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
+            _piece2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin2.png"));
             _currentGameState = new GameState();
         }
 

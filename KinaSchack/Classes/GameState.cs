@@ -32,7 +32,6 @@ namespace KinaSchack.Classes
                     if (GameBoard.positions[i, j].bounds.Contains(new Point(x, y)))
                     {
                         SelectedCell = (i, j);
-                        GameBoard.positions[i, j].occupied = true;
                         Debug.WriteLine("Ruta: " + SelectedCell);
                     }
 
