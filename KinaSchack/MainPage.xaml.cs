@@ -28,9 +28,11 @@ namespace KinaSchack
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public CanvasBitmap BG;
-        private GameState currentGameState;
-        public int x, y;
+        private CanvasBitmap _BG;
+        private CanvasBitmap _piece;
+        private GameState _currentGameState;
+        private int x, y;
+        private bool debugMode;
         public MainPage()
         {
             this.InitializeComponent();
@@ -38,11 +40,13 @@ namespace KinaSchack
 
         private void Canvas_Draw(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
         {
-            args.DrawingSession.DrawImage(BG);
-            foreach (var pos in currentGameState.gameBoard.positions)
+            args.DrawingSession.DrawImage(_BG);
+            foreach (var pos in _currentGameState.GameBoard.positions)
             {
                 args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
+                args.DrawingSession.DrawImage(_piece, pos.bounds);
             }
+            
 
         }
 
@@ -54,8 +58,9 @@ namespace KinaSchack
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
-            BG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/BG.png"));
-            currentGameState = new GameState();
+            _BG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin_Checkers_BG.png"));
+            _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
+            _currentGameState = new GameState();
         }
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -63,7 +68,7 @@ namespace KinaSchack
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
 
-            currentGameState.CheckIfSelectedCell(x,y);
+            _currentGameState.GetSelectedCell(x,y);
         }
 
         private void Canvas_Update(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
