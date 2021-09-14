@@ -1,4 +1,5 @@
 ﻿using KinaSchack.Classes;
+using KinaSchack.Enums;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
@@ -42,14 +43,14 @@ namespace KinaSchack
         private void Canvas_Draw(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
         {
             args.DrawingSession.DrawImage(_BG);
-            foreach (var pos in _currentGameState.GameBoard.positions)
+            foreach (var pos in _currentGameState.GameBoard.Cells)
             {
                 args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
-                if(pos.Item1 == Board.boardstatus.Player2)
+                if(pos.Item1 == BoardStatus.Player2)
                 {
                     args.DrawingSession.DrawImage(_piece, pos.bounds);
                 }
-                else if(pos.Item1 == Board.boardstatus.Player1)
+                else if(pos.Item1 == BoardStatus.Player1)
                 {
                     args.DrawingSession.DrawImage(_piece2, pos.bounds);
                 }
@@ -76,8 +77,7 @@ namespace KinaSchack
         {
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
-
-            _currentGameState.GetSelectedCell(x,y);
+            _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(x, y);
         }
 
         private void Canvas_Update(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
