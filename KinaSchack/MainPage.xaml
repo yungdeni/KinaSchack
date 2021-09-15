@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 	<Grid>
-		<canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" Update="Canvas_Update" ClearColor="CornflowerBlue" />
+		<canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" PointerReleased="Canvas_PointerReleased" PointerMoved="Canvas_PointerMoved" Update="Canvas_Update" ClearColor="CornflowerBlue" />
 
 	</Grid>
 	

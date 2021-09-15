@@ -18,6 +18,7 @@ namespace KinaSchack.Classes
 
         public BoardStatus CurrentPlayer;
         public (int x, int y) SelectedCell;
+        public (int a, int b) NewSelectedCell;
         public bool PieceSelected;
 
         //vems tur

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Microsoft.Graphics.Canvas.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,14 +34,14 @@ namespace KinaSchack
         private CanvasBitmap _piece;
         private CanvasBitmap _piece2;
         private GameState _currentGameState;
-        private int x, y;
+        private int a, b, x, y;
         private bool debugMode;
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        private void Canvas_Draw(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
+        private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             args.DrawingSession.DrawImage(_BG);
             foreach (var pos in _currentGameState.GameBoard.Cells)
@@ -54,12 +55,10 @@ namespace KinaSchack
                 {
                     args.DrawingSession.DrawImage(_piece2, pos.bounds);
                 }
-            }
-            
-
+            }         
         }
 
-        private void Canvas_CreateResources(Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
+        private void Canvas_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
 
@@ -75,12 +74,31 @@ namespace KinaSchack
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            Debug.WriteLine("PoinertPressed");
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
             _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(x, y);
+
         }
 
-        private void Canvas_Update(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
+        private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            Debug.WriteLine("PoinertReleased");
+            a = (int)e.GetCurrentPoint(Canvas).Position.X;
+            b = (int)e.GetCurrentPoint(Canvas).Position.Y;
+            _currentGameState.NewSelectedCell = _currentGameState.GetSelectedCell(a, b);
+
+            _currentGameState.Move(_currentGameState.GetSelectedCell(a, b));
+
+            Debug.WriteLine(_currentGameState.NewSelectedCell);
+        }
+
+        private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            //Debug.WriteLine("PoinertMoved");
+        }
+
+        private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
 
         }
