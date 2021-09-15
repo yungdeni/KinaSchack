@@ -34,7 +34,7 @@ namespace KinaSchack
         private CanvasBitmap _piece;
         private CanvasBitmap _piece2;
         private GameState _currentGameState;
-        private int a, b, x, y;
+        private int x, y;
         private bool debugMode;
         public MainPage()
         {
@@ -44,7 +44,7 @@ namespace KinaSchack
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             args.DrawingSession.DrawImage(_BG);
-            foreach (var pos in _currentGameState.GameBoard.Cells)
+            foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
                 args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
                 if(pos.Item1 == BoardStatus.Player2)
@@ -55,7 +55,7 @@ namespace KinaSchack
                 {
                     args.DrawingSession.DrawImage(_piece2, pos.bounds);
                 }
-            }         
+            }
         }
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
@@ -77,20 +77,13 @@ namespace KinaSchack
             Debug.WriteLine("PoinertPressed");
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
-            _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(x, y);
+            _currentGameState.HandleTurn(x, y);
 
         }
 
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertReleased");
-            a = (int)e.GetCurrentPoint(Canvas).Position.X;
-            b = (int)e.GetCurrentPoint(Canvas).Position.Y;
-            _currentGameState.NewSelectedCell = _currentGameState.GetSelectedCell(a, b);
-
-            _currentGameState.Move(_currentGameState.GetSelectedCell(a, b));
-
-            Debug.WriteLine(_currentGameState.NewSelectedCell);
         }
 
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)

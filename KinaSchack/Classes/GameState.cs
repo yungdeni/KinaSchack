@@ -32,39 +32,59 @@ namespace KinaSchack.Classes
             PieceSelected = false;
         }
 
-        public (int x, int y) GetSelectedCell (int x, int y)
+        public (int x, int y) GetSelectedCell(int x, int y)
         {
-
             for (int i = 0; i < GameBoard.Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < GameBoard.Cells.GetLength(1); j++)
                 {
                     if (GameBoard.Cells[i, j].bounds.Contains(new Point(x, y)))
                     {
+                        Debug.WriteLine("Ruta: " + i, j);
                         return (i, j);
-                        Debug.WriteLine("Ruta: " + i,j);
+
                     }
                 }
             }
-            return (0,0);
+            return (-1, -1);
         }
-        public bool CheckIfPlayersPiece(int x, int y)
+        public bool CheckIfPlayersPiece((int x, int y) cellPosition)
         {
-            if (CurrentPlayer == GameBoard.Cells[x,y].Item1)
-            {
-                return true;
-            }
-            return false;
+            return CurrentPlayer == GameBoard.Cells[cellPosition.x, cellPosition.y].Item1;
         }
         public void Move((int x, int y) newPosition)
         {
-            if (CheckIfPlayersPiece(SelectedCell.x,SelectedCell.y))
+
+            if (GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty)
             {
-                if (GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty)
-                {
-                    GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
-                    GameBoard.Cells[SelectedCell.x,SelectedCell.y].Item1 = BoardStatus.Empty;
-                }
+                GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
+                GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
+            }
+
+        }
+        public void HandleTurn(int x, int y)
+        {
+            //Check if player clicked on a cell
+            
+            if (GetSelectedCell(x, y) == (-1, -1))
+            {
+                SelectedCell = (-1, -1);
+                PieceSelected = false;
+                return;
+            }
+
+            if (CheckIfPlayersPiece(GetSelectedCell(x, y)) && PieceSelected == false)
+            {
+                SelectedCell = GetSelectedCell(x, y);
+                PieceSelected = true;
+                return;
+            }
+            if (PieceSelected)
+            {
+                Move(GetSelectedCell(x, y));
+                PieceSelected = false;
+                //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
+                CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
             }
         }
     }
