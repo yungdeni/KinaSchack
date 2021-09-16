@@ -1,16 +1,14 @@
 ﻿<Page
-    x:Class="KinaSchack.MainPage"
+    x:Class="KinaSchack.MainMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:KinaSchack"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	<Grid>
-		<canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" PointerReleased="Canvas_PointerReleased" PointerMoved="Canvas_PointerMoved" Update="Canvas_Update" ClearColor="CornflowerBlue" />
 
+    <Grid>
+		<HyperlinkButton Content="Go to game" Click="HyperlinkButton_Click"/>
 	</Grid>
-	
 </Page>
