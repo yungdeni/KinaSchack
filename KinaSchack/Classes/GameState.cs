@@ -54,13 +54,24 @@ namespace KinaSchack.Classes
         }
         public void Move((int x, int y) newPosition)
         {
-
+            CheckIfIllegalDiagonalMove((newPosition));
             if (GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty)
             {
                 GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
                 GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
             }
 
+        }
+        //NorthEast and SouthWest moves are illegal
+        //The difference between two points are in the form (n,-n) when making this type of move
+        public bool CheckIfIllegalDiagonalMove((int x, int y) newPosition)
+        {
+            if ((SelectedCell.x - newPosition.x) * -1 == SelectedCell.y - newPosition.y)
+            {
+                Debug.WriteLine("Illegal SouthWest/NorthEast");
+                return true;
+            }
+            return false;
         }
         public void HandleTurn(int x, int y)
         {
@@ -81,10 +92,15 @@ namespace KinaSchack.Classes
             }
             if (PieceSelected)
             {
-                Move(GetSelectedCell(x, y));
-                PieceSelected = false;
-                //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
-                CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
+                if (!CheckIfIllegalDiagonalMove(GetSelectedCell(x, y)))
+                {
+                    Move(GetSelectedCell(x, y));
+                    PieceSelected = false;
+                    //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
+                    CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
+
+                }
+
             }
         }
     }
