@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using KinaSchack.Enums;
+using Windows.Media.Playback;
 
 namespace KinaSchack.Classes
 {
@@ -15,11 +16,11 @@ namespace KinaSchack.Classes
     public class GameState
     {
         public Board GameBoard;
-
         public BoardStatus CurrentPlayer;
         public (int x, int y) SelectedCell;
         public (int a, int b) NewSelectedCell;
         public bool PieceSelected;
+        private Audio _audio;
 
         //vems tur
         //om man har selectad en piece
@@ -27,6 +28,7 @@ namespace KinaSchack.Classes
 
         public GameState()
         {
+            _audio = new Audio();
             GameBoard = new Board();
             CurrentPlayer = BoardStatus.Player1;
             PieceSelected = false;
@@ -59,6 +61,7 @@ namespace KinaSchack.Classes
             {
                 GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
                 GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
+                _audio.PlayJumpSound();
             }
 
         }

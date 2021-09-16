@@ -46,7 +46,7 @@ namespace KinaSchack
             args.DrawingSession.DrawImage(_BG);
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
-                args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
+                //args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
                 if(pos.Item1 == BoardStatus.Player2)
                 {
                     args.DrawingSession.DrawImage(_piece, pos.bounds);
