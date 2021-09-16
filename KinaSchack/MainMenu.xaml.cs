@@ -42,7 +42,7 @@ namespace KinaSchack
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Exit();
         }
     }
 }
