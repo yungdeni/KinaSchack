@@ -143,6 +143,7 @@
     <Content Include="Assets\Images\Pumpkin2.png" />
     <Content Include="Assets\Images\Pumpkin.png" />
     <Content Include="Assets\Images\Pumpkin_Checkers_BG.png" />
+    <Content Include="Assets\Images\Title.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
