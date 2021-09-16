@@ -63,7 +63,8 @@ namespace KinaSchack.Classes
 
         }
         //NorthEast and SouthWest moves are illegal
-        //The difference between two points are in the form (n,-n) when making this type of move
+        ////The difference between two points is in the form (n,-n) when making this type of move
+
         public bool CheckIfIllegalDiagonalMove((int x, int y) newPosition)
         {
             if ((SelectedCell.x - newPosition.x) * -1 == SelectedCell.y - newPosition.y)
@@ -72,6 +73,24 @@ namespace KinaSchack.Classes
                 return true;
             }
             return false;
+        }
+        //Only one step at a time is allowed(unless you jump over someone)
+        //The difference between two points is in the form (±1,0) when making a one-step horizontal move
+        //A vertical move is in the form (0,±1)
+        //A diagonal move is in the form ±(1,1)
+        public bool CheckIfMoveIsOneStep((int x, int y) newPosition)
+        {
+            int diffX = newPosition.x - SelectedCell.x;
+            int diffY = newPosition.y - SelectedCell.y;
+            if (Math.Abs(diffX) == 1 && diffY == 0)
+            {
+                return true;
+            }
+            if (Math.Abs(diffY) == 1 && diffX == 0)
+            {
+                return true;
+            }
+            return diffX == diffY && Math.Abs(diffX) == 1;
         }
         public void HandleTurn(int x, int y)
         {
@@ -92,7 +111,7 @@ namespace KinaSchack.Classes
             }
             if (PieceSelected)
             {
-                if (!CheckIfIllegalDiagonalMove(GetSelectedCell(x, y)))
+                if (!CheckIfIllegalDiagonalMove(GetSelectedCell(x, y)) && CheckIfMoveIsOneStep(GetSelectedCell(x, y)))
                 {
                     Move(GetSelectedCell(x, y));
                     PieceSelected = false;
