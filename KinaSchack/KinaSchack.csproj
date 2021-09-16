@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Board.cs" />
     <Compile Include="Enums\BoardStatus.cs" />
     <Compile Include="Classes\GameState.cs" />
@@ -136,6 +137,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Audio\jumps.wav" />
     <Content Include="Assets\Images\BG.png" />
     <Content Include="Assets\Images\Grid.png" />
     <Content Include="Assets\Images\Pumpkin2.png" />
