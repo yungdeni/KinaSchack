@@ -54,13 +54,8 @@ namespace KinaSchack.Classes
         }
         public void Move((int x, int y) newPosition)
         {
-            CheckIfIllegalDiagonalMove((newPosition));
-            if (GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty)
-            {
-                GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
-                GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
-            }
-
+            GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
+            GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
         }
         //NorthEast and SouthWest moves are illegal
         ////The difference between two points is in the form (n,-n) when making this type of move
@@ -92,6 +87,11 @@ namespace KinaSchack.Classes
             }
             return diffX == diffY && Math.Abs(diffX) == 1;
         }
+
+        public bool CheckIfNewPositionIsEmpty((int x, int y) newPosition)
+        {
+            return GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty;
+        }
         public void HandleTurn(int x, int y)
         {
             //Check if player clicked on a cell
@@ -103,7 +103,7 @@ namespace KinaSchack.Classes
                 return;
             }
 
-            if (CheckIfPlayersPiece(GetSelectedCell(x, y)) && PieceSelected == false)
+            if (CheckIfPlayersPiece(GetSelectedCell(x, y)))
             {
                 SelectedCell = GetSelectedCell(x, y);
                 PieceSelected = true;
@@ -111,9 +111,10 @@ namespace KinaSchack.Classes
             }
             if (PieceSelected)
             {
-                if (!CheckIfIllegalDiagonalMove(GetSelectedCell(x, y)) && CheckIfMoveIsOneStep(GetSelectedCell(x, y)))
+                (int x, int y) newPos = GetSelectedCell(x, y);
+                if (!CheckIfIllegalDiagonalMove(newPos) && CheckIfMoveIsOneStep(newPos) && CheckIfNewPositionIsEmpty(newPos))
                 {
-                    Move(GetSelectedCell(x, y));
+                    Move(newPos);
                     PieceSelected = false;
                     //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                     CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);

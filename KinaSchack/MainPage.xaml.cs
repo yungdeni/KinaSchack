@@ -56,6 +56,12 @@ namespace KinaSchack
                     args.DrawingSession.DrawImage(_piece2, pos.bounds);
                 }
             }
+            //Rect selectedPiece = _currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds;
+            //if (_currentGameState.PieceSelected)
+            //{
+            //    args.DrawingSession.DrawCircle((float)(selectedPiece.X + (selectedPiece.Width / 2)), (float)(selectedPiece.Y + (selectedPiece.Height / 2)), 30, Colors.Green, 5);
+            //}
+
         }
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
