@@ -34,7 +34,6 @@ namespace KinaSchack
         private CanvasBitmap _piece;
         private CanvasBitmap _piece2;
         private GameState _currentGameState;
-        private Audio _audio;
         private int x, y;
         private bool debugMode;
         public MainPage()
@@ -70,7 +69,6 @@ namespace KinaSchack
             _BG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin_Checkers_BG.png"));
             _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
             _piece2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin2.png"));
-            _audio = new Audio();
             _currentGameState = new GameState();
         }
 
@@ -86,7 +84,6 @@ namespace KinaSchack
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertReleased");
-            _audio.PlayJumpSound();
         }
 
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
