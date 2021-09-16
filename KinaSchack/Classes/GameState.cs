@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using KinaSchack.Enums;
+using Windows.Media.Playback;
 
 namespace KinaSchack.Classes
 {
@@ -15,7 +16,6 @@ namespace KinaSchack.Classes
     public class GameState
     {
         public Board GameBoard;
-
         public BoardStatus CurrentPlayer;
         public (int x, int y) SelectedCell;
         public (int a, int b) NewSelectedCell;
