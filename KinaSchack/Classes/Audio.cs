@@ -17,20 +17,12 @@ namespace KinaSchack.Classes
         public Audio()
         {
             jumpSound = new MediaPlayer();
-            jumpSound.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/jump.wav"));
+            jumpSound.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/jumps.wav"));
         }
         public void PlayJumpSound()
         {
-            //if (playing)
-            //{
-            //    jumpSound.Pause();
-            //    playing = false;
-            //}
-            //else
-            //{
-            //    playing = true;
-                jumpSound.Play();
-            //}
+            playing = true;
+            jumpSound.Play();
         }
     }
 }
