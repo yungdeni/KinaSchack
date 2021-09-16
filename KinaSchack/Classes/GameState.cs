@@ -44,7 +44,6 @@ namespace KinaSchack.Classes
                     {
                         Debug.WriteLine("Ruta: " + i, j);
                         return (i, j);
-
                     }
                 }
             }
@@ -56,14 +55,43 @@ namespace KinaSchack.Classes
         }
         public void Move((int x, int y) newPosition)
         {
+            GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
+            GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
+        }
+        //NorthEast and SouthWest moves are illegal
+        ////The difference between two points is in the form (n,-n) when making this type of move
 
-            if (GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty)
+        public bool CheckIfIllegalDiagonalMove((int x, int y) newPosition)
+        {
+            if ((SelectedCell.x - newPosition.x) * -1 == SelectedCell.y - newPosition.y)
             {
-                GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
-                GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
-                _audio.PlayJumpSound();
+                Debug.WriteLine("Illegal SouthWest/NorthEast");
+                return true;
             }
+            return false;
+        }
+        //Only one step at a time is allowed(unless you jump over someone)
+        //The difference between two points is in the form (±1,0) when making a one-step horizontal move
+        //A vertical move is in the form (0,±1)
+        //A diagonal move is in the form ±(1,1)
+        public bool CheckIfMoveIsOneStep((int x, int y) newPosition)
+        {
+            int diffX = newPosition.x - SelectedCell.x;
+            int diffY = newPosition.y - SelectedCell.y;
+            if (Math.Abs(diffX) == 1 && diffY == 0)
+            {
+                return true;
+            }
+            if (Math.Abs(diffY) == 1 && diffX == 0)
+            {
+                return true;
+            }
+            return diffX == diffY && Math.Abs(diffX) == 1;
+        }
 
+        public bool CheckIfNewPositionIsEmpty((int x, int y) newPosition)
+        {
+            return GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty;
         }
         public void HandleTurn(int x, int y)
         {
@@ -75,8 +103,7 @@ namespace KinaSchack.Classes
                 PieceSelected = false;
                 return;
             }
-
-            if (CheckIfPlayersPiece(GetSelectedCell(x, y)) && PieceSelected == false)
+            if (CheckIfPlayersPiece(GetSelectedCell(x, y)))
             {
                 SelectedCell = GetSelectedCell(x, y);
                 PieceSelected = true;
@@ -84,10 +111,15 @@ namespace KinaSchack.Classes
             }
             if (PieceSelected)
             {
-                Move(GetSelectedCell(x, y));
-                PieceSelected = false;
-                //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
-                CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
+                (int x, int y) newPos = GetSelectedCell(x, y);
+                if (!CheckIfIllegalDiagonalMove(newPos) && CheckIfMoveIsOneStep(newPos) && CheckIfNewPositionIsEmpty(newPos))
+                {
+                    Move(newPos);
+                    PieceSelected = false;
+                    //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
+                    CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
+                    _audio.PlayJumpSound();
+                }
             }
         }
     }
