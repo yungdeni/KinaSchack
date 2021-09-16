@@ -8,7 +8,17 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-		<HyperlinkButton Content="Go to game" Click="HyperlinkButton_Click"/>
-	</Grid>
+    <Grid RenderTransformOrigin="0.719,0.289">
+
+
+
+        <Button Content="Start Game" Height="52" Margin="257,529,0,0" Width="259" VerticalAlignment="Top" Background="LightBlue" Click="Button_Click">
+
+        </Button>
+        <Button Content="Options" Height="52" Margin="257,614,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_1"/>
+        <Button Content="Quit" Height="52" Margin="257,698,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_2"/>
+        <Image x:Name="Title" Source="Assets/Images/Title.png" Margin="10,10,0,0" MaxWidth="800" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+      
+
+    </Grid>
 </Page>
