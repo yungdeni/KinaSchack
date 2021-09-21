@@ -128,9 +128,7 @@ namespace KinaSchack.Classes
 
                     //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                     CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
-                    _audio.PlayJumpSound();
-                    
-                   
+                    _audio.PlayJumpSound();                 
                 }
             }
         }
@@ -156,14 +154,15 @@ namespace KinaSchack.Classes
             }
             else if (CurrentPlayer == BoardStatus.Player2)
             {
-                for (int b = 3; b <= 6; b++)
+                a = 2;
+                for (int b = 6; b >= 3; b--)
                 {
-                    a--;
-                    for (int c = 6; c <= a; c++)
+                    a++;
+                    for (int c = 6; c >= a; c--)
                     {
                         Debug.WriteLine(a);
                         Debug.WriteLine(b + ", " + c);
-                        if (GameBoard.Cells[c, b].Item1 != BoardStatus.Player1)
+                        if (GameBoard.Cells[c, b].Item1 != BoardStatus.Player2)
                         {
                             return false;
                         }
