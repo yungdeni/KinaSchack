@@ -93,6 +93,41 @@ namespace KinaSchack.Classes
         {
             return GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty;
         }
+        public bool CheckIfJumpIsLegal((int x, int y) newPosition)
+        {
+            int diffX = newPosition.x - SelectedCell.x;
+            int diffY = newPosition.y - SelectedCell.y;
+            Debug.WriteLine("Direction: ({0},{1})", Math.Sign(diffX), Math.Sign(diffY));
+            (int x, int y) direction = (Math.Sign(diffX), Math.Sign(diffY));
+            int counter = 1;
+            var originalPos = SelectedCell;
+            while (originalPos != newPosition)
+            {
+                originalPos.x += direction.x;
+                originalPos.y += direction.y;
+                if (counter % 2 == 0)
+                {
+                    if (GameBoard.Cells[originalPos.x, originalPos.y].Item1 != BoardStatus.Empty)
+                    {
+                        Debug.WriteLine("Wrong");
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (GameBoard.Cells[originalPos.x, originalPos.y].Item1 == BoardStatus.Empty)
+                    {
+                        Debug.WriteLine("Wrong");
+                        return false;
+                    }
+                }
+
+                counter++;
+            }
+
+            Debug.WriteLine("Correct");
+            return true;
+        }
         public void HandleTurn(int x, int y)
         {
             //Check if player clicked on a cell
@@ -112,9 +147,20 @@ namespace KinaSchack.Classes
             if (PieceSelected)
             {
                 (int x, int y) newPos = GetSelectedCell(x, y);
+                
                 if (!CheckIfIllegalDiagonalMove(newPos) && CheckIfMoveIsOneStep(newPos) && CheckIfNewPositionIsEmpty(newPos))
                 {
                     Move(newPos);
+                    
+                    PieceSelected = false;
+                    //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
+                    CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
+                    _audio.PlayJumpSound();
+                }
+                else if (!CheckIfIllegalDiagonalMove(newPos) && CheckIfJumpIsLegal(newPos) && CheckIfNewPositionIsEmpty(newPos))
+                {
+                    Move(newPos);
+
                     PieceSelected = false;
                     //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                     CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
