@@ -42,7 +42,7 @@ namespace KinaSchack.Classes
                 {
                     if (GameBoard.Cells[i, j].bounds.Contains(new Point(x, y)))
                     {
-                        Debug.WriteLine("Ruta: " + i, j);
+                        Debug.WriteLine("Ruta: " + i + ", " + j);
                         return (i, j);
                     }
                 }
@@ -116,11 +116,61 @@ namespace KinaSchack.Classes
                 {
                     Move(newPos);
                     PieceSelected = false;
+
+                    if (CheckIfVictory(CurrentPlayer))
+                    {
+                        Debug.WriteLine("Winner");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Loser");
+                    }
+
                     //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                     CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
                     _audio.PlayJumpSound();
+                    
+                   
                 }
             }
+        }
+        public bool CheckIfVictory(BoardStatus CurrentPlayer)
+        {
+            int a = 4;
+            if (CurrentPlayer == BoardStatus.Player1)
+            {
+                for (int i = 0; i <= 3; i++)
+                {
+                    a--;
+                    for (int j = 0; j <= a; j++)
+                    {
+                        Debug.WriteLine(a);
+                        Debug.WriteLine(i + ", " + j);
+                        if (GameBoard.Cells[j, i].Item1 != BoardStatus.Player1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            else if (CurrentPlayer == BoardStatus.Player2)
+            {
+                for (int b = 3; b <= 6; b++)
+                {
+                    a--;
+                    for (int c = 6; c <= a; c++)
+                    {
+                        Debug.WriteLine(a);
+                        Debug.WriteLine(b + ", " + c);
+                        if (GameBoard.Cells[c, b].Item1 != BoardStatus.Player1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 }

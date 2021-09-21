@@ -17,8 +17,8 @@
         </Button>
         <Button Content="Options" Height="52" Margin="257,614,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_1"/>
         <Button Content="Quit" Height="52" Margin="257,698,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_2"/>
-        <Image x:Name="Title" Source="Assets/Images/Title.png" Margin="10,10,0,0" MaxWidth="800" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-      
+        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="212,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="173" FontFamily="Monotype Corsiva" FontSize="68"><Run Text="  "/><Run Text="PUMPIN CHECKERS"/></TextBlock>
+
 
     </Grid>
 </Page>

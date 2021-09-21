@@ -8,10 +8,11 @@
 	xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	<Grid>
-		<canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" PointerReleased="Canvas_PointerReleased" PointerMoved="Canvas_PointerMoved" Update="Canvas_Update" ClearColor="CornflowerBlue" />
+    <Grid>
+        <canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" PointerReleased="Canvas_PointerReleased" PointerMoved="Canvas_PointerMoved" Update="Canvas_Update" ClearColor="CornflowerBlue" />
+        <TextBlock x:Name="P2" HorizontalAlignment="Left" Height="32" Margin="110,45,0,0" Text="Player2" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" FontFamily="Monotype Corsiva" FontSize="28" Foreground="#FFFF6200"/>
+        <TextBlock x:Name="P1" HorizontalAlignment="Left" Height="45" Margin="775,850,0,0" Text="Player1" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontFamily="Monotype Corsiva" FontSize="28" Foreground="LightSkyBlue"/>
+    </Grid>
 
-	</Grid>
-    
 
 </Page>
