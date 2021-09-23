@@ -118,6 +118,11 @@ namespace KinaSchack
             //Debug.WriteLine("PoinertMoved");
         }
 
+        private void HintButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
 
