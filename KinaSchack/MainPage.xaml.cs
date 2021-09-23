@@ -20,6 +20,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -39,22 +41,40 @@ namespace KinaSchack
         public MainPage()
         {
             this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
+            Scaling.SetScale();
         }
 
+        private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            Scaling.boundsScaling = ApplicationView.GetForCurrentView().VisibleBounds;
+            Scaling.SetScale();
+
+        }
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
-            args.DrawingSession.DrawImage(_BG);
+            args.DrawingSession.DrawImage(Scaling.img(_BG));
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
                 //args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
                 if(pos.Item1 == BoardStatus.Player2)
                 {
-                    args.DrawingSession.DrawImage(_piece, pos.bounds);
+                    args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(pos.bounds));
                 }
                 else if(pos.Item1 == BoardStatus.Player1)
                 {
-                    args.DrawingSession.DrawImage(_piece2, pos.bounds);
+                    args.DrawingSession.DrawImage(_piece2, Scaling.GetScaledRect(pos.bounds));
                 }
+            }
+            if (_currentGameState.PieceSelected)
+            {
+                foreach (var move in _currentGameState.PossibleMoves)
+                {
+                    Rect cellToDraw = Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[move.x, move.y].bounds);
+                    double radius = Math.Sqrt(Math.Pow(cellToDraw.Height, 2) + Math.Pow(cellToDraw.Width, 2));
+                    args.DrawingSession.DrawCircle((float)(cellToDraw.X + (cellToDraw.Width / 2)), (float)(cellToDraw.Y + (cellToDraw.Height / 2)), (float)radius / 2, Colors.Green, 5);
+                }
+
             }
 
             //Rect selectedPiece = _currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds;
@@ -83,7 +103,8 @@ namespace KinaSchack
             Debug.WriteLine("PoinertPressed");
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
-            _currentGameState.HandleTurn(x, y);
+            var newPoint = Scaling.GetScaledPoint(x, y);
+            _currentGameState.HandleTurn(newPoint.x, newPoint.y);
 
         }
 
