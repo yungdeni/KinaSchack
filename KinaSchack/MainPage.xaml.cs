@@ -115,6 +115,19 @@ namespace KinaSchack
 
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
+            x = (int)e.GetCurrentPoint(Canvas).Position.X;
+            y = (int)e.GetCurrentPoint(Canvas).Position.Y;
+            var hoverCell = Scaling.GetScaledPoint(x,y);
+            if (_currentGameState.GetSelectedCell(hoverCell.x, hoverCell.y) == (-1, -1))
+            {
+                return;
+            }
+            else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(hoverCell.x, hoverCell.y)))
+            {
+                _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(hoverCell.x, hoverCell.y);
+                Debug.WriteLine("hover " + _currentGameState.SelectedCell);
+            }
+
             //Debug.WriteLine("PoinertMoved");
         }
 
