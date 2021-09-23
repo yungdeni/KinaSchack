@@ -139,10 +139,12 @@
   <ItemGroup>
     <Content Include="Assets\Audio\jumps.wav" />
     <Content Include="Assets\Images\BG.png" />
+    <Content Include="Assets\Images\BG_Glow.png" />
     <Content Include="Assets\Images\Grid.png" />
     <Content Include="Assets\Images\Pumpkin2.png" />
     <Content Include="Assets\Images\Pumpkin.png" />
     <Content Include="Assets\Images\Pumpkin_Checkers_BG.png" />
+    <Content Include="Assets\Images\selectedPumpkin.png" />
     <Content Include="Assets\Images\Title.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
