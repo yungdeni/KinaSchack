@@ -39,6 +39,9 @@ namespace KinaSchack
         private int x, y;
         private bool debugMode;
         private CanvasBitmap _test;
+        private (int x, int y) hoverSelect;
+
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -57,29 +60,22 @@ namespace KinaSchack
             args.DrawingSession.DrawImage(Scaling.img(_BG));
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
-                var scaledpoint = Scaling.GetScaledPoint((int)pos.bounds.X, (int)pos.bounds.Y);
-                var cellOnHover = _currentGameState.SelectedCell;
-
-
+               
                 //args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
                 if (pos.Item1 == BoardStatus.Player2)
                 {
-
                     args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(pos.bounds));
                 }
                 else if(pos.Item1 == BoardStatus.Player1)
                 {
-                    if (cellOnHover == scaledpoint)
-                    {
-                        args.DrawingSession.DrawImage(_test, Scaling.GetScaledRect(pos.bounds));
-                    }
-                    else
-                    {
-                        args.DrawingSession.DrawImage(_piece2, Scaling.GetScaledRect(pos.bounds));
-                    }
-                    
+                    args.DrawingSession.DrawImage(_piece2, Scaling.GetScaledRect(pos.bounds));
                 }
             }
+            if (hoverSelect != (-1, -1))
+            {
+                args.DrawingSession.DrawImage(_test, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+            }            
+
             if (_currentGameState.PieceSelected)
             {
                 foreach (var move in _currentGameState.PossibleMoves)
@@ -141,7 +137,7 @@ namespace KinaSchack
                 }
                 else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y)))
                 {
-                    _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
+                    hoverSelect = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
                     Debug.WriteLine("moved!!" + _currentGameState.SelectedCell + _currentGameState.CurrentPlayer);
 
                 }
