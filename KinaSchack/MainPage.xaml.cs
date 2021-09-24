@@ -117,15 +117,17 @@ namespace KinaSchack
         {
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
-            var hoverCell = Scaling.GetScaledPoint(x,y);
-            if (_currentGameState.GetSelectedCell(hoverCell.x, hoverCell.y) == (-1, -1))
+            var newPoint = Scaling.GetScaledPoint(x, y);
+
+            if (_currentGameState.GetSelectedCell(newPoint.x, newPoint.y) == (-1, -1))
             {
                 return;
             }
-            else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(hoverCell.x, hoverCell.y)))
+            else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(newPoint.x, newPoint.y)))
             {
-                _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(hoverCell.x, hoverCell.y);
-                Debug.WriteLine("hover " + _currentGameState.SelectedCell);
+
+                _currentGameState.SelectedCell = _currentGameState.GetSelectedCell(newPoint.x, newPoint.y);
+                Debug.WriteLine("moved" + _currentGameState.SelectedCell);
             }
 
             //Debug.WriteLine("PoinertMoved");
