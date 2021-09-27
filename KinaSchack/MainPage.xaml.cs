@@ -94,7 +94,7 @@ namespace KinaSchack
             if (_currentGameState.CheckIfVictory())
             {
                 //args.DrawingSession.DrawImage(_winner);
-                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                     {
                         Winner.Visibility = Visibility.Visible;
@@ -130,6 +130,7 @@ namespace KinaSchack
 
             _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
 
+            ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
         }
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -178,6 +179,16 @@ namespace KinaSchack
         {
             MainMenu.player.Pause();
             MainMenu.player.Source = null;
+        }
+
+        private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void InputPlayersNameDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            this.Frame.Navigate(typeof(MainMenu));
         }
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
