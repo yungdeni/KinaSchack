@@ -41,9 +41,9 @@ namespace KinaSchack
         private bool debugMode;
         public static Audio audio;
 
-        private CanvasBitmap _test;
+        private CanvasBitmap orangeHover;
+        private CanvasBitmap blueHover;
         private (int x, int y) hoverSelect;
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -76,7 +76,15 @@ namespace KinaSchack
             }
             if (hoverSelect != (-1, -1))
             {
-                args.DrawingSession.DrawImage(_test, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+                if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
+                {
+                    args.DrawingSession.DrawImage(blueHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+                }
+                else
+                {
+                    args.DrawingSession.DrawImage(orangeHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+                }
+                
             }            
 
             if (_currentGameState.PieceSelected)
@@ -131,6 +139,9 @@ namespace KinaSchack
             _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
 
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
+            orangeHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
+            blueHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin2.png"));
+
         }
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -155,15 +166,10 @@ namespace KinaSchack
             var hoverPoint = Scaling.GetScaledPoint(x, y);
             if (_currentGameState != null)
             {
-                if (_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y) == (-1, -1))
+                var selectedCellTemp = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
+                if (selectedCellTemp == (-1, -1) || _currentGameState.CheckIfPlayersPiece(selectedCellTemp))
                 {
-                    return;
-                }
-                else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y)))
-                {
-                    hoverSelect = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
-                    Debug.WriteLine("moved!!" + _currentGameState.SelectedCell + _currentGameState.CurrentPlayer);
-
+                    hoverSelect = selectedCellTemp;
                 }
             }
 
