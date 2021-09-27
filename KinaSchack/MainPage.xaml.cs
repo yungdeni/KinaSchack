@@ -40,6 +40,7 @@ namespace KinaSchack
         private int x, y;
         private bool debugMode;
         public static Audio audio;
+        private Players _players;
 
         private CanvasBitmap _test;
         private (int x, int y) hoverSelect;
@@ -93,7 +94,8 @@ namespace KinaSchack
             //Do something if a player wins
             if (_currentGameState.CheckIfVictory())
             {
-                //args.DrawingSession.DrawImage(_winner);
+                //gets the main CoreApplicationView so it is always available
+                //source: https://stackoverflow.com/questions/16477190/correct-way-to-get-the-coredispatcher-in-a-windows-store-app
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                     {
@@ -127,9 +129,10 @@ namespace KinaSchack
             _winner = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/winner1.png"));
             _currentGameState = new GameState();
             audio = new Audio();
+            _players = new Players();
 
             _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
-
+            //Content dialog with textbox to enter players name 
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
         }
 
@@ -183,7 +186,9 @@ namespace KinaSchack
 
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-
+            _players.SetPlayersName(Player1Input.Text, Player2Input.Text);
+            P1.Text = _players.Player1;
+            P2.Text = _players.Player2;
         }
 
         private void InputPlayersNameDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
