@@ -35,12 +35,14 @@ namespace KinaSchack
         private CanvasBitmap _BG;
         private CanvasBitmap _piece;
         private CanvasBitmap _piece2;
+        private CanvasBitmap _winner;
         private GameState _currentGameState;
         private int x, y;
         private bool debugMode;
+        public static Audio audio;
+
         private CanvasBitmap _test;
         private (int x, int y) hoverSelect;
-
 
         public MainPage()
         {
@@ -58,6 +60,7 @@ namespace KinaSchack
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             args.DrawingSession.DrawImage(Scaling.img(_BG));
+            
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
                
@@ -86,6 +89,22 @@ namespace KinaSchack
                 }
 
             }
+            //args.DrawingSession.DrawImage(Scaling.img(_winner));
+            //Do something if a player wins
+            if (_currentGameState.CheckIfVictory())
+            {
+                //args.DrawingSession.DrawImage(_winner);
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                    {
+                        Winner.Visibility = Visibility.Visible;
+                    }
+                );
+
+                
+                
+            }
+
 
             //Rect selectedPiece = _currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds;
             //if (_currentGameState.PieceSelected)
@@ -105,8 +124,12 @@ namespace KinaSchack
             _BG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/BG_Glow.png"));
             _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
             _piece2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin2.png"));
+            _winner = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/winner1.png"));
             _currentGameState = new GameState();
+            audio = new Audio();
+
             _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
+
         }
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -149,6 +172,12 @@ namespace KinaSchack
         private void HintButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void StopMusic_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu.player.Pause();
+            MainMenu.player.Source = null;
         }
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
