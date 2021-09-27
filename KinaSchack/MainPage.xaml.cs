@@ -41,9 +41,9 @@ namespace KinaSchack
         private bool debugMode;
         public static Audio audio;
 
-        private CanvasBitmap _test;
+        private CanvasBitmap orangeHover;
+        private CanvasBitmap blueHover;
         private (int x, int y) hoverSelect;
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -76,7 +76,15 @@ namespace KinaSchack
             }
             if (hoverSelect != (-1, -1))
             {
-                args.DrawingSession.DrawImage(_test, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+                if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
+                {
+                    args.DrawingSession.DrawImage(blueHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+                }
+                else
+                {
+                    args.DrawingSession.DrawImage(orangeHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+                }
+                
             }            
 
             if (_currentGameState.PieceSelected)
@@ -128,8 +136,8 @@ namespace KinaSchack
             _currentGameState = new GameState();
             audio = new Audio();
 
-            _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
-
+            orangeHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
+            blueHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin2.png"));
         }
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
