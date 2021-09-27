@@ -38,6 +38,10 @@ namespace KinaSchack
         private GameState _currentGameState;
         private int x, y;
         private bool debugMode;
+        private CanvasBitmap _test;
+        private (int x, int y) hoverSelect;
+
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -56,8 +60,9 @@ namespace KinaSchack
             args.DrawingSession.DrawImage(Scaling.img(_BG));
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
+               
                 //args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
-                if(pos.Item1 == BoardStatus.Player2)
+                if (pos.Item1 == BoardStatus.Player2)
                 {
                     args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(pos.bounds));
                 }
@@ -66,6 +71,11 @@ namespace KinaSchack
                     args.DrawingSession.DrawImage(_piece2, Scaling.GetScaledRect(pos.bounds));
                 }
             }
+            if (hoverSelect != (-1, -1))
+            {
+                args.DrawingSession.DrawImage(_test, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[hoverSelect.x, hoverSelect.y].bounds));
+            }            
+
             if (_currentGameState.PieceSelected)
             {
                 foreach (var move in _currentGameState.PossibleMoves)
@@ -96,6 +106,7 @@ namespace KinaSchack
             _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
             _piece2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin2.png"));
             _currentGameState = new GameState();
+            _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
         }
 
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -115,6 +126,23 @@ namespace KinaSchack
 
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
+            x = (int)e.GetCurrentPoint(Canvas).Position.X;
+            y = (int)e.GetCurrentPoint(Canvas).Position.Y;
+            var hoverPoint = Scaling.GetScaledPoint(x, y);
+            if (_currentGameState != null)
+            {
+                if (_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y) == (-1, -1))
+                {
+                    return;
+                }
+                else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y)))
+                {
+                    hoverSelect = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
+                    Debug.WriteLine("moved!!" + _currentGameState.SelectedCell + _currentGameState.CurrentPlayer);
+
+                }
+            }
+
             //Debug.WriteLine("PoinertMoved");
         }
 
