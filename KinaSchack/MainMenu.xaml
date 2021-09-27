@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid RenderTransformOrigin="0.719,0.289">
+    <Grid RenderTransformOrigin="0.719,0.289" Background="DarkOrchid">
 
 
 
@@ -18,7 +18,7 @@
         <Button Content="Options" Height="52" Margin="257,614,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_1"/>
         <Button Content="Quit" Height="52" Margin="257,698,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_2"/>
         <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="212,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="173" FontFamily="Monotype Corsiva" FontSize="68"><Run Text="  "/><Run Text="PUMPIN CHECKERS"/></TextBlock>
-
+        <Image Source="Assets/Images/Pumpkin2.png" HorizontalAlignment="Right"></Image>
 
     </Grid>
 </Page>

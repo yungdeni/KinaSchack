@@ -22,11 +22,11 @@ namespace KinaSchack.Classes
         public bool PieceSelected;
         public List<(int x, int y)> PossibleMoves;
         private List<(int x, int y)> _jumps;
-        private Audio _audio;
+        
 
         public GameState()
         {
-            _audio = new Audio();
+            
             GameBoard = new Board();
             CurrentPlayer = BoardStatus.Player1;
             PieceSelected = false;
@@ -167,23 +167,27 @@ namespace KinaSchack.Classes
                     Move(newPos);
                     PieceSelected = false;
 
-                    if (CheckIfVictory(CurrentPlayer))
+                    if (CheckIfVictory())
                     {
                         Debug.WriteLine("Winner");
+                        MainPage.audio.PlayJumpSound();
+                        MainPage.audio.PlayWinnerSound();
                     }
                     else
                     {
                         Debug.WriteLine("Loser");
-                    }
 
-                    //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
-                    CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
-                    _audio.PlayJumpSound();
-                    PossibleMoves.Clear();
+                        //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
+                        CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
+                        MainPage.audio.PlayJumpSound();
+                        
+                        PossibleMoves.Clear();
+
+                    }
                 }
             }
         }
-        public bool CheckIfVictory(BoardStatus CurrentPlayer)
+        public bool CheckIfVictory()
         {
             int a = 4;
             if (CurrentPlayer == BoardStatus.Player1)
