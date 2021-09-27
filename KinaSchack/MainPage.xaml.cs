@@ -154,15 +154,10 @@ namespace KinaSchack
             var hoverPoint = Scaling.GetScaledPoint(x, y);
             if (_currentGameState != null)
             {
-                if (_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y) == (-1, -1))
+                var selectedCellTemp = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
+                if (selectedCellTemp == (-1, -1) || _currentGameState.CheckIfPlayersPiece(selectedCellTemp))
                 {
-                    return;
-                }
-                else if (_currentGameState.CheckIfPlayersPiece(_currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y)))
-                {
-                    hoverSelect = _currentGameState.GetSelectedCell(hoverPoint.x, hoverPoint.y);
-                    Debug.WriteLine("moved!!" + _currentGameState.SelectedCell + _currentGameState.CurrentPlayer);
-
+                    hoverSelect = selectedCellTemp;
                 }
             }
 
