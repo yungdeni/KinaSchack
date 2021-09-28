@@ -1,40 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using KinaSchack.Classes;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using Windows.Storage;
 
 namespace KinaSchack.Classes
 {
-    class Players
+    class Players : INotifyPropertyChanged
     {
-        public string Player1 { get; set; }
-        public string Player2 { get; set; }
+        //public string Player1 { get; set; }
+        //public string Player2 { get; set; }
+
+        private string _player1;
+        private string _player2;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Players()
         {
-            Player1 = "Player1";
-            Player2 = "Player2";
+            _player1 = "Player1";
+            _player2 = "Player2";
         }
-
-        //If textbox is empty, keep default value else set input from player
-        public void SetPlayersName(string player1, string player2)
+        public string Player1
         {
-            if (string.IsNullOrEmpty(player1) == false && string.IsNullOrEmpty(player2) == false)
+            get => _player1;
+            set
             {
-                Player1 = player1;
-                Player2 = player2;
+                _player1 = value;
+                OnPropertyChanged();
             }
-            else if (string.IsNullOrEmpty(player1) && string.IsNullOrEmpty(player2) == false)
+        }
+        public string Player2
+        {
+            get => _player2;
+            set
             {
-                Player2 = player2;
+                _player2 = value;
+                OnPropertyChanged();
             }
-            else if (string.IsNullOrEmpty(player2) && string.IsNullOrEmpty(player1) == false)
-            {
-                Player1 = player1;
-            }
-            Debug.WriteLine(Player1 + " " + Player2);
+        }
+        public void OnPropertyChanged([CallerMemberName] string playerName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(playerName));
         }
     }
 }

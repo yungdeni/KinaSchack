@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Core;
+using System.ComponentModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -42,9 +43,12 @@ namespace KinaSchack
         public static Audio audio;
         private Players _players;
 
+        static public bool isWinner = false;
+
         private CanvasBitmap _test;
         private (int x, int y) hoverSelect;
 
+   
         public MainPage()
         {
             this.InitializeComponent();
@@ -92,7 +96,7 @@ namespace KinaSchack
             }
             //args.DrawingSession.DrawImage(Scaling.img(_winner));
             //Do something if a player wins
-            if (_currentGameState.CheckIfVictory())
+            if (isWinner)
             {
                 //gets the main CoreApplicationView so it is always available
                 //source: https://stackoverflow.com/questions/16477190/correct-way-to-get-the-coredispatcher-in-a-windows-store-app
@@ -135,7 +139,7 @@ namespace KinaSchack
             //Content dialog with textbox to enter players name 
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
         }
-
+   
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertPressed");
@@ -143,7 +147,6 @@ namespace KinaSchack
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
             var newPoint = Scaling.GetScaledPoint(x, y);
             _currentGameState.HandleTurn(newPoint.x, newPoint.y);
-
         }
 
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -186,7 +189,6 @@ namespace KinaSchack
 
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            _players.SetPlayersName(Player1Input.Text, Player2Input.Text);
             P1.Text = _players.Player1;
             P2.Text = _players.Player2;
         }
@@ -196,9 +198,12 @@ namespace KinaSchack
             this.Frame.Navigate(typeof(MainMenu));
         }
 
+        private void Player1Input_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        }
+
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
-
         }
     }
 }
