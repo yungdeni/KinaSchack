@@ -105,6 +105,9 @@ namespace KinaSchack
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                     {
+                        WinnerTextEffect w = new WinnerTextEffect("ran");
+
+                        Winner.Text = w.DrawText("ran");
                         Winner.Visibility = Visibility.Visible;
                     }
                 );
