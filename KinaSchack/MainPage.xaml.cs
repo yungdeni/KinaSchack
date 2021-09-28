@@ -136,8 +136,6 @@ namespace KinaSchack
             _currentGameState = new GameState();
             audio = new Audio();
 
-            _test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
-
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
             orangeHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
             blueHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin2.png"));

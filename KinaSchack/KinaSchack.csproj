@@ -122,6 +122,7 @@
     <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Board.cs" />
     <Compile Include="Classes\Scaling.cs" />
+    <Compile Include="Classes\WinnerTextEffect.cs" />
     <Compile Include="Enums\BoardStatus.cs" />
     <Compile Include="Classes\GameState.cs" />
     <Compile Include="MainMenu.xaml.cs">

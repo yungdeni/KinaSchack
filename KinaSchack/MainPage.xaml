@@ -31,6 +31,7 @@
                 </EventTrigger>
             </TextBlock.Triggers>
         </TextBlock>
+        
         <Button x:Name="StopMusic" Content="Stop Music" Height="30" Margin="1260,75,0,0" VerticalAlignment="Top" Width="100" Click="StopMusic_Click"/>
         <ContentDialog 
            x:Name="InputPlayersNameDialog"
