@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Board.cs" />
+    <Compile Include="Classes\Players.cs" />
     <Compile Include="Classes\Scaling.cs" />
     <Compile Include="Enums\BoardStatus.cs" />
     <Compile Include="Classes\GameState.cs" />
