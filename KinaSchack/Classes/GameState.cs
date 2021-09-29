@@ -22,6 +22,7 @@ namespace KinaSchack.Classes
         public bool PieceSelected;
         public List<(int x, int y)> PossibleMoves;
         private List<(int x, int y)> _jumps;
+        public Queue<AnimatePiece> AnimationQueue;
         
 
         public GameState()
@@ -35,6 +36,7 @@ namespace KinaSchack.Classes
             {
                 (2,0),(0,2),(-2,0),(0,-2),(2,2),(-2,-2)
             };
+            AnimationQueue = new Queue<AnimatePiece>();
         }
         public (int x, int y) GetSelectedCell(int x, int y)
         {
@@ -57,8 +59,10 @@ namespace KinaSchack.Classes
         }
         public void Move((int x, int y) newPosition)
         {
+            AnimationQueue.Enqueue(new AnimatePiece(GameBoard.Cells[SelectedCell.x, SelectedCell.y].bounds, GameBoard.Cells[newPosition.x, newPosition.y].bounds, CurrentPlayer));
             GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
             GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
+            
         }
         public bool CheckIfNewPositionIsEmpty((int x, int y) newPosition)      {
             return GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty;
