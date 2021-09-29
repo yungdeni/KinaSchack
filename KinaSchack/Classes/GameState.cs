@@ -176,6 +176,7 @@ namespace KinaSchack.Classes
                         Debug.WriteLine("Winner");
                         MainPage.audio.PlayJumpSound();
                         MainPage.audio.PlayWinnerSound();
+                        MainPage.isWinner = true;
                     }
                     else
                     {
