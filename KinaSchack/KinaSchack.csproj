@@ -150,6 +150,7 @@
     <Content Include="Assets\Images\Pumpkin.png" />
     <Content Include="Assets\Images\Pumpkin_Checkers_BG.png" />
     <Content Include="Assets\Images\selectedPumpkin.png" />
+    <Content Include="Assets\Images\selectedPumpkin2.png" />
     <Content Include="Assets\Images\Title.png" />
     <Content Include="Assets\Images\winner1.png" />
     <Content Include="Properties\Default.rd.xml" />
