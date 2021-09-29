@@ -9,6 +9,9 @@ using Windows.Foundation;
 
 namespace KinaSchack.Classes
 {
+    /// <summary>
+    /// Class <c>AnimatePiece</c> models a piece moving with variable velocity through the screen
+    /// </summary>
     public class AnimatePiece
     {
         public Rect StartPosition;
@@ -17,7 +20,7 @@ namespace KinaSchack.Classes
         public BoardStatus Player;
         public bool Done;
         public Vector2 Velocity;
-        private float _initialDistance;
+        private readonly float _initialDistance;
 
         public AnimatePiece(Rect startPos, Rect endPos, BoardStatus player)
         {
@@ -28,10 +31,10 @@ namespace KinaSchack.Classes
             DrawPosition = startPos;
             Velocity = GetVelocity();
             _initialDistance = GetDistance();
-
-
         }
-
+        /// <summary>
+        /// This method updates the draw location. It speeds up in the beginning and slows down towards the end
+        /// </summary>
         public void Update()
         {
             DrawPosition.X += Velocity.X;
@@ -46,16 +49,15 @@ namespace KinaSchack.Classes
                 Velocity.X *= (float)0.9;
                 Velocity.Y *= (float)0.9;
             }
-            if (GetDistance() < 0.1)
+            //Getting close towards the end marks it done and we can stop drawing the animation
+            if (GetDistance() < 0.05)
             {
                 Velocity = Vector2.Zero;
                 Done = true;
             }
-            
         }
         private Vector2 GetVelocity()
         {
-
             return new Vector2((float)(EndPosition.X - StartPosition.X) / 100, (float)(EndPosition.Y - StartPosition.Y) / 100);
         }
         private float GetDistance()
