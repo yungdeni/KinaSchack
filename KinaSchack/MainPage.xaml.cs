@@ -42,7 +42,7 @@ namespace KinaSchack
         private bool debugMode;
         public static Audio audio;
         private Players _players;
-
+        private double _currVolume;
         static public bool isWinner = false;
 
         private CanvasBitmap orangeHover;
@@ -166,8 +166,8 @@ namespace KinaSchack
             _currentGameState = new GameState();
             audio = new Audio();
             _players = new Players();
-
-
+            _currVolume = MainMenu.player.Volume * 1000;
+            VolumeSlider.Value = _currVolume;
             //Content dialog with textbox to enter players name 
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
             orangeHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
@@ -211,12 +211,6 @@ namespace KinaSchack
 
         }
 
-        private void StopMusic_Click(object sender, RoutedEventArgs e)
-        {
-            MainMenu.player.Pause();
-            MainMenu.player.Source = null;
-        }
-
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             P1.Text = _players.Player1;
@@ -234,6 +228,50 @@ namespace KinaSchack
         }
 
 
+        private void AudioSettings_Click(object sender, RoutedEventArgs e)
+        {
+            AudioSettingsDialog.ShowAsync();
+        }
+
+        private void AudioSettingsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void AudioSettingsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void StartMusic_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu.player.Play();
+        }
+
+        private void StopMusic_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu.player.Pause();
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Debug.WriteLine(MainMenu.player.Volume);
+            Debug.WriteLine(VolumeSlider.Value / 1000 + "    slider");
+
+            if (VolumeSlider.Value < _currVolume)
+            {
+                Debug.WriteLine("minskar");
+                MainMenu.player.Volume = VolumeSlider.Value / 1000;
+                _currVolume = VolumeSlider.Value;
+            }
+            else if (VolumeSlider.Value > _currVolume)
+            {
+                Debug.WriteLine("ökar");
+                MainMenu.player.Volume = VolumeSlider.Value / 1000;
+                _currVolume = VolumeSlider.Value;
+            }
+
+        }
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
          if (_currentGameState.AnimationQueue.Count != 0)
