@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AnimatePiece.cs" />
     <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Board.cs" />
     <Compile Include="Classes\Players.cs" />
@@ -150,6 +151,7 @@
     <Content Include="Assets\Images\Pumpkin.png" />
     <Content Include="Assets\Images\Pumpkin_Checkers_BG.png" />
     <Content Include="Assets\Images\selectedPumpkin.png" />
+    <Content Include="Assets\Images\selectedPumpkin2.png" />
     <Content Include="Assets\Images\Title.png" />
     <Content Include="Assets\Images\winner1.png" />
     <Content Include="Properties\Default.rd.xml" />
