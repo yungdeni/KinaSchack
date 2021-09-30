@@ -105,6 +105,7 @@ namespace KinaSchack
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                     {
+
                         WinnerTextEffect w = new WinnerTextEffect("Epsilon");
 
                         CanvasAnimatedControl victoryCanvas = new CanvasAnimatedControl
@@ -113,7 +114,6 @@ namespace KinaSchack
                         };
                         victoryCanvas.Draw += w.DrawText;
                         GameGrid.Children.Add(victoryCanvas);
-
                         Winner.Visibility = Visibility.Visible;
                     }
                 );
@@ -158,13 +158,14 @@ namespace KinaSchack
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
             var newPoint = Scaling.GetScaledPoint(x, y);
             _currentGameState.HandleTurn(newPoint.x, newPoint.y);
-
+             
 
         }
 
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertReleased");
+            
         }
 
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
