@@ -128,6 +128,7 @@ namespace KinaSchack
                         };
                         victoryCanvas.Draw += w.DrawText;
                         GameGrid.Children.Add(victoryCanvas);
+                        AddBackToMenuButton();
                         Winner.Visibility = Visibility.Visible;
                     }
                 );
@@ -270,6 +271,11 @@ namespace KinaSchack
 
         }
 
+        private void WinnerButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainMenu));
+        }
+
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
          if (_currentGameState.AnimationQueue.Count != 0)
@@ -287,6 +293,25 @@ namespace KinaSchack
 
             }
 
+        }
+        private void AddBackToMenuButton()
+        {
+            SolidColorBrush backTransparent = new SolidColorBrush(Colors.Transparent);
+            SolidColorBrush foreTransparent = new SolidColorBrush(Colors.Black);
+
+            Button menuButton = new Button
+            {
+                Content = "Back to Menu",
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Background = backTransparent,
+                Foreground = foreTransparent,
+                Width = 150,
+                Height = 100,
+                FontSize = 15
+            };
+            menuButton.Click += WinnerButton_Click;
+            GameGrid.Children.Add(menuButton);
         }
     }
 }
