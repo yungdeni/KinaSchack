@@ -54,6 +54,7 @@ namespace KinaSchack
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
             Scaling.SetScale();
+            SetDefaultStartPlayerText();
         }
 
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
@@ -193,6 +194,7 @@ namespace KinaSchack
             y = (int)e.GetCurrentPoint(Canvas).Position.Y;
             var newPoint = Scaling.GetScaledPoint(x, y);
             _currentGameState.HandleTurn(newPoint.x, newPoint.y);
+            ChangePlayerEffect();
         }
 
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -284,7 +286,7 @@ namespace KinaSchack
                 _currVolume = VolumeSlider.Value;
             }
 
-
+        }
         private void WinnerButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainMenu));
@@ -292,7 +294,7 @@ namespace KinaSchack
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
-         if (_currentGameState.AnimationQueue.Count != 0)
+            if (_currentGameState.AnimationQueue.Count != 0)
             {
                 _testAnimation = _currentGameState.AnimationQueue.Dequeue();
                 Debug.WriteLine("Got animation");
@@ -325,6 +327,33 @@ namespace KinaSchack
             };
             menuButton.Click += WinnerButton_Click;
             GameGrid.Children.Add(menuButton);
+        }
+        private void ChangePlayerEffect()
+        {
+            if (_currentGameState.CurrentPlayer.ToString() == _players.Player1)
+            {
+                P1.Visibility = Visibility.Collapsed;
+                textblockTranslateMaster1.Visibility = Visibility.Visible;
+                PlayerEffect1.Visibility = Visibility.Visible;
+                P2.Visibility = Visibility.Visible;
+                textblockTranslateMaster2.Visibility = Visibility.Collapsed;
+                PlayerEffect2.Visibility = Visibility.Collapsed;
+            }
+            else if (_currentGameState.CurrentPlayer.ToString() == _players.Player2)
+            {
+                P2.Visibility = Visibility.Collapsed;
+                textblockTranslateMaster2.Visibility = Visibility.Visible;
+                PlayerEffect2.Visibility = Visibility.Visible;
+                P1.Visibility = Visibility.Visible;
+                textblockTranslateMaster1.Visibility = Visibility.Collapsed;
+                PlayerEffect1.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void SetDefaultStartPlayerText()
+        {
+            P1.Visibility = Visibility.Collapsed;
+            textblockTranslateMaster1.Visibility = Visibility.Visible;
+            PlayerEffect1.Visibility = Visibility.Visible;
         }
     }
 }
