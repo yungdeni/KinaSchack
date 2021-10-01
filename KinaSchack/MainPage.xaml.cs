@@ -239,30 +239,6 @@ namespace KinaSchack
 
         }
 
-        private void AudioSettings_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AudioSettingsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-
-        }
-
-        private void AudioSettingsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-
-        }
-
-        private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
-        }
-
-        private void StartMusic_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void AudioSettings_Click(object sender, RoutedEventArgs e)
         {
