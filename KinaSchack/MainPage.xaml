@@ -8,7 +8,7 @@
 	xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
+    <Grid x:Name="GameGrid">
         <canvas:CanvasAnimatedControl
             x:Name="Canvas"
             Draw="Canvas_Draw"
@@ -125,7 +125,7 @@
                     PlaceholderText="Player2"
                     FontFamily="Monotype Corsiva">
                 </TextBox>
-                
+
             </StackPanel>
         </ContentDialog>
         <Grid>

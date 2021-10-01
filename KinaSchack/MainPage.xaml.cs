@@ -119,10 +119,19 @@ namespace KinaSchack
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                     {
+
+                        WinnerTextEffect w = new WinnerTextEffect("Epsilon");
+
+                        CanvasAnimatedControl victoryCanvas = new CanvasAnimatedControl
+                        {
+                            Name = "VictoryCanvas",
+                        };
+                        victoryCanvas.Draw += w.DrawText;
+                        GameGrid.Children.Add(victoryCanvas);
                         Winner.Visibility = Visibility.Visible;
                     }
                 );
-     
+                isWinner = false;
             }
             if (!(_testAnimation is null))
             {
@@ -169,6 +178,7 @@ namespace KinaSchack
             _currVolume = MainMenu.player.Volume * 1000;
             VolumeSlider.Value = _currVolume;
             //Content dialog with textbox to enter players name 
+
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
             orangeHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
             blueHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin2.png"));
@@ -187,6 +197,7 @@ namespace KinaSchack
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertReleased");
+            
         }
 
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
@@ -202,6 +213,7 @@ namespace KinaSchack
                     hoverSelect = selectedCellTemp;
                 }
             }
+
 
             //Debug.WriteLine("PoinertMoved");
         }
@@ -227,6 +239,30 @@ namespace KinaSchack
 
         }
 
+        private void AudioSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AudioSettingsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void AudioSettingsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
+        }
+
+        private void StartMusic_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void AudioSettings_Click(object sender, RoutedEventArgs e)
         {
