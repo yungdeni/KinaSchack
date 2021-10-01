@@ -296,19 +296,18 @@ namespace KinaSchack
         }
         private void AddBackToMenuButton()
         {
-            SolidColorBrush backTransparent = new SolidColorBrush(Colors.Transparent);
             SolidColorBrush foreTransparent = new SolidColorBrush(Colors.White);
-
+            FontFamily font = new FontFamily("Monotype Corsiva");
             Button menuButton = new Button
             {
                 Content = "Back to Menu",
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Right,
-                Background = backTransparent,
+                FontFamily = font,
                 Foreground = foreTransparent,
-                Width = 150,
-                Height = 100,
-                FontSize = 15
+                Width = 120,
+                Height = 40,
+                FontSize = 16
             };
             menuButton.Click += WinnerButton_Click;
             GameGrid.Children.Add(menuButton);
