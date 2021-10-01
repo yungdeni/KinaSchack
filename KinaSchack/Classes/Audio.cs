@@ -35,10 +35,13 @@ namespace KinaSchack.Classes
             mediaPlayer.Volume = 0.008;
             mediaPlayer.Play();
         }
+        public void StartBackGrounAudio()
+        {
+            MainMenu.player.Play();
+        }
         public void StopBackGrounAudio()
         {
             MainMenu.player.Pause();
-            MainMenu.player.Source = null;
         }
     }
 }
