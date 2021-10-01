@@ -297,7 +297,7 @@ namespace KinaSchack
         private void AddBackToMenuButton()
         {
             SolidColorBrush backTransparent = new SolidColorBrush(Colors.Transparent);
-            SolidColorBrush foreTransparent = new SolidColorBrush(Colors.Black);
+            SolidColorBrush foreTransparent = new SolidColorBrush(Colors.White);
 
             Button menuButton = new Button
             {
