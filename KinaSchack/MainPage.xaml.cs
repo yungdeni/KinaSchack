@@ -131,7 +131,7 @@ namespace KinaSchack
                         Winner.Visibility = Visibility.Visible;
                     }
                 );
-     
+                isWinner = false;
             }
             if (!(_testAnimation is null))
             {
@@ -245,6 +245,30 @@ namespace KinaSchack
 
         }
 
+        private void AudioSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AudioSettingsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void AudioSettingsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
+        }
+
+        private void StartMusic_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {

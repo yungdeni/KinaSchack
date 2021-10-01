@@ -9,21 +9,6 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid x:Name="GameGrid">
-            <canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" PointerReleased="Canvas_PointerReleased" PointerMoved="Canvas_PointerMoved" Update="Canvas_Update" ClearColor="CornflowerBlue" />
-            <Button Content="Hint" Click="HintButton_Click"/>
-            <TextBlock x:Name="P2" HorizontalAlignment="Left"  Height="32" Margin="110,18,0,0" Text="Player2" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" FontFamily="Monotype Corsiva" FontSize="28" Foreground="#FFFF6200"/>
-            <TextBlock x:Name="P1" HorizontalAlignment="Left" Height="45" Margin="775,754,0,0" Text="Player1" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontFamily="Monotype Corsiva" FontSize="28" Foreground="LightSkyBlue"/>
-        <TextBlock x:Name="Winner" HorizontalAlignment="Left" Height="223" Margin="847,401,0,0" Text="Test" TextWrapping="Wrap" VerticalAlignment="Top"  Width="636" FontFamily="Monotype Corsiva" FontSize="90" Foreground="LightSkyBlue" Visibility="Collapsed" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <RotateTransform x:Name='MyRotateTransform' Angle='0' CenterX='230' CenterY='25'/>
-                </TextBlock.RenderTransform>
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent='TextBlock.Loaded'>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-
-    <Grid>
         <canvas:CanvasAnimatedControl
             x:Name="Canvas"
             Draw="Canvas_Draw"
@@ -81,42 +66,27 @@
                                 Storyboard.TargetProperty='(RotateTransform.Angle)'
                                 From='0.0' To='360' Duration='0:0:10' 
                                 RepeatBehavior='Forever' />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBlock.Triggers>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
         </TextBlock>
         <Button
-            x:Name="StopMusic"
-            Content="Stop Music"
+            x:Name="AudioSettings"
+            Content="Audio Settings"
             Height="30"
             Margin="1260,75,0,0"
             VerticalAlignment="Top"
             Width="100"
-            Click="StopMusic_Click"/>
-        <ContentDialog
-           x:Name="InputPlayersNameDialog"
-           PrimaryButtonText="Start Game"
-           PrimaryButtonClick="InputPlayersNameDialog_PrimaryButtonClick"
-           CloseButtonText="Cancel"
-           CloseButtonClick="InputPlayersNameDialog_CloseButtonClick"
-           >
-                <ContentDialog.TitleTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Width="273">
-                            <Image Source="ms-appx:///Assets/SmallLogo.png" Width="40" Height="40" Margin="10,0"/>
-                            <TextBlock Text="     Players Name" FontFamily="Monotype Corsiva" Width="142" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ContentDialog.TitleTemplate>
-                <StackPanel>
-                    <TextBlock x:Name="Player1" Text="Type name for Player 1" FontFamily="Monotype Corsiva"/>
-                    <TextBox x:Name="Player1Input"></TextBox>
-                    <TextBlock x:Name="Player2" Text="Type name for Player 2" FontFamily="Monotype Corsiva"/>
-                    <TextBox x:Name="Player2Input"></TextBox>
-                </StackPanel>
-            </ContentDialog>
-        </Grid>
+            FontFamily="Monotype Corsiva"
+            Click="AudioSettings_Click"/>
+        <ContentDialog 
+            x:Name="InputPlayersNameDialog"
+            PrimaryButtonText="Start Game"
+            PrimaryButtonClick="InputPlayersNameDialog_PrimaryButtonClick"
+            CloseButtonText="Cancel"
+            CloseButtonClick="InputPlayersNameDialog_CloseButtonClick"
+            >
             <ContentDialog.TitleTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Width="273">
@@ -155,8 +125,76 @@
                     PlaceholderText="Player2"
                     FontFamily="Monotype Corsiva">
                 </TextBox>
-                
+
             </StackPanel>
         </ContentDialog>
+        <Grid>
+            <ContentDialog 
+            x:Name="AudioSettingsDialog"
+            PrimaryButtonText="OK"
+            PrimaryButtonClick="AudioSettingsDialog_PrimaryButtonClick"
+            CloseButtonText="Cancel"
+            CloseButtonClick="AudioSettingsDialog_CloseButtonClick">
+                <ContentDialog.TitleTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Width="273" Height="25">
+                            <Image
+                            Source="ms-appx:///Assets/SmallLogo.png"
+                            Width="40"
+                            Height="40"
+                            Margin="10,0"/>
+                            <TextBlock
+                            Text="     Audio Settings"
+                            FontFamily="Monotype Corsiva"
+                            Width="142"
+                            HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentDialog.TitleTemplate>
+                <StackPanel Margin="0,0,13,18">
+                    <Slider x:Name="VolumeSlider"  
+                    Header="Volume Control"
+                    FontFamily="Monotype Corsiva"                  
+                    Minimum="0"
+                    Maximum="10"                 
+                    TickFrequency="1"
+                    ElementSoundMode="Default"                  
+                    TickPlacement="BottomRight"
+                    ValueChanged="VolumeSlider_ValueChanged"/>
+                    <TextBlock
+                    x:Name="showValue"
+                    Text=""
+                    FontFamily="Monotype Corsiva"
+                    Height="20"/>
+                    <Button
+                    x:Name="StartMusic"
+                    Content="Start Music"
+                    Click="StartMusic_Click"
+                    FontFamily="Monotype Corsiva"
+                    Width="88" RenderTransformOrigin="0.5,0.5" Height="31" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Button.RenderTransform>
+                            <CompositeTransform SkewX="22.508" TranslateX="13.53" Rotation="16.413" ScaleX="0.938" ScaleY="1.259" SkewY="20.312" TranslateY="2.437"/>
+                        </Button.RenderTransform>
+                    </Button>
+                    <TextBlock
+                    x:Name="em"
+                    Text=""
+                    FontFamily="Monotype Corsiva"
+                    Height="7"/>
+                    <Button
+                    x:Name="StopMusic"
+                    Width="92"
+                    Content="Stop Music"
+                    Click="StopMusic_Click"
+                    FontFamily="Monotype Corsiva" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Height="27">
+                        <Button.RenderTransform>
+                            <CompositeTransform SkewX="42.461" TranslateX="12.653" Rotation="-13.112" ScaleX="1" ScaleY="1" SkewY="0" TranslateY="-1.395"/>
+                        </Button.RenderTransform>
+                    </Button>
+                </StackPanel>
+            </ContentDialog>
+        </Grid>
     </Grid>
+
+
 </Page>

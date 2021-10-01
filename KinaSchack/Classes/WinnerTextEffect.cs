@@ -39,8 +39,8 @@ namespace KinaSchack.Classes
             blur = new GaussianBlurEffect()
             {
                 Source = blur,
-                BlurAmount = 1.5f,
-                BorderMode = EffectBorderMode.Soft
+                BlurAmount = 8.5f,
+                //BorderMode = EffectBorderMode.Soft
             };
         }
 
@@ -49,7 +49,7 @@ namespace KinaSchack.Classes
             CanvasCommandList textCmdList = new CanvasCommandList(sender);
             using (CanvasDrawingSession cmdlist = textCmdList.CreateDrawingSession())
             {
-                cmdlist.DrawText(_text, 800, 300, Colors.Turquoise, textFormat);
+                cmdlist.DrawText(_text, 800, 300, Colors.DeepPink, textFormat);
             }
             blur.Source = textCmdList;
 
