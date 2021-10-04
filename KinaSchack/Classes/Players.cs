@@ -11,11 +11,11 @@ using Windows.Storage;
 
 namespace KinaSchack.Classes
 {
+    /// <summary>
+    /// Class <c>Players</c> sets the players name from textbox input
+    /// </summary>
     class Players : INotifyPropertyChanged
     {
-        //public string Player1 { get; set; }
-        //public string Player2 { get; set; }
-
         private string _player1;
         private string _player2;
 

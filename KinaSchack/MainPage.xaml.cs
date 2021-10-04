@@ -148,7 +148,7 @@ namespace KinaSchack
                         args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(_testAnimation.DrawPosition));
                     }
                     
-                    Debug.WriteLine("Drawing Animation");
+                    //Debug.WriteLine("Drawing Animation");
                 }
 
             }
@@ -304,7 +304,7 @@ namespace KinaSchack
                 if (!_testAnimation.Done)
                 {
                     _testAnimation.Update();
-                    Debug.WriteLine("Updating Animation");
+                    //Debug.WriteLine("Updating Animation");
                 }
 
             }
@@ -330,7 +330,8 @@ namespace KinaSchack
         }
         private void ChangePlayerEffect()
         {
-            if (_currentGameState.CurrentPlayer.ToString() == _players.Player1)
+            Debug.WriteLine(_players.Player1 + "  OOps, no highligt");
+            if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
             {
                 P1.Visibility = Visibility.Collapsed;
                 textblockTranslateMaster1.Visibility = Visibility.Visible;
@@ -339,7 +340,7 @@ namespace KinaSchack
                 textblockTranslateMaster2.Visibility = Visibility.Collapsed;
                 PlayerEffect2.Visibility = Visibility.Collapsed;
             }
-            else if (_currentGameState.CurrentPlayer.ToString() == _players.Player2)
+            else if (_currentGameState.CurrentPlayer == BoardStatus.Player2)
             {
                 P2.Visibility = Visibility.Collapsed;
                 textblockTranslateMaster2.Visibility = Visibility.Visible;
