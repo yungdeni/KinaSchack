@@ -225,7 +225,7 @@ namespace KinaSchack
         {
 
         }
-
+        //Sets the players properties to default or input from textbox
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             P1.Text = _players.Player1;
@@ -242,7 +242,7 @@ namespace KinaSchack
 
         }
 
-
+        //Displays the Audio settings Content Dialog
         private void AudioSettings_Click(object sender, RoutedEventArgs e)
         {
             AudioSettingsDialog.ShowAsync();
@@ -267,7 +267,7 @@ namespace KinaSchack
         {
             MainMenu.player.Pause();
         }
-
+        //Volume slider changes the background music.
         private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             Debug.WriteLine(MainMenu.player.Volume);
@@ -328,6 +328,7 @@ namespace KinaSchack
             menuButton.Click += WinnerButton_Click;
             GameGrid.Children.Add(menuButton);
         }
+        //Change the highlight of players turn
         private void ChangePlayerEffect()
         {
             if (_currentGameState.CurrentPlayer.ToString() == _players.Player1)
