@@ -15,9 +15,9 @@
         <Button Content="Start Game" Height="52" Margin="257,529,0,0" Width="259" VerticalAlignment="Top" Background="LightBlue" Click="MainMenuStartGame">
 
         </Button>
-        <Button Content="Options" Height="52" Margin="257,614,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_1"/>
         <Button Content="Quit" Height="52" Margin="257,698,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="MainMenuQuit"/>
-        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="212,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="173" FontFamily="Monotype Corsiva" FontSize="68"><Run Text="  "/><Run Text="PUMPIN CHECKERS"/></TextBlock>
+        <Button Content="Game Instructions" Height="52" Margin="257,614,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_1"/>
+        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="212,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="173" FontFamily="Monotype Corsiva" FontSize="68"><Run Text="  "/><Run Text="PUMPKIN CHECKERS"/></TextBlock>
         <Image Source="Assets/Images/Pumpkin2.png" HorizontalAlignment="Right"></Image>
 
     </Grid>
