@@ -349,6 +349,17 @@ namespace KinaSchack
                 PlayerEffect1.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void FlyoutBackToMenu_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainMenu));
+        }
+
+        private void FlyoutExitGame(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
         private void SetDefaultStartPlayerText()
         {
             P1.Visibility = Visibility.Collapsed;
