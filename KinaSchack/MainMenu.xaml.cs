@@ -36,9 +36,7 @@ namespace KinaSchack
             player.Play();
         }
 
-    
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MainMenuStartGame(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
         }
@@ -48,9 +46,10 @@ namespace KinaSchack
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void MainMenuQuit(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();
         }
+
     }
 }

@@ -18,7 +18,7 @@
             PointerMoved="Canvas_PointerMoved"
             Update="Canvas_Update"
             ClearColor="CornflowerBlue" />
-        <Button Content="Hint" Click="HintButton_Click"/>
+        
         <TextBlock
             x:Name="P2"
             HorizontalAlignment="Left"
@@ -103,7 +103,7 @@
             Margin="775,754,0,0"
             Grid.Column="0" Grid.Row="0"/>
 
-        
+
         <TextBlock
             x:Name="Winner"
             HorizontalAlignment="Left"
@@ -136,15 +136,6 @@
                 </EventTrigger>
             </TextBlock.Triggers>
         </TextBlock>
-        <Button
-            x:Name="AudioSettings"
-            Content="Audio Settings"
-            Height="30"
-            Margin="1260,75,0,0"
-            VerticalAlignment="Top"
-            Width="100"
-            FontFamily="Monotype Corsiva"
-            Click="AudioSettings_Click"/>
         <ContentDialog 
             x:Name="InputPlayersNameDialog"
             PrimaryButtonText="Start Game"
@@ -258,6 +249,32 @@
                     </Button>
                 </StackPanel>
             </ContentDialog>
+        </Grid>
+        <Grid>
+            <Button Name="flyoutButton"
+                    Content=". . ."
+                    Background="Transparent"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="15"
+                    Width="50"
+                    Height="40">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Main Menu"
+                                        Click="FlyoutBackToMenu_Click"/>
+                        <MenuFlyoutSubItem Text="Options">
+                            <MenuFlyoutItem Text="Audio Settings"
+                                            Click="AudioSettings_Click"/>
+                            <MenuFlyoutItem Text="Game Instructions"/>
+                            <MenuFlyoutItem Text="Disable Hint"
+                                            Click="HintButton_Click"/>
+                        </MenuFlyoutSubItem>
+                        <MenuFlyoutItem Text="Exit"
+                                        Click="FlyoutExitGame"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
         </Grid>
     </Grid>
 
