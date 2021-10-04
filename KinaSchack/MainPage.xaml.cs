@@ -148,7 +148,7 @@ namespace KinaSchack
                         args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(_testAnimation.DrawPosition));
                     }
                     
-                    Debug.WriteLine("Drawing Animation");
+                    //Debug.WriteLine("Drawing Animation");
                 }
 
             }
@@ -225,7 +225,7 @@ namespace KinaSchack
         {
 
         }
-
+        //Sets the players properties to default or input from textbox
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             P1.Text = _players.Player1;
@@ -242,7 +242,7 @@ namespace KinaSchack
 
         }
 
-
+        //Displays the Audio settings Content Dialog
         private void AudioSettings_Click(object sender, RoutedEventArgs e)
         {
             AudioSettingsDialog.ShowAsync();
@@ -267,7 +267,7 @@ namespace KinaSchack
         {
             MainMenu.player.Pause();
         }
-
+        //Volume slider changes the background music.
         private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             Debug.WriteLine(MainMenu.player.Volume);
@@ -304,7 +304,7 @@ namespace KinaSchack
                 if (!_testAnimation.Done)
                 {
                     _testAnimation.Update();
-                    Debug.WriteLine("Updating Animation");
+                    //Debug.WriteLine("Updating Animation");
                 }
 
             }
@@ -328,9 +328,11 @@ namespace KinaSchack
             menuButton.Click += WinnerButton_Click;
             GameGrid.Children.Add(menuButton);
         }
+        //Change the highlight of players turn
         private void ChangePlayerEffect()
         {
-            if (_currentGameState.CurrentPlayer.ToString() == _players.Player1)
+            Debug.WriteLine(_players.Player1 + "  OOps, no highligt");
+            if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
             {
                 P1.Visibility = Visibility.Collapsed;
                 textblockTranslateMaster1.Visibility = Visibility.Visible;
@@ -339,7 +341,7 @@ namespace KinaSchack
                 textblockTranslateMaster2.Visibility = Visibility.Collapsed;
                 PlayerEffect2.Visibility = Visibility.Collapsed;
             }
-            else if (_currentGameState.CurrentPlayer.ToString() == _players.Player2)
+            else if (_currentGameState.CurrentPlayer == BoardStatus.Player2)
             {
                 P2.Visibility = Visibility.Collapsed;
                 textblockTranslateMaster2.Visibility = Visibility.Visible;
