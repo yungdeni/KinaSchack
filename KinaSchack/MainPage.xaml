@@ -251,14 +251,15 @@
             </ContentDialog>
         </Grid>
         <Grid>
-            <Button Name="flyoutButton"
-                    Content=". . ."
+            <Button Content=". . ."
                     Background="Transparent"
+                    Foreground="White"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     FontSize="15"
                     Width="50"
                     Height="40">
+
                 <Button.Flyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Text="Main Menu"

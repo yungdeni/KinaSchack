@@ -28,6 +28,7 @@ namespace KinaSchack
         /// </summary>
         public App()
         {
+            Current.RequestedTheme = ApplicationTheme.Light;
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
