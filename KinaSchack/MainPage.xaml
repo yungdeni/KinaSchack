@@ -269,7 +269,9 @@
                             <MenuFlyoutItem Text="Game Instructions"/>
                             <MenuFlyoutItem Text="Disable Hint"
                                             Click="HintButton_Click"/>
-                        </MenuFlyoutSubItem>
+							<MenuFlyoutItem Text="Load"
+											Click="LoadButton_Click"/>
+						</MenuFlyoutSubItem>
                         <MenuFlyoutItem Text="Exit"
                                         Click="FlyoutExitGame"/>
                     </MenuFlyout>

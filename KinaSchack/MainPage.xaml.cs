@@ -23,7 +23,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Core;
 using System.ComponentModel;
-
+using System.Text.Json;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace KinaSchack
@@ -39,12 +39,11 @@ namespace KinaSchack
         private CanvasBitmap _winner;
         private GameState _currentGameState;
         private int x, y;
-        private bool debugMode;
         public static Audio audio;
         private Players _players;
         private double _currVolume;
         static public bool isWinner = false;
-
+        private string saveState;
         private CanvasBitmap orangeHover;
         private CanvasBitmap blueHover;
         private (int x, int y) hoverSelect;
@@ -65,8 +64,9 @@ namespace KinaSchack
         }
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
+
             args.DrawingSession.DrawImage(Scaling.img(_BG));
-            
+
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
                 if (!(_testAnimation is null))
@@ -224,6 +224,7 @@ namespace KinaSchack
         private void HintButton_Click(object sender, RoutedEventArgs e)
         {
 
+            saveState = _currentGameState.GameBoard.GetPlayerPositions();
         }
         //Sets the players properties to default or input from textbox
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -294,6 +295,7 @@ namespace KinaSchack
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
+
             if (_currentGameState.AnimationQueue.Count != 0)
             {
                 _testAnimation = _currentGameState.AnimationQueue.Dequeue();
@@ -360,6 +362,11 @@ namespace KinaSchack
         private void FlyoutExitGame(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            _currentGameState.GameBoard.SetPlayerPositions(saveState);
         }
 
         private void SetDefaultStartPlayerText()

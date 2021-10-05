@@ -51,6 +51,30 @@ namespace KinaSchack.Classes
             //positions[5, 5].occupied = true;
 
         }
+        public string GetPlayerPositions()
+        {
+            StringBuilder positions = new StringBuilder();
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    positions.Append(Cells[i, j].Item1.ToString() + ",");
+                }
+            }
+            positions.Remove(positions.Length - 1, 1);          
+            return positions.ToString();
+        }
+        public void SetPlayerPositions(string saveString)
+        {
+            var positions = saveString.Split(",");
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    Cells[i, j].Item1 = (BoardStatus)Enum.Parse(typeof(BoardStatus), positions[i * Cells.GetLength(0) + j]);
+                }
+            }
+        }
 
     }
 }
