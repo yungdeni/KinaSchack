@@ -362,6 +362,11 @@ namespace KinaSchack
             Application.Current.Exit();
         }
 
+        private void LoadInstructionPage(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         private void SetDefaultStartPlayerText()
         {
             P1.Visibility = Visibility.Collapsed;

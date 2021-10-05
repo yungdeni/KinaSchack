@@ -266,16 +266,19 @@
                         <MenuFlyoutSubItem Text="Options">
                             <MenuFlyoutItem Text="Audio Settings"
                                             Click="AudioSettings_Click"/>
-                            <MenuFlyoutItem Text="Game Instructions"/>
+                            <MenuFlyoutItem Text="Game Instructions"
+                                            Click="LoadInstructionPage"/>
                             <MenuFlyoutItem Text="Disable Hint"
                                             Click="HintButton_Click"/>
                         </MenuFlyoutSubItem>
+                        <MenuFlyoutItem Text="Credits"/>
                         <MenuFlyoutItem Text="Exit"
                                         Click="FlyoutExitGame"/>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
         </Grid>
+        
     </Grid>
 
 
