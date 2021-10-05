@@ -18,19 +18,21 @@ namespace KinaSchack.Classes
         public Audio()
         {
             mediaPlayer = new MediaPlayer();
-            
-            //jumpSound = new MediaPlayer();
+
+            //Jump Sound: https://freesound.org/people/simoneyoh3998/sounds/500675/
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/jumps.wav"));
            
         }
         public void PlayJumpSound()
         {
             playing = true;
+            mediaPlayer.Volume = 0.5;
             mediaPlayer.Play();
         }
         public void PlayWinnerSound()
         {
-            MainMenu.player.Pause();        
+            MainMenu.player.Pause();
+            // Winner Music: https://opengameart.org/content/victory-1
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/Viktor Kraus - Victory!.mp3"));       
             mediaPlayer.Volume = 0.008;
             mediaPlayer.Play();
