@@ -46,6 +46,8 @@ namespace KinaSchack
         private Players _players;
         private double _currVolume;
         static public bool isWinner = false;
+        private string _theWinner;
+
         private CanvasBitmap orangeHover;
         private CanvasBitmap blueHover;
         private (int x, int y) hoverSelect;
@@ -123,9 +125,18 @@ namespace KinaSchack
                 //source: https://stackoverflow.com/questions/16477190/correct-way-to-get-the-coredispatcher-in-a-windows-store-app
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
-                    {
-
-                        WinnerTextEffect w = new WinnerTextEffect("Epsilon");
+                    {         
+                        if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
+                        {
+                            _theWinner = _players.Player1;
+                        }
+                        else if (_currentGameState.CurrentPlayer == BoardStatus.Player2)
+                        {
+                            _theWinner = _players.Player2;
+                        }
+                        WinnerTextEffect w = new WinnerTextEffect(_theWinner);
+                      
+                        //WinnerTextEffect w = new WinnerTextEffect("Epsilon");
 
                         CanvasAnimatedControl victoryCanvas = new CanvasAnimatedControl
                         {
