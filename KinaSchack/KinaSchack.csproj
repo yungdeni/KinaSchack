@@ -127,9 +127,6 @@
     <Compile Include="Classes\WinnerTextEffect.cs" />
     <Compile Include="Enums\BoardStatus.cs" />
     <Compile Include="Classes\GameState.cs" />
-    <Compile Include="GameInstruction.xaml.cs">
-      <DependentUpon>GameInstruction.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -173,10 +170,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="GameInstruction.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

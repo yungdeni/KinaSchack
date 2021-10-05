@@ -18,7 +18,7 @@
             PointerMoved="Canvas_PointerMoved"
             Update="Canvas_Update"
             ClearColor="CornflowerBlue" />
-        
+
         <TextBlock
             x:Name="P2"
             HorizontalAlignment="Left"
@@ -64,8 +64,8 @@
             Text="{Binding Path=Text, ElementName=P2}"
             Margin="110,18,0,0"
             Grid.Column="0" Grid.Row="0"/>
-        
-        
+
+
 
         <TextBlock
             x:Name="P1"
@@ -254,6 +254,7 @@
             <Button Name="flyoutButton"
                     Content=". . ."
                     Background="Transparent"
+                    Foreground="White"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     FontSize="15"
@@ -278,7 +279,37 @@
                 </Button.Flyout>
             </Button>
         </Grid>
+
         
+            <RelativePanel BorderThickness="20" >
+                <TextBlock></TextBlock>
+                <Popup x:Name="Instruction_Popup" 
+                   IsOpen="False" 
+                   Width="600" 
+                   Height="300" 
+                   IsLightDismissEnabled="True"
+                   RelativePanel.AlignRightWithPanel="True">
+                    
+                <Popup.ChildTransitions>
+                    <TransitionCollection>
+                        <PaneThemeTransition Edge="Bottom"/>
+                    </TransitionCollection>
+                </Popup.ChildTransitions>
+
+                <StackPanel Background="SlateGray" Height="{Binding ElementName=Instruction_Popup , Path=Height}" Width="{Binding ElementName=Instruction_Popup , Path=Width}">
+
+                    <TextBlock Text="Game Instructions" HorizontalAlignment="Center" FontSize="50" FontFamily="Monotype Corsiva"/>
+                    
+                    <Image Source="/Assets/Images/Jump_Ins.png" Height="550"></Image>
+                    <Image Name="RuleImage" Visibility="Collapsed" />
+
+                </StackPanel>
+            
+                </Popup>
+            
+        </RelativePanel>
+        
+    
     </Grid>
 
 
