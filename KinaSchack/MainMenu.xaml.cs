@@ -30,10 +30,12 @@ namespace KinaSchack
         public MainMenu()
         {
             this.InitializeComponent();
-
+            //Background Music: https://opengameart.org/content/neocrey-jump-to-win
             player.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/neocrey - Jump to win.mp3"));
             player.Volume = 0.005;
+            player.AutoPlay = true;
             player.Play();
+           
         }
 
         private void MainMenuStartGame(object sender, RoutedEventArgs e)
@@ -50,6 +52,5 @@ namespace KinaSchack
         {
             Application.Current.Exit();
         }
-
     }
 }
