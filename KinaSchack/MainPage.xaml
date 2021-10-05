@@ -290,20 +290,37 @@
                    IsLightDismissEnabled="True"
                    RelativePanel.AlignRightWithPanel="True">
                     
-                <Popup.ChildTransitions>
+                <!--<Popup.ChildTransitions>
                     <TransitionCollection>
                         <PaneThemeTransition Edge="Bottom"/>
                     </TransitionCollection>
-                </Popup.ChildTransitions>
+                </Popup.ChildTransitions>-->
 
-                <StackPanel Background="SlateGray" Height="{Binding ElementName=Instruction_Popup , Path=Height}" Width="{Binding ElementName=Instruction_Popup , Path=Width}">
+                <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="2" Height="800">
+                    <StackPanel Height="{Binding ElementName=Instruction_Popup , Path=Height}" Width="{Binding ElementName=Instruction_Popup , Path=Width}">
 
-                    <TextBlock Text="Game Instructions" HorizontalAlignment="Center" FontSize="50" FontFamily="Monotype Corsiva"/>
-                    
-                    <Image Source="/Assets/Images/Jump_Ins.png" Height="550"></Image>
-                    <Image Name="RuleImage" Visibility="Collapsed" />
+                        <TextBlock Text="Game Instructions" FontWeight="Bold" HorizontalAlignment="Center" FontSize="50" FontFamily="Monotype Corsiva"/>
 
-                </StackPanel>
+                        <Image Source="/Assets/Images/Jump_Ins.png" Height="450" Margin="25,20,0,0"></Image>
+                        <Image Name="RuleImage" Visibility="Collapsed"/>
+                        <TextBlock FontSize="18" 
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="20,30,20,0" 
+                               TextWrapping="Wrap"
+                               Text="1. The aim is to race to the opposite corner of the board before the opponent.">
+                        </TextBlock>
+                        <TextBlock FontSize="18" 
+                               FontWeight="Bold" 
+                               Foreground="White"
+                               Margin="20,30,20,0" 
+                               TextWrapping="Wrap"
+                               Text="2. Players take turns moving a pumpkin piece. You can move it by jumping one step or ">
+
+                        </TextBlock>
+
+                    </StackPanel>
+                </Border>
             
                 </Popup>
             
