@@ -43,7 +43,6 @@ namespace KinaSchack
         private Players _players;
         private double _currVolume;
         static public bool isWinner = false;
-        private string saveState;
         private CanvasBitmap orangeHover;
         private CanvasBitmap blueHover;
         private (int x, int y) hoverSelect;
