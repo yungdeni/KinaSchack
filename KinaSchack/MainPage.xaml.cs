@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Core;
 using System.ComponentModel;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -41,23 +42,24 @@ namespace KinaSchack
         private CanvasBitmap _tombstone;
         private GameState _currentGameState;
         private int x, y;
-        private bool debugMode;
         public static Audio audio;
         private Players _players;
         private double _currVolume;
         static public bool isWinner = false;
         private string _theWinner;
-
         private CanvasBitmap orangeHover;
         private CanvasBitmap blueHover;
         private (int x, int y) hoverSelect;
-        private AnimatePiece _testAnimation;
+        private AnimatePiece _currentAnimation;
+        private bool _showHints;
+        private SaveState _savedGame;
         public MainPage()
         {
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
             Scaling.SetScale();
             SetDefaultStartPlayerText();
+            _showHints = true;
         }
 
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
@@ -68,13 +70,14 @@ namespace KinaSchack
         }
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
+
             args.DrawingSession.DrawImage(Scaling.img(_BG));
 
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
-                if (!(_testAnimation is null))
+                if (!(_currentAnimation is null))
                 {
-                    if (_testAnimation.EndPosition == pos.bounds && !_testAnimation.Done)
+                    if (_currentAnimation.EndPosition == pos.bounds && !_currentAnimation.Done)
                     {
                         continue;
                     }
@@ -107,7 +110,7 @@ namespace KinaSchack
 
             }
 
-            if (_currentGameState.PieceSelected)
+            if (_currentGameState.PieceSelected && _showHints)
             {
                 foreach (var move in _currentGameState.PossibleMoves)
                 {
@@ -150,17 +153,17 @@ namespace KinaSchack
                 );
                 isWinner = false;
             }
-            if (!(_testAnimation is null))
+            if (!(_currentAnimation is null))
             {
-                if (!_testAnimation.Done)
+                if (!_currentAnimation.Done)
                 {
-                    if (_testAnimation.Player == BoardStatus.Player1)
+                    if (_currentAnimation.Player == BoardStatus.Player1)
                     {
-                        args.DrawingSession.DrawImage(_piece2, Scaling.GetScaledRect(_testAnimation.DrawPosition));
+                        args.DrawingSession.DrawImage(_piece2, Scaling.GetScaledRect(_currentAnimation.DrawPosition));
                     }
                     else
                     {
-                        args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(_testAnimation.DrawPosition));
+                        args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(_currentAnimation.DrawPosition));
                     }
 
                     //Debug.WriteLine("Drawing Animation");
@@ -233,7 +236,9 @@ namespace KinaSchack
 
         private void HintButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var item = (MenuFlyoutItem)sender;
+            _showHints = !_showHints;
+            item.Text = _showHints ? "Disable Hint" : "Enable Hint";
         }
         //Sets the players properties to default or input from textbox
         private void InputPlayersNameDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -304,21 +309,20 @@ namespace KinaSchack
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
+
             if (_currentGameState.AnimationQueue.Count != 0)
             {
-                _testAnimation = _currentGameState.AnimationQueue.Dequeue();
+                _currentAnimation = _currentGameState.AnimationQueue.Dequeue();
                 Debug.WriteLine("Got animation");
             }
-            if (!(_testAnimation is null))
+            if (!(_currentAnimation is null))
             {
-                if (!_testAnimation.Done)
+                if (!_currentAnimation.Done)
                 {
-                    _testAnimation.Update();
+                    _currentAnimation.Update();
                     //Debug.WriteLine("Updating Animation");
                 }
-
             }
-
         }
         private void AddBackToMenuButton()
         {
@@ -371,6 +375,23 @@ namespace KinaSchack
             Application.Current.Exit();
         }
 
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            _currentAnimation = null;
+            if (!(_savedGame is null))
+            {
+                _currentGameState = _savedGame.ReturnSavedGameState();
+                //_players = _savedGame.ReturnSavedPlayers();
+            }
+            ChangePlayerEffect();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            _savedGame = new SaveState(_currentGameState, _players);
+            LoadingFunction.IsEnabled = true;
+        }
         private void LoadInstructionPage(object sender, RoutedEventArgs e)
         {
             if (!Instruction_Popup.IsOpen)
