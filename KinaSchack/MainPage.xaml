@@ -349,45 +349,6 @@
             </Grid>
         </RelativePanel>
         
-
-        <!--<RelativePanel BorderThickness="20" >
-            
-            <Popup x:Name="Instruction_Popup" 
-                   IsOpen="False" 
-                   Width="600" 
-                   Height="300" 
-                   IsLightDismissEnabled="True"
-                   RelativePanel.AlignRightWithPanel="True">
-
-                <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="2" Height="800">
-                    <StackPanel Height="{Binding ElementName=Instruction_Popup , Path=Height}" Width="{Binding ElementName=Instruction_Popup , Path=Width}">
-
-                        <TextBlock Text="Game Instructions" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" FontSize="50" FontFamily="Monotype Corsiva"/>
-
-                        <Image Source="/Assets/Images/Jump_Ins.png" Height="350" Margin="25,20,0,0"></Image>
-                        <Image Name="RuleImage" Visibility="Collapsed"/>
-                        <TextBlock FontSize="18" 
-                               FontWeight="Bold"
-                               Foreground="White"
-                               Margin="20,30,20,0" 
-                               TextWrapping="Wrap"
-                               Text="The aim is to race to the opposite corner of the board before the opponent. Players take turns moving a pumpkin piece by moving ">
-                        </TextBlock>
-                        <TextBlock FontSize="18" 
-                               FontWeight="Bold" 
-                               Foreground="White"
-                               Margin="20,0,20,0" 
-                               TextWrapping="Wrap"
-                               Text="one step to an empty space or by jumping over other pumpkins once or several times in a row">
-                        </TextBlock>
-                        
-                    </StackPanel>
-                </Border>
-
-            </Popup>
-
-        </RelativePanel>-->
-        
     </Grid>
 
 
