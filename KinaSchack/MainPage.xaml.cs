@@ -372,7 +372,6 @@ namespace KinaSchack
             }
         }
 
-
         private void SetDefaultStartPlayerText()
         {
             P1.Visibility = Visibility.Collapsed;
