@@ -20,6 +20,9 @@ namespace KinaSchack.Classes
         public (int x, int y) SelectedCell;
         public (int a, int b) NewSelectedCell;
         public bool PieceSelected;
+        public int playerCount = 0;
+        public bool showTombstone = false;
+        public Random rand = new Random();
         public List<(int x, int y)> PossibleMoves;
         private List<(int x, int y)> _jumps;
         public Queue<AnimatePiece> AnimationQueue;
@@ -75,7 +78,7 @@ namespace KinaSchack.Classes
             //Debug.WriteLine("Direction: ({0},{1})", Math.Sign(diffX), Math.Sign(diffY));
             //(int x, int y) direction = (Math.Sign(diffX), Math.Sign(diffY));
             (int x, int y) midPoint = ((newPosition.x + startPosition.x) / 2, (newPosition.y + startPosition.y) / 2);
-            if (CheckIfNewPositionIsEmpty(midPoint))
+            if (CheckIfNewPositionIsEmpty(midPoint) || GameBoard.Cells[midPoint.x, midPoint.y].Item1 == BoardStatus.Tombstone)
             {
                 return false;
             }
@@ -100,6 +103,7 @@ namespace KinaSchack.Classes
                 }
                 if (CheckIfNewPositionIsEmpty((newX, newY)) && CheckIfJumpIsLegal((newX, newY), (SelectedCell.x, SelectedCell.y)))
                 {
+                   
                     moves.Add((newX, newY));
                 }
             }
@@ -173,21 +177,37 @@ namespace KinaSchack.Classes
 
                     if (CheckIfVictory())
                     {
-                        Debug.WriteLine("Winner");
+                        //Debug.WriteLine("Winner");
                         MainPage.audio.PlayJumpSound();
                         MainPage.audio.PlayWinnerSound();
                         MainPage.isWinner = true;
                     }
                     else
                     {
-                        Debug.WriteLine("Loser");
-
+                        //Debug.WriteLine("Loser");
                         //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                         CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
                         MainPage.audio.PlayJumpSound();
                         
+                        //Set to random turns?
+                        //int randomNo2 = rand.Next(0, 6);
+                        if (playerCount == 4 || playerCount == 7)
+                        {
+                            Debug.WriteLine(playerCount + " playercount inside if");
+                            showTombstone = true;
+                            if (CurrentPlayer == BoardStatus.Player2)
+                            {
+                                playerCount = 0;
+                            }                         
+                        }
+                        else
+                        {
+                            showTombstone = false;
+                        }
+                        playerCount++;
+                        TumbstoneFeature();
+                        Debug.WriteLine(playerCount + " playercount outside if");
                         PossibleMoves.Clear();
-
                     }
                 }
             }
@@ -202,8 +222,8 @@ namespace KinaSchack.Classes
                     a--;
                     for (int j = 0; j <= a; j++)
                     {
-                        Debug.WriteLine(a);
-                        Debug.WriteLine(i + ", " + j);
+                        //Debug.WriteLine(a);
+                        //Debug.WriteLine(i + ", " + j);
                         if (GameBoard.Cells[j, i].Item1 != BoardStatus.Player1)
                         {
                             return false;
@@ -220,8 +240,8 @@ namespace KinaSchack.Classes
                     a++;
                     for (int c = 6; c >= a; c--)
                     {
-                        Debug.WriteLine(a);
-                        Debug.WriteLine(b + ", " + c);
+                        //Debug.WriteLine(a);
+                        //Debug.WriteLine(b + ", " + c);
                         if (GameBoard.Cells[c, b].Item1 != BoardStatus.Player2)
                         {
                             return false;
@@ -230,6 +250,48 @@ namespace KinaSchack.Classes
                 }
             }
             return true;
+        }
+        //Find a random empty cell to set to tombstone
+        public void TumbstoneFeature()
+        {
+            Debug.WriteLine(showTombstone + "showTombstone");
+            Debug.WriteLine(playerCount + "count");
+            var random = new Random();
+            List<(int x, int y)> emptyCells;
+            emptyCells = new List<(int x, int y)>();
+
+            if (showTombstone)
+            {
+                for (int i = 0; i <= 6; i++)
+                {
+                    for (int j = 0; j <= 6; j++)
+                    {
+                        Debug.WriteLine(i + ", " + j);
+                        if (GameBoard.Cells[j, i].Item1 == BoardStatus.Empty)
+                        {
+                            emptyCells.Add((j, i));
+                        }
+                    }
+                }
+                var index = emptyCells[random.Next(emptyCells.Count)];
+                int randX = index.x;
+                int randY = index.y;
+                GameBoard.Cells[randX, randY].Item1 = BoardStatus.Tombstone;
+            }
+            else
+            {
+                for (int i = 0; i <= 6; i++)
+                {
+                    for (int j = 0; j <= 6; j++)
+                    {
+                        Debug.WriteLine(i + ", " + j);
+                        if (GameBoard.Cells[j, i].Item1 == BoardStatus.Tombstone)
+                        {
+                            GameBoard.Cells[j, i].Item1 = BoardStatus.Empty;
+                        }
+                    }
+                }
+            }
         }
     }
 }
