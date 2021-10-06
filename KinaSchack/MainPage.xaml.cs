@@ -49,6 +49,7 @@ namespace KinaSchack
         private (int x, int y) hoverSelect;
         private AnimatePiece _currentAnimation;
         private bool _showHints;
+        private SaveState _savedGame;
         public MainPage()
         {
             this.InitializeComponent();
@@ -368,12 +369,17 @@ namespace KinaSchack
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             _currentAnimation = null;
-            _currentGameState.GameBoard.SetPlayerPositions(saveState);
+            if (!(_savedGame is null))
+            {
+                _currentGameState = _savedGame.ReturnSavedGameState();
+                //_players = _savedGame.ReturnSavedPlayers();
+            }
+            ChangePlayerEffect();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            saveState = _currentGameState.GameBoard.GetPlayerPositions();
+            _savedGame = new SaveState(_currentGameState, _players);
             LoadingFunction.IsEnabled = true;
         }
 
