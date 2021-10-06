@@ -260,7 +260,7 @@ namespace KinaSchack
         //Displays the Audio settings Content Dialog
         private void AudioSettings_Click(object sender, RoutedEventArgs e)
         {
-            AudioSettingsDialog.ShowAsync();
+           AudioSettingsDialog.ShowAsync();
         }
 
         private void AudioSettingsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -375,6 +375,7 @@ namespace KinaSchack
             Application.Current.Exit();
         }
 
+
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             _currentAnimation = null;
@@ -390,6 +391,15 @@ namespace KinaSchack
         {
             _savedGame = new SaveState(_currentGameState, _players);
             LoadingFunction.IsEnabled = true;
+        }
+        private void LoadInstructionPage(object sender, RoutedEventArgs e)
+        {
+            if (!Instruction_Popup.IsOpen)
+            {
+                Instruction_Popup.Height = Window.Current.Bounds.Height;
+                Instruction_Popup.IsOpen = true;
+                RuleImage.Visibility = Visibility.Visible;
+            }
         }
 
         private void SetDefaultStartPlayerText()
