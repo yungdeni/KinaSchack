@@ -139,8 +139,6 @@ namespace KinaSchack
                         }
                         WinnerTextEffect w = new WinnerTextEffect(_theWinner);
                       
-                        //WinnerTextEffect w = new WinnerTextEffect("Epsilon");
-
                         CanvasAnimatedControl victoryCanvas = new CanvasAnimatedControl
                         {
                             Name = "VictoryCanvas",
@@ -173,7 +171,6 @@ namespace KinaSchack
             //if (_currentGameState.PieceSelected)
             //{
             //    args.DrawingSession.DrawCircle((float)(selectedPiece.X + (selectedPiece.Width / 2)), (float)(selectedPiece.Y + (selectedPiece.Height / 2)), 30, Colors.Green, 5);
-            //}
         }
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
@@ -304,6 +301,7 @@ namespace KinaSchack
         }
         private void WinnerButton_Click(object sender, RoutedEventArgs e)
         {
+            audio.mediaPlayer.Pause();
             this.Frame.Navigate(typeof(MainMenu));
         }
 

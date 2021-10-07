@@ -49,7 +49,7 @@ namespace KinaSchack.Classes
             CanvasCommandList textCmdList = new CanvasCommandList(sender);
             using (CanvasDrawingSession cmdlist = textCmdList.CreateDrawingSession())
             {
-                cmdlist.DrawText(_text, 800, 300, Colors.DeepPink, textFormat);
+                cmdlist.DrawText(_text, Scaling.GetScaledPoint(500, 100).x, Scaling.GetScaledPoint(500, 100).y, Colors.DeepPink, textFormat);
             }
             blur.Source = textCmdList;
 
@@ -64,13 +64,13 @@ namespace KinaSchack.Classes
         {
             ApplyEffectToText(sender);
             args.DrawingSession.DrawImage(blur);
-            args.DrawingSession.DrawText(_text,800, 300, Colors.DarkGray, textFormat);
+            args.DrawingSession.DrawText(_text, Scaling.GetScaledPoint(500, 100).x, Scaling.GetScaledPoint(500, 100).y, Colors.DarkGray, textFormat);
         }
-        public void DrawPlayerTurn(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
-        {
-            ApplyEffectToText(sender);
-            args.DrawingSession.DrawImage(blur);
-            args.DrawingSession.DrawText(_player, 50, 50, Colors.DarkGray, textFormat);
-        }
+        //public void DrawPlayerTurn(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        //{
+        //    ApplyEffectToText(sender);
+        //    args.DrawingSession.DrawImage(blur);
+        //    args.DrawingSession.DrawText(_player, 50, 50, Colors.DarkGray, textFormat);
+        //}
     }
 }
