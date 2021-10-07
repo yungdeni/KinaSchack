@@ -45,7 +45,12 @@ namespace KinaSchack
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            if (!Instruction_Popup.IsOpen)
+            {
+                Instruction_Popup.Height = Window.Current.Bounds.Height;
+                Instruction_Popup.IsOpen = true;
+                RuleImage.Visibility = Visibility.Visible;
+            }
         }
 
         private void MainMenuQuit(object sender, RoutedEventArgs e)
