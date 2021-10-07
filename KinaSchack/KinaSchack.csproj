@@ -123,6 +123,7 @@
     <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Board.cs" />
     <Compile Include="Classes\Players.cs" />
+    <Compile Include="Classes\SaveState.cs" />
     <Compile Include="Classes\Scaling.cs" />
     <Compile Include="Classes\WinnerTextEffect.cs" />
     <Compile Include="Enums\BoardStatus.cs" />
@@ -147,6 +148,7 @@
     <Content Include="Assets\Images\BG.png" />
     <Content Include="Assets\Images\BG_Glow.png" />
     <Content Include="Assets\Images\Grid.png" />
+    <Content Include="Assets\Images\Jump_Ins.png" />
     <Content Include="Assets\Images\miniPumpkin.png" />
     <Content Include="Assets\Images\Pumpkin3.png" />
     <Content Include="Assets\Images\Pumpkin2.png" />
@@ -182,6 +184,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>5.0.2</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
       <Version>1.26.0</Version>
