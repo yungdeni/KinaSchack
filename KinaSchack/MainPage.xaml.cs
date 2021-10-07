@@ -72,7 +72,6 @@ namespace KinaSchack
         {
 
             args.DrawingSession.DrawImage(Scaling.img(_BG));
-
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
                 if (!(_currentAnimation is null))
@@ -309,18 +308,23 @@ namespace KinaSchack
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
+            
 
-            if (_currentGameState.AnimationQueue.Count != 0)
+            if (_currentGameState.AnimationQueue.Count != 0 && _currentAnimation is null)
             {
                 _currentAnimation = _currentGameState.AnimationQueue.Dequeue();
                 Debug.WriteLine("Got animation");
             }
             if (!(_currentAnimation is null))
             {
-                if (!_currentAnimation.Done)
+                if (_currentAnimation.Done)
+                {
+                    _currentAnimation = null;
+                    //Debug.WriteLine("Updating Animation");
+                }
+                else
                 {
                     _currentAnimation.Update();
-                    //Debug.WriteLine("Updating Animation");
                 }
             }
         }
