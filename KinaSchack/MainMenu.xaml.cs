@@ -33,7 +33,7 @@ namespace KinaSchack
             //Background Music: https://opengameart.org/content/neocrey-jump-to-win
             player.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/neocrey - Jump to win.mp3"));
             player.Volume = 0.005;
-            player.AutoPlay = true;
+            player.IsLoopingEnabled = true;
             player.Play();
            
         }

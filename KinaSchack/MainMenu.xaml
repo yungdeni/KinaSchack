@@ -6,19 +6,68 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="DarkOrchid">
 
-    <Grid RenderTransformOrigin="0.719,0.289" Background="DarkOrchid">
-
-
-
-        <Button Content="Start Game" Height="52" Margin="257,529,0,0" Width="259" VerticalAlignment="Top" Background="LightBlue" Click="MainMenuStartGame">
-
-        </Button>
-        <Button Content="Quit" Height="52" Margin="257,698,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="MainMenuQuit"/>
-        <Button Content="Game Instructions" Height="52" Margin="257,614,0,0" VerticalAlignment="Top" Width="259" Background="LightBlue" Click="Button_Click_1"/>
-        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="212,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="173" FontFamily="Monotype Corsiva" FontSize="68"><Run Text="  "/><Run Text="PUMPKIN CHECKERS"/></TextBlock>
-        <Image Source="Assets/Images/Pumpkin2.png" HorizontalAlignment="Right"></Image>
-
-    </Grid>
+    <Viewbox MaxWidth="1920" MaxHeight="1080" Stretch="Uniform" StretchDirection="Both">
+        <Grid
+              Width="1920"
+              Height="1080">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="0*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock
+                    x:Name="TitleText"
+                    HorizontalAlignment="Left"
+                    Margin="250,173,0,0"
+                    TextWrapping="Wrap"
+                    Width="718"
+                    Height="245"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="120">
+                    <Run Text=" PUMPKIN CHECKERS"/>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Margin="254,529,0,0" Orientation="Vertical">
+                <Button
+                    Content="Start Game"
+                    Height="52"
+                    Width="253"
+                    Background="LightBlue"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="26"
+                    Click="MainMenuStartGame">
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Margin="254,614,0,0" Orientation="Vertical">
+                <Button
+                    Content="Game Instructions"
+                    Height="52"
+                    Width="253"
+                    Background="LightBlue"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="26"
+                    Click="MainMenuStartGame"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Margin="254,698,0,0" Orientation="Vertical">
+                <Button
+                    Content="Quit"
+                    Height="52"
+                    VerticalAlignment="Top"
+                    Width="253"
+                    Background="LightBlue"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="26"
+                    Click="MainMenuQuit"/>
+            </StackPanel>
+            <StackPanel>
+                <Image Source="Assets/Images/Pumpkin2.png" Width="800" Height="800" Margin="800,20,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Viewbox>
 </Page>
