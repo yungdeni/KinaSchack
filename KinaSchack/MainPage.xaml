@@ -8,6 +8,7 @@
 	xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <Grid x:Name="GameGrid">
         <canvas:CanvasAnimatedControl
             x:Name="Canvas"
@@ -17,132 +18,165 @@
             PointerReleased="Canvas_PointerReleased"
             PointerMoved="Canvas_PointerMoved"
             Update="Canvas_Update"
-            ClearColor="CornflowerBlue" />
-        
-        <TextBlock
-            x:Name="P2"
-            HorizontalAlignment="Left"
-            Height="32"
-            Margin="110,18,0,0"
-            Text="{x:Bind _players.Player2, Mode=TwoWay}"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="103"
-            FontFamily="Monotype Corsiva"
-            FontSize="28"
-            Foreground="#FFFF6200"/>
+            ClearColor="CornflowerBlue">
+        </canvas:CanvasAnimatedControl>
 
-        <TextBlock
-            x:Name="PlayerEffect2"
-            FontSize="32"
-            FontWeight="Bold"
-            Foreground="#FFFF6200"
-            FontFamily="Monotype Corsiva"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Height="32"
-            Width="103"
-            Margin="110,18,0,0"
-            Text="{Binding Path=Text, ElementName=textblockTranslateMaster2}"
-            Visibility="Collapsed"
-            Grid.Column="0" Grid.Row="0">
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="2" Y="2" />
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock
-            Name="textblockTranslateMaster2"          
-            FontSize="32"
-            FontWeight="Bold"
-            FontFamily="Monotype Corsiva"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Width="103"
-            Height="32"
-            Foreground="White"
-            Visibility="Collapsed"
-            Text="{Binding Path=Text, ElementName=P2}"
-            Margin="110,18,0,0"
-            Grid.Column="0" Grid.Row="0"/>
-        
-        
-
-        <TextBlock
-            x:Name="P1"
-            HorizontalAlignment="Left"
-            Height="45" Margin="775,754,0,0"
-            Text="{x:Bind _players.Player1, Mode=OneWay}"
-            VerticalAlignment="Top" Width="100"
-            FontFamily="Monotype Corsiva"
-            FontSize="28"
-            Foreground="LightSkyBlue"/>
-
-
-        <TextBlock
-            x:Name="PlayerEffect1"
-            FontSize="32"
-            FontWeight="Bold" 
-            Foreground="LightSkyBlue"
-            FontFamily="Monotype Corsiva"
-            Text="{Binding Path=Text, ElementName=textblockTranslateMaster1}"
-            Margin="775,754,0,0"
-            Visibility="Collapsed"
-            Grid.Column="0" Grid.Row="0">
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="2" Y="2" />
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock
-            Name="textblockTranslateMaster1" 
-            FontSize="32"
-            FontWeight="Bold"
-            FontFamily="Monotype Corsiva"
-            Foreground="White"
-            Visibility="Collapsed"
-            Text="{Binding Path=Text, ElementName=P1}"
-            Margin="775,754,0,0"
-            Grid.Column="0" Grid.Row="0"/>
-
-
-        <TextBlock
-            x:Name="Winner"
-            HorizontalAlignment="Left"
-            Height="223"
-            Margin="847,401,0,0"
-            Text="* * * * * * * *"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="636"
-            FontFamily="Monotype Corsiva"
-            FontSize="90"
-            Foreground="LightSkyBlue"
-            Visibility="Collapsed"
-            UseLayoutRounding="False"
-            d:LayoutRounding="Auto">
-            <TextBlock.RenderTransform>
-                <RotateTransform x:Name='MyRotateTransform' Angle='0' CenterX='230' CenterY='25'/>
-            </TextBlock.RenderTransform>
-            <TextBlock.Triggers>
-                <EventTrigger RoutedEvent='TextBlock.Loaded'>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <Viewbox StretchDirection="Both">
+                <TextBlock
+                    x:Name="P2"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Margin="15,0,750,0"
+                    Text="{x:Bind _players.Player2, Mode=TwoWay}"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Top"
+                    Width="222"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="24"
+                    Foreground="#FFFF6200"/>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <Viewbox StretchDirection="Both">
+                <TextBlock
+                    x:Name="PlayerEffect2"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="#FFFF6200"
+                    FontFamily="Monotype Corsiva"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Height="40"
+                    Width="222"
+                    Margin="15,0,750,0"
+                    Text="{Binding Path=Text, ElementName=textblockTranslateMaster2}"
+                    Visibility="Collapsed"
+                    Grid.Column="0" Grid.Row="0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform X="2" Y="2" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <Viewbox StretchDirection="Both">
+                <TextBlock
+                    Name="textblockTranslateMaster2"          
+                    FontSize="25"
+                    FontWeight="Bold"
+                    FontFamily="Monotype Corsiva"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Width="222"
+                    Height="40"
+                    Foreground="White"
+                    Visibility="Collapsed"
+                    Text="{Binding Path=Text, ElementName=P2}"
+                    Margin="15,0,750,0"
+                    Grid.Column="0" Grid.Row="0">
+                </TextBlock>
+            </Viewbox>
+        </StackPanel>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+                <TextBlock
+                    x:Name="P1"
+                    Margin="500,500,500,50"
+                    Text="{x:Bind _players.Player1, Mode=TwoWay}"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Width="222"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="29"
+                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform SkewY="0.452" TranslateY="0.678"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
+                <TextBlock
+                    x:Name="PlayerEffect1"
+                    FontSize="30"
+                    FontWeight="Bold" 
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Width="222"
+                    Foreground="LightSkyBlue"
+                    FontFamily="Monotype Corsiva"
+                    Text="{Binding Path=Text, ElementName=textblockTranslateMaster1}"
+                    Margin="500,500,500,50"
+                    Visibility="Collapsed"
+                    Grid.Column="0" Grid.Row="0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform X="2" Y="2" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
+                <TextBlock
+                    Name="textblockTranslateMaster1" 
+                    FontSize="30"
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Width="222"
+                    FontFamily="Monotype Corsiva"
+                    Foreground="White"
+                    Visibility="Collapsed"
+                    Text="{Binding Path=Text, ElementName=P1}"
+                    Margin="500,500,500,50"
+                    Grid.Column="0" Grid.Row="0">
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Height="469" Width="1652">
+                <TextBlock
+                x:Name="Winner"
+                HorizontalAlignment="Left"
+                Height="223"
+                Margin="750,0,300,0"                  
+                Text="* * * * * * * *"             
+                TextWrapping="Wrap"
+                Width="783"
+                FontFamily="Monotype Corsiva"
+                FontSize="90"
+                Foreground="LightSkyBlue"
+                Visibility="Collapsed">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform x:Name='MyRotateTransform' Angle='0' CenterX='230' CenterY='25'/>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent='TextBlock.Loaded'>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
                                 Storyboard.TargetName='MyRotateTransform' 
                                 Storyboard.TargetProperty='(RotateTransform.Angle)'
                                 From='0.0' To='360' Duration='0:0:10' 
                                 RepeatBehavior='Forever' />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </TextBlock.Triggers>
-        </TextBlock>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
         <ContentDialog 
             x:Name="InputPlayersNameDialog"
             PrimaryButtonText="Start Game"
             PrimaryButtonClick="InputPlayersNameDialog_PrimaryButtonClick"
             CloseButtonText="Cancel"
-            CloseButtonClick="InputPlayersNameDialog_CloseButtonClick"
-            >
+            CloseButtonClick="InputPlayersNameDialog_CloseButtonClick">
             <ContentDialog.TitleTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Width="273">
@@ -250,7 +284,8 @@
                 </StackPanel>
             </ContentDialog>
         </Grid>
-        <Grid>
+
+        <Grid Margin="-30,0,0,0">
             <Button Content=". . ."
                     Background="Transparent"
                     Foreground="White"
@@ -278,6 +313,4 @@
             </Button>
         </Grid>
     </Grid>
-
-
 </Page>

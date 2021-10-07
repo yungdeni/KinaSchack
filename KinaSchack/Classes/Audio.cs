@@ -35,6 +35,7 @@ namespace KinaSchack.Classes
             // Winner Music: https://opengameart.org/content/victory-1
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/Viktor Kraus - Victory!.mp3"));       
             mediaPlayer.Volume = 0.008;
+            mediaPlayer.IsLoopingEnabled = true;
             mediaPlayer.Play();
         }
         public void StartBackGrounAudio()
