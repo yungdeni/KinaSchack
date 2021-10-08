@@ -12,14 +12,10 @@
         </Border.Background>
 
     <Viewbox MaxWidth="1920" MaxHeight="1080" Stretch="Uniform" StretchDirection="Both">
-        <Grid          
+            <Grid          
               Width="1920"
               Height="1080">
-            <!--<Grid.Background>
-                <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/Images/BackGround.png">
-                </ImageBrush>
-            </Grid.Background>-->
-            <Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="0*" />
             </Grid.ColumnDefinitions>
