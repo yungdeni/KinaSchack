@@ -5,9 +5,12 @@
     xmlns:local="using:KinaSchack"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" MaxHeight="1080" MaxWidth="1920"
-    Background="Black">
-    
+    mc:Ignorable="d">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="Assets/Images/BackGround.png"/>
+        </Border.Background>
+
     <Viewbox MaxWidth="1920" MaxHeight="1080" Stretch="Uniform" StretchDirection="Both">
         <Grid          
               Width="1920"
@@ -28,6 +31,7 @@
                 <TextBlock
                     x:Name="TitleText"
                     HorizontalAlignment="Left"
+                    Foreground="White"
                     Margin="250,173,0,0"
                     TextWrapping="Wrap"
                     Width="718"
@@ -38,7 +42,7 @@
                 </TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="0" Margin="254,529,0,0" Orientation="Vertical">
-                <Button
+                    <Button 
                     Content="Start Game"
                     Height="52"
                     Width="253"
@@ -46,20 +50,54 @@
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
                     Click="MainMenuStartGame">
-                </Button>
-            </StackPanel>
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.ThemeDictionaries>
+                                    <ResourceDictionary x:Key="Dark">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary x:Key="Light">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                    </ResourceDictionary>
+                                </ResourceDictionary.ThemeDictionaries>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
+                
+
+
+                </StackPanel>
             <StackPanel Grid.Row="0" Margin="254,614,0,0" Orientation="Vertical">
-                <Button
+                    <Button
                     Content="Game Instructions"
                     Height="52"
                     Width="253"
                     Background="LightBlue"
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
-                    Click="MainMenuStartGame"/>
-            </StackPanel>
-            <StackPanel Grid.Row="0" Margin="254,698,0,0" Orientation="Vertical">
-                <Button
+                    Click="MainMenuStartGame">
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.ThemeDictionaries>
+                                    <ResourceDictionary x:Key="Dark">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary x:Key="Light">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                    </ResourceDictionary>
+                                </ResourceDictionary.ThemeDictionaries>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
+
+
+                </StackPanel>
+                <StackPanel Grid.Row="0" Margin="254,698,0,0" Orientation="Vertical">
+                    <Button
                     Content="Quit"
                     Height="52"
                     VerticalAlignment="Top"
@@ -67,7 +105,23 @@
                     Background="LightBlue"
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
-                    Click="MainMenuQuit"/>
+                    Click="MainMenuQuit">
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.ThemeDictionaries>
+                                    <ResourceDictionary x:Key="Dark">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary x:Key="Light">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                    </ResourceDictionary>
+                                </ResourceDictionary.ThemeDictionaries>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>    
+                </StackPanel>
             </StackPanel>
             <Popup x:Name="Instruction_Popup" 
                                IsOpen="False" 
@@ -127,4 +181,5 @@
             </Popup>
         </Grid>
     </Viewbox>
+    </Border>
 </Page>

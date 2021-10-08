@@ -285,7 +285,7 @@
             </ContentDialog>
         </Grid>
 
-        <Grid Margin="-30,0,0,0">
+        <Grid Margin="0,0,0,0">
             <Button Content=". . ."
                     Background="Transparent"
                     Foreground="White"
