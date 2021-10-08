@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using KinaSchack.Classes;
+using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,6 +31,11 @@ namespace KinaSchack
         public MainMenu()
         {
             this.InitializeComponent();
+            // Set the app window preferred launch view size
+            ApplicationView.PreferredLaunchViewSize = new Size { Height = 1920, Width = 1080 };
+
+            // Set app window preferred launch windowing mode
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             //Background Music: https://opengameart.org/content/neocrey-jump-to-win
             player.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/neocrey - Jump to win.mp3"));
             player.Volume = 0.005;

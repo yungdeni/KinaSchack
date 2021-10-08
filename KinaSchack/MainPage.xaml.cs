@@ -187,7 +187,7 @@ namespace KinaSchack
             _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
             _piece2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin2.png"));
             _winner = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/winner1.png"));
-            _tombstone = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin3.png"));
+            _tombstone = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/tombstone.png"));
             _currentGameState = new GameState();
             audio = new Audio();
             _players = new Players();
