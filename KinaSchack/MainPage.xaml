@@ -293,7 +293,8 @@
                     VerticalAlignment="Bottom"
                     FontSize="15"
                     Width="50"
-                    Height="40">
+                    Height="40"
+                    BorderThickness="0">
 
                 <Button.Flyout>
                     <MenuFlyout>

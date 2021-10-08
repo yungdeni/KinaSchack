@@ -46,20 +46,22 @@
                     Content="Start Game"
                     Height="52"
                     Width="253"
-                    Background="LightBlue"
+                    Background="Transparent"
+                    Foreground="White"    
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
+                    BorderThickness="0"
                     Click="MainMenuStartGame">
                         <Button.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.ThemeDictionaries>
                                     <ResourceDictionary x:Key="Dark">
                                         <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
                                     </ResourceDictionary>
                                     <ResourceDictionary x:Key="Light">
                                         <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
                                     </ResourceDictionary>
                                 </ResourceDictionary.ThemeDictionaries>
                             </ResourceDictionary>
@@ -74,20 +76,22 @@
                     Content="Game Instructions"
                     Height="52"
                     Width="253"
-                    Background="LightBlue"
+                    Background="Transparent"
+                    Foreground="White"    
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
-                    Click="MainMenuStartGame">
+                    BorderThickness="0"
+                    Click="LoadInstructionPage">
                         <Button.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.ThemeDictionaries>
                                     <ResourceDictionary x:Key="Dark">
                                         <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
                                     </ResourceDictionary>
                                     <ResourceDictionary x:Key="Light">
                                         <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
                                     </ResourceDictionary>
                                 </ResourceDictionary.ThemeDictionaries>
                             </ResourceDictionary>
@@ -102,20 +106,22 @@
                     Height="52"
                     VerticalAlignment="Top"
                     Width="253"
-                    Background="LightBlue"
+                    Background="Transparent"
+                    Foreground="White"    
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
+                    BorderThickness="0"
                     Click="MainMenuQuit">
                         <Button.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.ThemeDictionaries>
                                     <ResourceDictionary x:Key="Dark">
                                         <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
                                     </ResourceDictionary>
                                     <ResourceDictionary x:Key="Light">
                                         <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
                                     </ResourceDictionary>
                                 </ResourceDictionary.ThemeDictionaries>
                             </ResourceDictionary>
