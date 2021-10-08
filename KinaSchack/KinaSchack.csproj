@@ -145,6 +145,7 @@
     <Content Include="Assets\Audio\jumps.wav" />
     <Content Include="Assets\Audio\neocrey - Jump to win.mp3" />
     <Content Include="Assets\Audio\Viktor Kraus - Victory!.mp3" />
+    <Content Include="Assets\Images\BackGround.png" />
     <Content Include="Assets\Images\BG.png" />
     <Content Include="Assets\Images\BG_Glow.png" />
     <Content Include="Assets\Images\Grid.png" />
