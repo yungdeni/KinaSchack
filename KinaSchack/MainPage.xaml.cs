@@ -80,6 +80,10 @@ namespace KinaSchack
                     {
                         continue;
                     }
+                    if (pos.bounds == _currentGameState.GameBoard.Cells[_currentGameState.LastMove.x, _currentGameState.LastMove.y].bounds)
+                    {
+                        continue;
+                    }
                 }
                 //args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
                 if (pos.Item1 == BoardStatus.Player2)

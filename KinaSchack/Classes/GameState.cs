@@ -19,6 +19,7 @@ namespace KinaSchack.Classes
         public BoardStatus CurrentPlayer;
         public (int x, int y) SelectedCell;
         public (int a, int b) NewSelectedCell;
+        public (int x, int y) LastMove;
         public bool PieceSelected;
         public int playerCount = 0;
         public bool showTombstone = false;
@@ -78,7 +79,7 @@ namespace KinaSchack.Classes
         }
         public void Move((int x, int y) newPosition)
         {
-
+            LastMove = newPosition;
             FillAnimationQueue(newPosition);
             GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
             GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
