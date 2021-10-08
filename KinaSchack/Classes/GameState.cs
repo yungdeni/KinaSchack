@@ -19,6 +19,7 @@ namespace KinaSchack.Classes
         public BoardStatus CurrentPlayer;
         public (int x, int y) SelectedCell;
         public (int a, int b) NewSelectedCell;
+        public (int x, int y) LastMove;
         public bool PieceSelected;
         public int playerCount = 0;
         public bool showTombstone = false;
@@ -26,7 +27,7 @@ namespace KinaSchack.Classes
         public List<(int x, int y)> PossibleMoves;
         private List<(int x, int y)> _jumps;
         public Queue<AnimatePiece> AnimationQueue;
-        
+        private Dictionary<(int x, int y), List<(int x, int y)>> _sequentialJumps;
 
         public GameState()
         {
@@ -40,6 +41,7 @@ namespace KinaSchack.Classes
                 (2,0),(0,2),(-2,0),(0,-2),(2,2),(-2,-2)
             };
             AnimationQueue = new Queue<AnimatePiece>();
+            _sequentialJumps = new Dictionary<(int x, int y), List<(int x, int y)>>();
         }
         public (int x, int y) GetSelectedCell(int x, int y)
         {
@@ -60,9 +62,25 @@ namespace KinaSchack.Classes
         {
             return CurrentPlayer == GameBoard.Cells[cellPosition.x, cellPosition.y].Item1;
         }
+        public void FillAnimationQueue((int x, int y) newPosition)
+        {
+            if (Math.Abs(newPosition.x - SelectedCell.x) == 1 || Math.Abs(newPosition.y - SelectedCell.y) == 1)
+            {
+                AnimationQueue.Enqueue(new AnimatePiece(GameBoard.Cells[SelectedCell.x, SelectedCell.y].bounds, GameBoard.Cells[newPosition.x, newPosition.y].bounds, CurrentPlayer));
+                return;
+            }
+            var animationPositions = _sequentialJumps[newPosition];
+            var startPos = SelectedCell;
+            foreach (var pos in animationPositions)
+            {
+                AnimationQueue.Enqueue(new AnimatePiece(GameBoard.Cells[startPos.x, startPos.y].bounds, GameBoard.Cells[pos.x, pos.y].bounds, CurrentPlayer));
+                startPos = pos;
+            }
+        }
         public void Move((int x, int y) newPosition)
         {
-            AnimationQueue.Enqueue(new AnimatePiece(GameBoard.Cells[SelectedCell.x, SelectedCell.y].bounds, GameBoard.Cells[newPosition.x, newPosition.y].bounds, CurrentPlayer));
+            LastMove = newPosition;
+            FillAnimationQueue(newPosition);
             GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
             GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
             
@@ -91,6 +109,7 @@ namespace KinaSchack.Classes
         }
         public List<(int x, int y)> GetPossibleMoves()
         {
+            _sequentialJumps.Clear();
             //Seed the list with possible jumps from starting position
             List<(int x, int y)> moves = new List<(int x, int y)>();
             foreach ((int x, int y) in _jumps)
@@ -106,6 +125,10 @@ namespace KinaSchack.Classes
                    
                     moves.Add((newX, newY));
                 }
+            }
+            foreach (var move in moves)
+            {
+                _sequentialJumps.Add(move, new List<(int x, int y)>() { move });
             }
             //Do the same thing with the new possible jumps as starting points
             List<(int x, int y)> copyOfPossibleMoves;
@@ -127,6 +150,9 @@ namespace KinaSchack.Classes
                             if (!moves.Contains((newX, newY)))
                             {
                                 moves.Add((newX, newY));
+                                var jumpsToAdd = _sequentialJumps[startPos].ToList();
+                                jumpsToAdd.Add((newX, newY));
+                                _sequentialJumps.Add((newX, newY),jumpsToAdd);
                             }
                         }
                     }
@@ -293,5 +319,7 @@ namespace KinaSchack.Classes
                 }
             }
         }
+        
+
     }
 }

@@ -37,6 +37,11 @@ namespace KinaSchack.Classes
         /// </summary>
         public void Update()
         {
+            if (GetDistance() < 1)
+            {
+                Velocity = Vector2.Zero;
+                Done = true;
+            }
             DrawPosition.X += Velocity.X;
             DrawPosition.Y += Velocity.Y;
             if (GetDistance() > _initialDistance / 2)
@@ -46,15 +51,12 @@ namespace KinaSchack.Classes
             }
             else
             {
-                Velocity.X *= (float)0.9;
-                Velocity.Y *= (float)0.9;
+   
+                Velocity.X = Math.Sign(Velocity.X) * (float)Math.Max(Math.Abs(Velocity.X * 0.9), 0.5);
+                Velocity.Y = Math.Sign(Velocity.Y) * (float)Math.Max(Math.Abs(Velocity.Y * 0.9), 0.5);
             }
             //Getting close towards the end marks it done and we can stop drawing the animation
-            if (GetDistance() < 0.05)
-            {
-                Velocity = Vector2.Zero;
-                Done = true;
-            }
+
         }
         private Vector2 GetVelocity()
         {
