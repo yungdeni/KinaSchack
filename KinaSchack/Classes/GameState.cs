@@ -49,7 +49,7 @@ namespace KinaSchack.Classes
                 {
                     if (GameBoard.Cells[i, j].bounds.Contains(new Point(x, y)))
                     {
-                        Debug.WriteLine("Ruta: " + i + ", " + j);
+                        //Debug.WriteLine("Ruta: " + i + ", " + j);
                         return (i, j);
                     }
                 }
@@ -184,6 +184,7 @@ namespace KinaSchack.Classes
                     }
                     else
                     {
+                        playerCount++;
                         //Debug.WriteLine("Loser");
                         //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                         CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
@@ -191,22 +192,16 @@ namespace KinaSchack.Classes
                         
                         //Set to random turns?
                         //int randomNo2 = rand.Next(0, 6);
-                        if (playerCount == 4 || playerCount == 7)
+                        if (playerCount % 5 == 0)
                         {
-                            Debug.WriteLine(playerCount + " playercount inside if");
-                            showTombstone = true;
-                            if (CurrentPlayer == BoardStatus.Player2)
-                            {
-                                playerCount = 0;
-                            }                         
+                            showTombstone = true;           
                         }
                         else
                         {
                             showTombstone = false;
                         }
-                        playerCount++;
-                        TumbstoneFeature();
-                        Debug.WriteLine(playerCount + " playercount outside if");
+                        Debug.WriteLine(playerCount + " playercount");                      
+                        TumbstoneFeature();                   
                         PossibleMoves.Clear();
                     }
                 }
