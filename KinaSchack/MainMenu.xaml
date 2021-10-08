@@ -125,48 +125,48 @@
                     </Button>
                 </StackPanel>
                 <Popup x:Name="Instruction_Popup" 
-                               IsOpen="False" 
-                               Width="720" 
-                               Height="800" 
-                               IsLightDismissEnabled="True"
-                               RelativePanel.AlignRightWithPanel="True"
-                               Margin="0,100,0,0">
+                       IsOpen="False" 
+                       Width="720" 
+                       Height="800" 
+                       IsLightDismissEnabled="True"
+                       RelativePanel.AlignRightWithPanel="True"
+                       Margin="0,100,0,0">
 
                 <Border BorderBrush="LightSlateGray" 
-                                    BorderThickness="4" 
-                                    CornerRadius="30" 
-                                    Height="800"
+                        BorderThickness="4" 
+                        CornerRadius="30" 
+                        Height="800"
                         Background="DarkSlateGray">
 
                     <StackPanel Height="{Binding ElementName=Instruction_Popup , Path=Height}" 
-                                            Width="{Binding ElementName=Instruction_Popup , Path=Width}">
+                                Width="{Binding ElementName=Instruction_Popup , Path=Width}">
 
                             <TextBlock Text="Game Instructions" 
-                                               Foreground="White" 
-                                               FontWeight="Bold" 
-                                               HorizontalAlignment="Center" 
-                                               FontSize="50" 
-                                               FontFamily="Monotype Corsiva"
+                                       Foreground="White" 
+                                       FontWeight="Bold" 
+                                       HorizontalAlignment="Center" 
+                                       FontSize="50" 
+                                       FontFamily="Monotype Corsiva"
                                        Margin="0,20,0,0"/>
 
                             <Image Source="/Assets/Images/Jump_Ins.png" 
-                                           Height="380" 
-                                           HorizontalAlignment="Left"
-                                           Margin="15,150,0,0"></Image>
+                                   Height="380" 
+                                   HorizontalAlignment="Left"
+                                   Margin="15,150,0,0"></Image>
                         <Image Name="RuleImage" 
-                                           Visibility="Collapsed"/>
+                               Visibility="Collapsed"/>
 
                         <Grid Margin="420,-400,0,0"
-                                          Width="300"
-                                          Height="400">
+                              Width="300"
+                              Height="400">
 
                             <TextBlock Margin="-400,-100,10,0"
-                                               FontSize="18"
-                                               TextWrapping="Wrap"
-                                               Foreground="White"
-                                               FontWeight="Bold"
-                                               Text="The aim is to race to the opposite corner of the board before the opponent. 
-                                               Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
+                                       FontSize="18"
+                                       TextWrapping="Wrap"
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       Text="The aim is to race to the opposite corner of the board before the opponent. 
+                                       Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
                             </TextBlock>
                                 <Image Source="/Assets/Images/jumptombstone.png"
                                        Height="200"
@@ -176,12 +176,12 @@
                                 </Image>
                         </Grid>
                         <TextBlock FontSize="18" 
-                                               FontWeight="Bold"
-                                               Foreground="White"
-                                               Margin="20,20,20,0" 
-                                               TextWrapping="Wrap"
-                                               Text="The green circles indicates all possible moves when selecting a pumpkin. 
-                                                   The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Margin="20,20,20,0" 
+                                   TextWrapping="Wrap"
+                                   Text="The green circles indicates all possible moves when selecting a pumpkin. 
+                                   The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
                         </TextBlock>
                     </StackPanel>
                 </Border>
