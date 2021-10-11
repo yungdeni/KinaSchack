@@ -328,7 +328,8 @@
 											IsEnabled="False"
 											Click="LoadButton_Click"/>
                         </MenuFlyoutSubItem>
-                        <MenuFlyoutItem Text="Credits"/>
+                        <MenuFlyoutItem Text="Credits"
+                                        Click="CreditsPopup"/>
                         <MenuFlyoutItem Text="Exit"
                                         Click="FlyoutExitGame"/>
                     </MenuFlyout>
@@ -365,32 +366,242 @@
                                        HorizontalAlignment="Left"
                                        Margin="15,150,0,0"></Image>
                                 <Image Name="RuleImage"/>
-                                <Grid Margin="420,-400,0,0"
-                                      Width="300"
-                                      Height="400">
-                                    <TextBlock Margin="-400,-100,10,0"
-                                               FontSize="18"
-                                               TextWrapping="Wrap"
-                                               Foreground="White"
-                                               FontWeight="Bold"
-                                               Text="The aim is to race to the opposite corner of the board before the opponent. 
-                                               Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row."
-                                               x:Name="page1block2">
+                                <Grid 
+                                    Margin="420,-400,0,0"
+                                    Width="300"
+                                    Height="400">
+                                    <TextBlock 
+                                        Margin="-400,-100,10,0"
+                                        FontSize="18"
+                                        TextWrapping="Wrap"
+                                        Foreground="White"
+                                        FontWeight="Bold"
+                                        Text="The aim is to race to the opposite corner of the board before the opponent. 
+                                        Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
                                     </TextBlock>
-                                    <Image Source="/Assets/Images/jumptombstone.png"
-                                           Height="200"
-                                           Width="200"
-                                           Margin="0,200,0,0">
+                                    <Image 
+                                        Source="/Assets/Images/jumptombstone.png"
+                                        Height="200"
+                                        Width="200"
+                                        Margin="0,200,0,0">
                                     </Image>
                                 </Grid>
-                                <TextBlock FontSize="18" 
-                                           FontWeight="Bold"
-                                           Foreground="White"
-                                           Margin="20,20,20,0" 
-                                           TextWrapping="Wrap"
-                                           Text="The green circles indicates all possible moves when selecting a pumpkin. 
-                                           The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
+                                <TextBlock 
+                                    FontSize="18" 
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Margin="20,20,20,0" 
+                                    TextWrapping="Wrap"
+                                    Text="The green circles indicates all possible moves when selecting a pumpkin. 
+                                    The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
                                 </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </Viewbox>
+            </Grid>
+        </RelativePanel>
+        <RelativePanel 
+            HorizontalAlignment="Right" 
+            Margin="0,10,10,0">
+            <Grid>
+                <Viewbox>
+                    <Popup 
+                        x:Name="Credits_Popup" 
+                        IsOpen="False" 
+                        Width="720" 
+                        Height="1200" 
+                        IsLightDismissEnabled="True"
+                        RelativePanel.AlignRightWithPanel="True">
+                        <Border
+                            BorderBrush="LightSlateGray" 
+                            BorderThickness="4" 
+                            CornerRadius="30" 
+                            Height="1200">
+                            <StackPanel 
+                                Height="{Binding ElementName=Credits_Popup , Path=Height}" 
+                                Width="{Binding ElementName=Credits_Popup , Path=Width}">
+                                <TextBlock 
+                                    Text="Credits" 
+                                    Foreground="White" 
+                                    FontWeight="Bold" 
+                                    HorizontalAlignment="Center"
+                                    FontSize="50" 
+                                    FontFamily="Monotype Corsiva"
+                                    Margin="0,20,0,0"/>
+                                <Grid 
+                                    Width="800"
+                                    Height="1200">
+                                    <TextBlock 
+                                        Name="GroupTitle"
+                                        Text="Group Epsilon"
+                                        Margin="260,15,0,0"
+                                        Foreground="White"
+                                        FontSize="40"
+                                        FontFamily="Monotype Corsiva">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="CeoTitle"
+                                        Text="President/CEO"
+                                        Margin="150,80,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Denijad Camovic"
+                                        Margin="400,80,200,0"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Foreground="WhiteSmoke">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="VPTitle"
+                                        Text="Vice President"
+                                        Margin="150,120,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Ulrika Karlsson"
+                                        Margin="400,120,200,0"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Foreground="WhiteSmoke">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="MemberTitle"
+                                        Text="Member of the Board"
+                                        Margin="150,160,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Viktor Cheung"
+                                        Margin="400,160,200,0"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Foreground="WhiteSmoke">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="GameDeveloperTitle"
+                                        Text="Game Developers"
+                                        Margin="220,220,0,0"
+                                        FontSize="40"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,280,0,0"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Text="Denijad">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,320,0,0"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Text="Ulrika">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,360,0,0"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Text="Viktor">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="AnimationTitle"
+                                        Margin="220,420,0,0"
+                                        Text="Animation Design"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="40"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,480,0,0"
+                                        Text="Denijad"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="ArtDesignTitle"
+                                        Margin="280,530,0,0"
+                                        Text="Art Design"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="40"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,590,0,0"
+                                        Text="Ulrika"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,630,0,0"
+                                        Text="Viktor"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="MusicAndSFXTitle"
+                                        Margin="280,690,0,0"
+                                        Text="Music/SFX"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="40">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Jump Sound"
+                                        Margin="300,750,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="30">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="https://freesound.org/people/simoneyoh3998/sounds/500675/"
+                                        Margin="100,810,0,0"
+                                        Foreground="WhiteSmoke"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Background Music"
+                                        Margin="270,870,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="30">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="https://opengameart.org/content/neocrey-jump-to-win"
+                                        Margin="140,930,0,0"
+                                        Foreground="WhiteSmoke"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Winner Music"
+                                        Margin="290,980,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="30">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="https://opengameart.org/content/victory-1"
+                                        Margin="200,1030,0,0"
+                                        Foreground="WhiteSmoke"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </Popup>
