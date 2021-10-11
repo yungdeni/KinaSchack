@@ -16,9 +16,11 @@ namespace KinaSchack.Classes
     /// </summary>
     public class Players : INotifyPropertyChanged
     {
+        //Declare variables
         private string _player1;
         private string _player2;
 
+        //Declare event
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Players()
@@ -32,6 +34,7 @@ namespace KinaSchack.Classes
             set
             {
                 _player1 = value;
+                //Call OnPropertyChanged whenever property is updated
                 OnPropertyChanged();
             }
         }
@@ -41,9 +44,12 @@ namespace KinaSchack.Classes
             set
             {
                 _player2 = value;
+                //Call OnPropertyChanged whenever property is updated
                 OnPropertyChanged();
             }
         }
+        //Create OnPropertyChanged to raise the event. Calling member´s name
+        //will be used as parameter.
         public void OnPropertyChanged([CallerMemberName] string playerName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(playerName));
