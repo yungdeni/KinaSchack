@@ -48,7 +48,7 @@ namespace KinaSchack.Classes
             };
         }
         /// <summary>
-        /// Saving the text as list 
+        /// Saving the text as list, can be used anywhere an image can be used. Set the color of the blur and save it as our blur source
         /// </summary>
         /// <param name="sender"></param>
         public void SetupText(ICanvasAnimatedControl sender)
@@ -69,6 +69,7 @@ namespace KinaSchack.Classes
         {
             ApplyEffectToText(sender);
             args.DrawingSession.DrawImage(blur);
+            // Drawing plain text with color and font without any effects on x,y position
             args.DrawingSession.DrawText(_text, Scaling.GetScaledPoint(500, 100).x, Scaling.GetScaledPoint(500, 100).y, Colors.DarkGray, textFormat);
         }
     }
