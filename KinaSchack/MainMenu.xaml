@@ -153,8 +153,7 @@
                                    Height="380" 
                                    HorizontalAlignment="Left"
                                    Margin="15,150,0,0"></Image>
-                        <Image Name="RuleImage" 
-                               Visibility="Collapsed"/>
+                        <Image Name="RuleImage"/>
 
                         <Grid Margin="420,-400,0,0"
                               Width="300"

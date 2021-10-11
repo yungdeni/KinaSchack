@@ -404,7 +404,7 @@ namespace KinaSchack
             {
                 Instruction_Popup.Height = Window.Current.Bounds.Height;
                 Instruction_Popup.IsOpen = true;
-                RuleImage.Visibility = Visibility.Visible;
+                //RuleImage.Visibility = Visibility.Visible;
             }
         }
 
