@@ -68,7 +68,7 @@ namespace KinaSchack.Classes
         public void DrawText(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             ApplyEffectToText(sender);
-            args.DrawingSession.DrawImage(blur);
+            //args.DrawingSession.DrawImage(blur);
             // Drawing plain text with color and font without any effects on x,y position
             args.DrawingSession.DrawText(_text, Scaling.GetScaledPoint(500, 100).x, Scaling.GetScaledPoint(500, 100).y, Colors.DarkGray, textFormat);
         }
