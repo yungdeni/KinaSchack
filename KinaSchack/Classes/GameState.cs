@@ -21,9 +21,8 @@ namespace KinaSchack.Classes
         public (int a, int b) NewSelectedCell;
         public (int x, int y) LastMove;
         public bool PieceSelected;
-        public int playerCount = 0;
-        public bool showTombstone = false;
-        public Random rand = new Random();
+        public int PlayerCount;
+        public bool ShowTombstone;
         public List<(int x, int y)> PossibleMoves;
         private List<(int x, int y)> _jumps;
         public Queue<AnimatePiece> AnimationQueue;
@@ -31,7 +30,7 @@ namespace KinaSchack.Classes
 
         public GameState()
         {
-            
+
             GameBoard = new Board();
             CurrentPlayer = BoardStatus.Player1;
             PieceSelected = false;
@@ -42,7 +41,15 @@ namespace KinaSchack.Classes
             };
             AnimationQueue = new Queue<AnimatePiece>();
             _sequentialJumps = new Dictionary<(int x, int y), List<(int x, int y)>>();
+            ShowTombstone = false;
+            PlayerCount = 0;
         }
+        /// <summary>
+        /// Method <c>GetSelectedCell returns the index array of the gameboard from absolute mouse positions</c>
+        /// </summary>
+        /// <param name="x">x-coordinate of window position</param>
+        /// <param name="y">y-coordinate of window position</param>
+        /// <returns>(x,y) tuple</returns>
         public (int x, int y) GetSelectedCell(int x, int y)
         {
             for (int i = 0; i < GameBoard.Cells.GetLength(0); i++)
@@ -58,12 +65,22 @@ namespace KinaSchack.Classes
             }
             return (-1, -1);
         }
+        /// <summary>
+        /// Method <c>CheckIfPlayersPiece</c> checks if the gameboard cell position has a piece that belongs to the current player
+        /// </summary>
+        /// <param name="cellPosition">Tuple of the index into the gameboard</param>
+        /// <returns></returns>
         public bool CheckIfPlayersPiece((int x, int y) cellPosition)
         {
             return CurrentPlayer == GameBoard.Cells[cellPosition.x, cellPosition.y].Item1;
         }
+        /// <summary>
+        /// Method <c>FillAnimationQueue</c> sets the queue of animations to sequential jumps
+        /// </summary>
+        /// <param name="newPosition">Tuple that indexes into the gameboard for the end position of a piece</param>
         public void FillAnimationQueue((int x, int y) newPosition)
         {
+            //A single move is trivial, just enqueue a straight path and return
             if (Math.Abs(newPosition.x - SelectedCell.x) == 1 || Math.Abs(newPosition.y - SelectedCell.y) == 1)
             {
                 AnimationQueue.Enqueue(new AnimatePiece(GameBoard.Cells[SelectedCell.x, SelectedCell.y].bounds, GameBoard.Cells[newPosition.x, newPosition.y].bounds, CurrentPlayer));
@@ -77,24 +94,35 @@ namespace KinaSchack.Classes
                 startPos = pos;
             }
         }
+        /// <summary>
+        /// Method <c>Move</c> Moves the piece from SelectedCell position to the new position
+        /// </summary>
+        /// <param name="newPosition">Tuple that indexes into the gameboard for the end position of a piece</param>
         public void Move((int x, int y) newPosition)
         {
             LastMove = newPosition;
             FillAnimationQueue(newPosition);
             GameBoard.Cells[newPosition.x, newPosition.y].Item1 = CurrentPlayer;
             GameBoard.Cells[SelectedCell.x, SelectedCell.y].Item1 = BoardStatus.Empty;
-            
+
         }
-        public bool CheckIfNewPositionIsEmpty((int x, int y) newPosition)      {
+        /// <summary>
+        /// Method <c>CheckIfNewPositionIsEmpty</c> checks if the gameboard cell position is empty
+        /// </summary>
+        /// <param name="newPosition">Tuple of the index into the gameboard</param>
+        /// <returns></returns>
+        public bool CheckIfNewPositionIsEmpty((int x, int y) newPosition)
+        {
             return GameBoard.Cells[newPosition.x, newPosition.y].Item1 == BoardStatus.Empty;
         }
-        //TODO: This doesnt need to be so general. We only check one jump now.
+        /// <summary>
+        /// Method <c>CheckIfJumpIsLegal</c> checks if a jump is valid
+        /// </summary>
+        /// <param name="newPosition">Endposition of the jump</param>
+        /// <param name="startPosition">Startposition of the jump</param>
+        /// <returns></returns>
         public bool CheckIfJumpIsLegal((int x, int y) newPosition, (int x, int y) startPosition)
         {
-            //int diffX = newPosition.x - SelectedCell.x;
-            //int diffY = newPosition.y - SelectedCell.y;
-            //Debug.WriteLine("Direction: ({0},{1})", Math.Sign(diffX), Math.Sign(diffY));
-            //(int x, int y) direction = (Math.Sign(diffX), Math.Sign(diffY));
             (int x, int y) midPoint = ((newPosition.x + startPosition.x) / 2, (newPosition.y + startPosition.y) / 2);
             if (CheckIfNewPositionIsEmpty(midPoint) || GameBoard.Cells[midPoint.x, midPoint.y].Item1 == BoardStatus.Tombstone)
             {
@@ -107,6 +135,10 @@ namespace KinaSchack.Classes
             Debug.WriteLine("Correct");
             return true;
         }
+        /// <summary>
+        /// Method <c>GetPossibleMoves</c> returns all possible moves that the piece in SelectedCell can do. Adds the path for each end position in _sequentialjumps
+        /// </summary>
+        /// <returns>A list of tuples containing all possible moves</returns>
         public List<(int x, int y)> GetPossibleMoves()
         {
             _sequentialJumps.Clear();
@@ -122,7 +154,7 @@ namespace KinaSchack.Classes
                 }
                 if (CheckIfNewPositionIsEmpty((newX, newY)) && CheckIfJumpIsLegal((newX, newY), (SelectedCell.x, SelectedCell.y)))
                 {
-                   
+
                     moves.Add((newX, newY));
                 }
             }
@@ -152,14 +184,14 @@ namespace KinaSchack.Classes
                                 moves.Add((newX, newY));
                                 var jumpsToAdd = _sequentialJumps[startPos].ToList();
                                 jumpsToAdd.Add((newX, newY));
-                                _sequentialJumps.Add((newX, newY),jumpsToAdd);
+                                _sequentialJumps.Add((newX, newY), jumpsToAdd);
                             }
                         }
                     }
                 }
                 //We are done when there are no more possible jumps to make
             } while (copyOfPossibleMoves.Count() != moves.Count());
-            //Add the single jumps
+            //Add the single moves
             foreach ((int x, int y) in _jumps)
             {
                 int newX = (x / 2) + SelectedCell.x;
@@ -175,6 +207,11 @@ namespace KinaSchack.Classes
             }
             return moves;
         }
+        /// <summary>
+        /// Method <c>Gets x, y coordinate from a mouseclick/movement in the gui and handles them according to the internal state of the game</c>
+        /// </summary>
+        /// <param name="x">x-coordinate</param>
+        /// <param name="y">y-coordinate</param>
         public void HandleTurn(int x, int y)
         {
             //Check if player clicked on a cell
@@ -204,35 +241,37 @@ namespace KinaSchack.Classes
                     if (CheckIfVictory())
                     {
                         //Debug.WriteLine("Winner");
-                        MainPage.audio.PlayJumpSound();
-                        MainPage.audio.PlayWinnerSound();
-                        MainPage.isWinner = true;
+                        MainPage.Audio.PlayJumpSound();
+                        MainPage.Audio.PlayWinnerSound();
+                        MainPage.IsWInner = true;
                     }
                     else
                     {
-                        playerCount++;
-                        //Debug.WriteLine("Loser");
+                        PlayerCount++;
                         //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                         CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
-                        MainPage.audio.PlayJumpSound();
-                        
+                        MainPage.Audio.PlayJumpSound();
+
                         //Set to random turns?
                         //int randomNo2 = rand.Next(0, 6);
-                        if (playerCount % 5 == 0)
+                        if (PlayerCount % 5 == 0)
                         {
-                            showTombstone = true;           
+                            ShowTombstone = true;
                         }
                         else
                         {
-                            showTombstone = false;
+                            ShowTombstone = false;
                         }
-                        Debug.WriteLine(playerCount + " playercount");                      
-                        TumbstoneFeature();                   
+                        TombStoneFeature();
                         PossibleMoves.Clear();
                     }
                 }
             }
         }
+        /// <summary>
+        /// Loops through the gameboard and checks if a player has won the game
+        /// </summary>
+        /// <returns></returns>
         public bool CheckIfVictory()
         {
             int a = 4;
@@ -272,16 +311,16 @@ namespace KinaSchack.Classes
             }
             return true;
         }
-        //Find a random empty cell to set to tombstone
-        public void TumbstoneFeature()
+        /// <summary>
+        /// Sets a random gameboardcell to a tombstone
+        /// </summary>
+        public void TombStoneFeature()
         {
-            Debug.WriteLine(showTombstone + "showTombstone");
-            Debug.WriteLine(playerCount + "count");
             var random = new Random();
             List<(int x, int y)> emptyCells;
             emptyCells = new List<(int x, int y)>();
 
-            if (showTombstone)
+            if (ShowTombstone)
             {
                 for (int i = 0; i <= 6; i++)
                 {
@@ -314,7 +353,5 @@ namespace KinaSchack.Classes
                 }
             }
         }
-        
-
     }
 }

@@ -14,7 +14,6 @@ namespace KinaSchack.Classes
     /// </summary>
     public class Audio
     {
-        //public static MediaPlayer jumpSound;
         public MediaPlayer mediaPlayer;
         public bool playing = false;
 
@@ -23,7 +22,8 @@ namespace KinaSchack.Classes
             mediaPlayer = new MediaPlayer();
 
             //Jump Sound: https://freesound.org/people/simoneyoh3998/sounds/500675/
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/jumps.wav"));     
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/jumps.wav"));         
+
         }
         public void PlayJumpSound()
         {
@@ -34,7 +34,8 @@ namespace KinaSchack.Classes
         public void PlayWinnerSound()
         {
             MainMenu.player.Pause();
-            // Winner Music: https://opengameart.org/content/victory-1
+
+            //Winner Music: https://opengameart.org/content/victory-1
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/Viktor Kraus - Victory!.mp3"));       
             mediaPlayer.Volume = 0.008;
             mediaPlayer.IsLoopingEnabled = true;
