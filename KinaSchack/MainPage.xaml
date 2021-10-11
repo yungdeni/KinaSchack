@@ -426,7 +426,7 @@
                                     Foreground="White" 
                                     FontWeight="Bold" 
                                     HorizontalAlignment="Center"
-                                    FontSize="50" 
+                                    FontSize="40" 
                                     FontFamily="Monotype Corsiva"
                                     Margin="0,20,0,0"/>
                                 <Grid 
@@ -435,22 +435,22 @@
                                     <TextBlock 
                                         Name="GroupTitle"
                                         Text="Group Epsilon"
-                                        Margin="260,15,0,0"
+                                        Margin="280,10,0,0"
                                         Foreground="White"
-                                        FontSize="40"
+                                        FontSize="30"
                                         FontFamily="Monotype Corsiva">
                                     </TextBlock>
                                     <TextBlock 
                                         Name="CeoTitle"
                                         Text="President/CEO"
-                                        Margin="150,80,0,0"
+                                        Margin="150,60,0,0"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="Denijad Camovic"
-                                        Margin="400,80,200,0"
+                                        Margin="400,60,200,0"
                                         FontSize="25"
                                         FontFamily="Monotype Corsiva"
                                         Foreground="WhiteSmoke">
@@ -458,14 +458,14 @@
                                     <TextBlock 
                                         Name="VPTitle"
                                         Text="Vice President"
-                                        Margin="150,120,0,0"
+                                        Margin="150,100,0,0"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="Ulrika Karlsson"
-                                        Margin="400,120,200,0"
+                                        Margin="400,100,200,0"
                                         FontSize="25"
                                         FontFamily="Monotype Corsiva"
                                         Foreground="WhiteSmoke">
@@ -473,14 +473,14 @@
                                     <TextBlock 
                                         Name="MemberTitle"
                                         Text="Member of the Board"
-                                        Margin="150,160,0,0"
+                                        Margin="150,140,0,0"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="Viktor Cheung"
-                                        Margin="400,160,200,0"
+                                        Margin="400,140,200,0"
                                         FontSize="25"
                                         FontFamily="Monotype Corsiva"
                                         Foreground="WhiteSmoke">
@@ -488,27 +488,27 @@
                                     <TextBlock 
                                         Name="GameDeveloperTitle"
                                         Text="Game Developers"
-                                        Margin="220,220,0,0"
+                                        Margin="220,200,0,0"
                                         FontSize="40"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva">
                                     </TextBlock>
                                     <TextBlock 
-                                        Margin="320,280,0,0"
+                                        Margin="320,260,0,0"
                                         Foreground="White"
                                         FontSize="25"
                                         FontFamily="Monotype Corsiva"
                                         Text="Denijad">
                                     </TextBlock>
                                     <TextBlock 
-                                        Margin="320,320,0,0"
+                                        Margin="320,300,0,0"
                                         Foreground="White"
                                         FontSize="25"
                                         FontFamily="Monotype Corsiva"
                                         Text="Ulrika">
                                     </TextBlock>
                                     <TextBlock 
-                                        Margin="320,360,0,0"
+                                        Margin="320,340,0,0"
                                         Foreground="White"
                                         FontSize="25"
                                         FontFamily="Monotype Corsiva"
@@ -516,14 +516,14 @@
                                     </TextBlock>
                                     <TextBlock 
                                         Name="AnimationTitle"
-                                        Margin="220,420,0,0"
+                                        Margin="220,380,0,0"
                                         Text="Animation Design"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="40"
                                         Foreground="White">
                                     </TextBlock>
                                     <TextBlock 
-                                        Margin="320,480,0,0"
+                                        Margin="320,430,0,0"
                                         Text="Denijad"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25"
@@ -531,21 +531,21 @@
                                     </TextBlock>
                                     <TextBlock 
                                         Name="ArtDesignTitle"
-                                        Margin="280,530,0,0"
+                                        Margin="280,480,0,0"
                                         Text="Art Design"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="40"
                                         Foreground="White">
                                     </TextBlock>
                                     <TextBlock 
-                                        Margin="320,590,0,0"
+                                        Margin="320,530,0,0"
                                         Text="Ulrika"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25"
                                         Foreground="White">
                                     </TextBlock>
                                     <TextBlock 
-                                        Margin="320,630,0,0"
+                                        Margin="320,570,0,0"
                                         Text="Viktor"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25"
@@ -553,7 +553,7 @@
                                     </TextBlock>
                                     <TextBlock 
                                         Name="MusicAndSFXTitle"
-                                        Margin="280,690,0,0"
+                                        Margin="270,610,0,0"
                                         Text="Music/SFX"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
@@ -561,42 +561,42 @@
                                     </TextBlock>
                                     <TextBlock 
                                         Text="Jump Sound"
-                                        Margin="300,750,0,0"
+                                        Margin="300,660,0,0"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="30">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="https://freesound.org/people/simoneyoh3998/sounds/500675/"
-                                        Margin="100,810,0,0"
+                                        Margin="100,710,0,0"
                                         Foreground="WhiteSmoke"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="Background Music"
-                                        Margin="270,870,0,0"
+                                        Margin="270,760,0,0"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="30">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="https://opengameart.org/content/neocrey-jump-to-win"
-                                        Margin="140,930,0,0"
+                                        Margin="140,810,0,0"
                                         Foreground="WhiteSmoke"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="Winner Music"
-                                        Margin="290,980,0,0"
+                                        Margin="290,860,0,0"
                                         Foreground="White"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="30">
                                     </TextBlock>
                                     <TextBlock 
                                         Text="https://opengameart.org/content/victory-1"
-                                        Margin="200,1030,0,0"
+                                        Margin="200,900,0,0"
                                         Foreground="WhiteSmoke"
                                         FontFamily="Monotype Corsiva"
                                         FontSize="25">
