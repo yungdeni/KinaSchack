@@ -113,14 +113,28 @@ namespace KinaSchack
 
             }
 
-            if (_currentGameState.PieceSelected && _showHints)
+
+            if (_currentGameState.PieceSelected)
             {
-                foreach (var move in _currentGameState.PossibleMoves)
+                if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
                 {
-                    Rect cellToDraw = Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[move.x, move.y].bounds);
-                    double radius = Math.Sqrt(Math.Pow(cellToDraw.Height, 2) + Math.Pow(cellToDraw.Width, 2));
-                    args.DrawingSession.DrawCircle((float)(cellToDraw.X + (cellToDraw.Width / 2)), (float)(cellToDraw.Y + (cellToDraw.Height / 2)), (float)radius / 2, Colors.Green, 5);
+                    args.DrawingSession.DrawImage(blueHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds));
                 }
+                else
+                {
+                    args.DrawingSession.DrawImage(orangeHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds));
+                }
+
+                if (_showHints)
+                {
+                    foreach (var move in _currentGameState.PossibleMoves)
+                    {
+                        Rect cellToDraw = Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[move.x, move.y].bounds);
+                        double radius = Math.Sqrt(Math.Pow(cellToDraw.Height, 2) + Math.Pow(cellToDraw.Width, 2));
+                        args.DrawingSession.DrawCircle((float)(cellToDraw.X + (cellToDraw.Width / 2)), (float)(cellToDraw.Y + (cellToDraw.Height / 2)), (float)radius / 2, Colors.Green, 5);
+                    }
+                }
+
 
             }
             //args.DrawingSession.DrawImage(Scaling.img(_winner));
