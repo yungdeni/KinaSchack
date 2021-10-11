@@ -23,6 +23,7 @@ namespace KinaSchack.Classes
 
             //Jump Sound: https://freesound.org/people/simoneyoh3998/sounds/500675/
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Audio/jumps.wav"));         
+
         }
         public void PlayJumpSound()
         {
