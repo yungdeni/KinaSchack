@@ -241,16 +241,16 @@ namespace KinaSchack.Classes
                     if (CheckIfVictory())
                     {
                         //Debug.WriteLine("Winner");
-                        MainPage.audio.PlayJumpSound();
-                        MainPage.audio.PlayWinnerSound();
-                        MainPage.isWinner = true;
+                        MainPage.Audio.PlayJumpSound();
+                        MainPage.Audio.PlayWinnerSound();
+                        MainPage.IsWInner = true;
                     }
                     else
                     {
                         PlayerCount++;
                         //Takes the integral int value behind the enum and flips it from 0 : Player1 and 1: Player2
                         CurrentPlayer = (BoardStatus)(((int)CurrentPlayer) ^ 1);
-                        MainPage.audio.PlayJumpSound();
+                        MainPage.Audio.PlayJumpSound();
 
                         //Set to random turns?
                         //int randomNo2 = rand.Next(0, 6);
