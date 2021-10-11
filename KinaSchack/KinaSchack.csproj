@@ -149,9 +149,9 @@
     <Content Include="Assets\Images\BG.png" />
     <Content Include="Assets\Images\BG_Glow.png" />
     <Content Include="Assets\Images\Grid.png" />
-    <Content Include="Assets\Images\jumpTombstone.PNG" />
     <Content Include="Assets\Images\Jump_Ins.png" />
     <Content Include="Assets\Images\miniPumpkin.png" />
+    <Content Include="Assets\Images\overstone.PNG" />
     <Content Include="Assets\Images\Pumpkin3.png" />
     <Content Include="Assets\Images\Pumpkin2.png" />
     <Content Include="Assets\Images\Pumpkin.png" />

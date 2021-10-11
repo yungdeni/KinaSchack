@@ -398,13 +398,11 @@ namespace KinaSchack
         {
             if (!Instruction_Popup.IsOpen)
             {
-                //Instruction_Popup.Height = Window.Current.Bounds.Height;
                 Instruction_Popup.IsOpen = true;
             }
         }
         private void CreditsPopup(object sender, RoutedEventArgs e)
         {
-            Credits_Popup.Height = Window.Current.Bounds.Height;
             Credits_Popup.IsOpen = true;
         }
 

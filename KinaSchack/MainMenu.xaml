@@ -224,8 +224,8 @@
                                     Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
                                 </TextBlock>
                                 <Image
-                                    Source="/Assets/Images/jumptombstone.png"
-                                    Height="200"
+                                    Source="/Assets/Images/overstone.png"
+                                    Height="250"
                                     Width="200"
                                     Margin="0,200,0,0">
                                 </Image>
@@ -237,7 +237,7 @@
                             Margin="20,20,20,0" 
                             TextWrapping="Wrap"
                             Text="The green circles indicates all possible moves when selecting a pumpkin. 
-                            The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
+                            The game will random place tombstone as obstacle on the board to prevent players to stand on that place. You can not jump over the tombstone.">
                         </TextBlock>
                     </StackPanel>
                 </Border>
