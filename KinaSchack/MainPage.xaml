@@ -410,14 +410,14 @@
                         x:Name="Credits_Popup" 
                         IsOpen="False" 
                         Width="720" 
-                        Height="1200" 
+                        Height="1080" 
                         IsLightDismissEnabled="True"
                         RelativePanel.AlignRightWithPanel="True">
                         <Border
                             BorderBrush="LightSlateGray" 
                             BorderThickness="4" 
                             CornerRadius="30" 
-                            Height="1200">
+                            Height="1080">
                             <StackPanel 
                                 Height="{Binding ElementName=Credits_Popup , Path=Height}" 
                                 Width="{Binding ElementName=Credits_Popup , Path=Width}">
