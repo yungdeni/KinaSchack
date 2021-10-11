@@ -1,10 +1,6 @@
 ﻿using KinaSchack.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 
 namespace KinaSchack.Classes
@@ -37,6 +33,7 @@ namespace KinaSchack.Classes
         /// </summary>
         public void Update()
         {
+            //Getting close towards the end marks it done and we can stop drawing the animation
             if (GetDistance() < 1)
             {
                 Velocity = Vector2.Zero;
@@ -44,24 +41,31 @@ namespace KinaSchack.Classes
             }
             DrawPosition.X += Velocity.X;
             DrawPosition.Y += Velocity.Y;
+            //Speed up untill we get halfway through
             if (GetDistance() > _initialDistance / 2)
             {
                 Velocity.X *= (float)1.1;
                 Velocity.Y *= (float)1.1;
             }
+            //Slow down again
             else
             {
-   
                 Velocity.X = Math.Sign(Velocity.X) * (float)Math.Max(Math.Abs(Velocity.X * 0.9), 0.5);
                 Velocity.Y = Math.Sign(Velocity.Y) * (float)Math.Max(Math.Abs(Velocity.Y * 0.9), 0.5);
             }
-            //Getting close towards the end marks it done and we can stop drawing the animation
-
         }
+        /// <summary>
+        /// Return a velocity vector depending on the distances from the start and endpositions of the piece
+        /// </summary>
+        /// <returns>Velocity <c>Vector2</c></returns>
         private Vector2 GetVelocity()
         {
             return new Vector2((float)(EndPosition.X - StartPosition.X) / 100, (float)(EndPosition.Y - StartPosition.Y) / 100);
         }
+        /// <summary>
+        /// Gets the euclidian distance between the start and end point of the animated piece
+        /// </summary>
+        /// <returns>the distance between the start and end position of the piece</returns>
         private float GetDistance()
         {
             return Vector2.Distance(new Vector2((float)DrawPosition.X, (float)DrawPosition.Y), new Vector2((float)EndPosition.X, (float)EndPosition.Y));
