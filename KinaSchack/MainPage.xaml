@@ -8,10 +8,605 @@
 	xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	<Grid>
-		<canvas:CanvasAnimatedControl x:Name="Canvas" Draw="Canvas_Draw" CreateResources="Canvas_CreateResources" PointerPressed="Canvas_PointerPressed" PointerReleased="Canvas_PointerReleased" PointerMoved="Canvas_PointerMoved" Update="Canvas_Update" ClearColor="CornflowerBlue" />
 
-	</Grid>
-    
+    <Grid x:Name="GameGrid">
+        <canvas:CanvasAnimatedControl
+            x:Name="Canvas"
+            Draw="Canvas_Draw"
+            CreateResources="Canvas_CreateResources"
+            PointerPressed="Canvas_PointerPressed"
+            PointerReleased="Canvas_PointerReleased"
+            PointerMoved="Canvas_PointerMoved"
+            Update="Canvas_Update"
+            ClearColor="CornflowerBlue">
+        </canvas:CanvasAnimatedControl>
 
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <Viewbox StretchDirection="Both">
+                <TextBlock
+                    x:Name="P2"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Margin="15,0,750,0"
+                    Text="{x:Bind _players.Player2, Mode=TwoWay}"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Top"
+                    Width="222"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="24"
+                    Foreground="#FFFF6200"/>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <Viewbox StretchDirection="Both">
+                <TextBlock
+                    x:Name="PlayerEffect2"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="#FFFF6200"
+                    FontFamily="Monotype Corsiva"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Height="40"
+                    Width="222"
+                    Margin="15,0,750,0"
+                    Text="{Binding Path=Text, ElementName=textblockTranslateMaster2}"
+                    Visibility="Collapsed"
+                    Grid.Column="0" Grid.Row="0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform X="2" Y="2" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <Viewbox StretchDirection="Both">
+                <TextBlock
+                    Name="textblockTranslateMaster2"          
+                    FontSize="25"
+                    FontWeight="Bold"
+                    FontFamily="Monotype Corsiva"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Width="222"
+                    Height="40"
+                    Foreground="White"
+                    Visibility="Collapsed"
+                    Text="{Binding Path=Text, ElementName=P2}"
+                    Margin="15,0,750,0"
+                    Grid.Column="0" Grid.Row="0">
+                </TextBlock>
+            </Viewbox>
+        </StackPanel>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+                <TextBlock
+                    x:Name="P1"
+                    Margin="500,500,500,50"
+                    Text="{x:Bind _players.Player1, Mode=TwoWay}"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Width="222"
+                    FontFamily="Monotype Corsiva"
+                    FontSize="29"
+                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform SkewY="0.452" TranslateY="0.678"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
+                <TextBlock
+                    x:Name="PlayerEffect1"
+                    FontSize="30"
+                    FontWeight="Bold" 
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Width="222"
+                    Foreground="LightSkyBlue"
+                    FontFamily="Monotype Corsiva"
+                    Text="{Binding Path=Text, ElementName=textblockTranslateMaster1}"
+                    Margin="500,500,500,50"
+                    Visibility="Collapsed"
+                    Grid.Column="0" Grid.Row="0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform X="2" Y="2" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
+                <TextBlock
+                    Name="textblockTranslateMaster1" 
+                    FontSize="30"
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Width="222"
+                    FontFamily="Monotype Corsiva"
+                    Foreground="White"
+                    Visibility="Collapsed"
+                    Text="{Binding Path=Text, ElementName=P1}"
+                    Margin="500,500,500,50"
+                    Grid.Column="0" Grid.Row="0">
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox StretchDirection="Both">
+            <StackPanel Height="469" Width="1652">
+                <TextBlock
+                x:Name="Winner"
+                HorizontalAlignment="Left"
+                Height="223"
+                Margin="750,0,300,0"                  
+                Text="* * * * * * * *"             
+                TextWrapping="Wrap"
+                Width="783"
+                FontFamily="Monotype Corsiva"
+                FontSize="90"
+                Foreground="LightSkyBlue"
+                Visibility="Collapsed">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform x:Name='MyRotateTransform' Angle='0' CenterX='230' CenterY='25'/>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent='TextBlock.Loaded'>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                Storyboard.TargetName='MyRotateTransform' 
+                                Storyboard.TargetProperty='(RotateTransform.Angle)'
+                                From='0.0' To='360' Duration='0:0:10' 
+                                RepeatBehavior='Forever' />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <ContentDialog 
+            x:Name="InputPlayersNameDialog"
+            PrimaryButtonText="Start Game"
+            PrimaryButtonClick="InputPlayersNameDialog_PrimaryButtonClick"
+            CloseButtonText="Cancel"
+            CloseButtonClick="InputPlayersNameDialog_CloseButtonClick">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Width="273">
+                        <Image
+                            Source="ms-appx:///Assets/SmallLogo.png"
+                            Width="40"
+                            Height="40"
+                            Margin="10,0"/>
+                        <TextBlock
+                            Text="     Players Name"
+                            FontFamily="Monotype Corsiva"
+                            Width="142"
+                            HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <StackPanel>
+                <TextBlock
+                    x:Name="Pl1"
+                    Text="Type name for Player 1"
+                    FontFamily="Monotype Corsiva"/>
+                <TextBox
+                    x:Name="Player1Input"
+                    Text="{x:Bind _players.Player1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextChanged="Player1Input_TextChanged"
+                    PlaceholderText="Player1"
+                    FontFamily="Monotype Corsiva">
+                </TextBox>
+                <TextBlock
+                    x:Name="Pl2"
+                    Text="Type name for Player 2"
+                    FontFamily="Monotype Corsiva"/>
+                <TextBox
+                    x:Name="Player2Input"                 
+                    Text="{x:Bind _players.Player2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    PlaceholderText="Player2"
+                    FontFamily="Monotype Corsiva">
+                </TextBox>
+
+            </StackPanel>
+        </ContentDialog>
+        <Grid>
+            <ContentDialog 
+            x:Name="AudioSettingsDialog"
+            PrimaryButtonText="OK"
+            PrimaryButtonClick="AudioSettingsDialog_PrimaryButtonClick"
+            CloseButtonText="Cancel"
+            CloseButtonClick="AudioSettingsDialog_CloseButtonClick">
+                <ContentDialog.TitleTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Width="273" Height="25">
+                            <Image
+                            Source="ms-appx:///Assets/SmallLogo.png"
+                            Width="40"
+                            Height="40"
+                            Margin="10,0"/>
+                            <TextBlock
+                            Text="     Audio Settings"
+                            FontFamily="Monotype Corsiva"
+                            Width="142"
+                            HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentDialog.TitleTemplate>
+                <StackPanel Margin="0,0,13,18">
+                    <Slider x:Name="VolumeSlider"  
+                    Header="Volume Control"
+                    FontFamily="Monotype Corsiva"                  
+                    Minimum="0"
+                    Maximum="10"                 
+                    TickFrequency="1"
+                    ElementSoundMode="Default"                  
+                    TickPlacement="BottomRight"
+                    ValueChanged="VolumeSlider_ValueChanged"/>
+                    <TextBlock
+                    x:Name="showValue"
+                    Text=""
+                    FontFamily="Monotype Corsiva"
+                    Height="20"/>
+                    <Button
+                    x:Name="StartMusic"
+                    Content="Start Music"
+                    Click="StartMusic_Click"
+                    FontFamily="Monotype Corsiva"
+                    Width="88" RenderTransformOrigin="0.5,0.5" Height="31" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Button.RenderTransform>
+                            <CompositeTransform SkewX="22.508" TranslateX="13.53" Rotation="16.413" ScaleX="0.938" ScaleY="1.259" SkewY="20.312" TranslateY="2.437"/>
+                        </Button.RenderTransform>
+                    </Button>
+                    <TextBlock
+                    x:Name="em"
+                    Text=""
+                    FontFamily="Monotype Corsiva"
+                    Height="7"/>
+                    <Button
+                    x:Name="StopMusic"
+                    Width="92"
+                    Content="Stop Music"
+                    Click="StopMusic_Click"
+                    FontFamily="Monotype Corsiva" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Height="27">
+                        <Button.RenderTransform>
+                            <CompositeTransform SkewX="42.461" TranslateX="12.653" Rotation="-13.112" ScaleX="1" ScaleY="1" SkewY="0" TranslateY="-1.395"/>
+                        </Button.RenderTransform>
+                    </Button>
+                </StackPanel>
+            </ContentDialog>
+        </Grid>
+
+        <Grid Margin="0,0,0,0">
+            <Button Content=". . ."
+                    Background="Transparent"
+                    Foreground="White"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Width="50"
+                    Height="40"
+                    BorderThickness="0">
+                <Button.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.ThemeDictionaries>
+                            <ResourceDictionary x:Key="Dark">
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="LightGray"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                            </ResourceDictionary>
+                            <ResourceDictionary x:Key="Light">
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="LightGray"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                            </ResourceDictionary>
+                        </ResourceDictionary.ThemeDictionaries>
+                    </ResourceDictionary>
+                </Button.Resources>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Main Menu"
+                                        Click="FlyoutBackToMenu_Click"/>
+                        <MenuFlyoutSubItem Text="Options">
+                            <MenuFlyoutItem Text="Audio Settings"
+                                            Click="AudioSettings_Click"/>
+                            <MenuFlyoutItem Text="Game Instructions"
+                                            Click="LoadInstructionPage"/>
+                            <MenuFlyoutItem Text="Disable Hint"
+                                            Click="HintButton_Click"/>
+                            <MenuFlyoutItem Text="Save"
+											Click="SaveButton_Click"/>
+                            <MenuFlyoutItem Text="Load"
+											Name="LoadingFunction"
+											IsEnabled="False"
+											Click="LoadButton_Click"/>
+                        </MenuFlyoutSubItem>
+                        <MenuFlyoutItem Text="Credits"
+                                        Click="CreditsPopup"/>
+                        <MenuFlyoutItem Text="Exit"
+                                        Click="FlyoutExitGame"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+        <RelativePanel HorizontalAlignment="Right" Margin="0,10,10,0">
+            <Grid>
+                <Viewbox>
+                    <Popup x:Name="Instruction_Popup" 
+                           IsOpen="False" 
+                           Width="720" 
+                           Height="800" 
+                           IsLightDismissEnabled="True"
+                           RelativePanel.AlignRightWithPanel="True">
+
+                        <Border BorderBrush="LightSlateGray" 
+                                BorderThickness="4" 
+                                CornerRadius="30" 
+                                Height="800">
+
+                            <StackPanel Height="{Binding ElementName=Instruction_Popup , Path=Height}" 
+                                        Width="{Binding ElementName=Instruction_Popup , Path=Width}">
+
+                                <TextBlock Text="Game Instructions" 
+                                           Foreground="White" 
+                                           FontWeight="Bold" 
+                                           HorizontalAlignment="Center" 
+                                           FontSize="50" 
+                                           FontFamily="Monotype Corsiva"
+                                           Margin="0,20,0,0"/>
+                                <Image Source="/Assets/Images/Jump_Ins.png" 
+                                       Height="380" 
+                                       HorizontalAlignment="Left"
+                                       Margin="15,150,0,0"></Image>
+                                <Image Name="RuleImage"/>
+                                <Grid 
+                                    Margin="420,-400,0,0"
+                                    Width="300"
+                                    Height="400">
+                                    <TextBlock 
+                                        Margin="-400,-100,10,0"
+                                        FontSize="18"
+                                        TextWrapping="Wrap"
+                                        Foreground="White"
+                                        FontWeight="Bold"
+                                        Text="The aim is to race to the opposite corner of the board before the opponent. 
+                                        Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
+                                    </TextBlock>
+                                    <Image 
+                                        Source="/Assets/Images/jumptombstone.png"
+                                        Height="200"
+                                        Width="200"
+                                        Margin="0,200,0,0">
+                                    </Image>
+                                </Grid>
+                                <TextBlock 
+                                    FontSize="18" 
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Margin="20,20,20,0" 
+                                    TextWrapping="Wrap"
+                                    Text="The green circles indicates all possible moves when selecting a pumpkin. 
+                                    The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </Viewbox>
+            </Grid>
+        </RelativePanel>
+        <RelativePanel 
+            HorizontalAlignment="Right" 
+            Margin="0,10,10,0">
+            <Grid>
+                <Viewbox>
+                    <Popup 
+                        x:Name="Credits_Popup" 
+                        IsOpen="False" 
+                        Width="720" 
+                        Height="1080" 
+                        IsLightDismissEnabled="True"
+                        RelativePanel.AlignRightWithPanel="True">
+                        <Border
+                            BorderBrush="LightSlateGray" 
+                            BorderThickness="4" 
+                            CornerRadius="30" 
+                            Height="1080">
+                            <StackPanel 
+                                Height="{Binding ElementName=Credits_Popup , Path=Height}" 
+                                Width="{Binding ElementName=Credits_Popup , Path=Width}">
+                                <TextBlock 
+                                    Text="Credits" 
+                                    Foreground="White" 
+                                    FontWeight="Bold" 
+                                    HorizontalAlignment="Center"
+                                    FontSize="40" 
+                                    FontFamily="Monotype Corsiva"
+                                    Margin="0,20,0,0"/>
+                                <Grid 
+                                    Width="800"
+                                    Height="1200">
+                                    <TextBlock 
+                                        Name="GroupTitle"
+                                        Text="Group Epsilon"
+                                        Margin="280,10,0,0"
+                                        Foreground="White"
+                                        FontSize="30"
+                                        FontFamily="Monotype Corsiva">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="CeoTitle"
+                                        Text="President/CEO"
+                                        Margin="150,60,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Denijad Camovic"
+                                        Margin="400,60,200,0"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Foreground="WhiteSmoke">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="VPTitle"
+                                        Text="Vice President"
+                                        Margin="150,100,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Ulrika Karlsson"
+                                        Margin="400,100,200,0"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Foreground="WhiteSmoke">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="MemberTitle"
+                                        Text="Member of the Board"
+                                        Margin="150,140,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Viktor Cheung"
+                                        Margin="400,140,200,0"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Foreground="WhiteSmoke">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="GameDeveloperTitle"
+                                        Text="Game Developers"
+                                        Margin="220,200,0,0"
+                                        FontSize="40"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,260,0,0"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Text="Denijad">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,300,0,0"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Text="Ulrika">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,340,0,0"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Monotype Corsiva"
+                                        Text="Viktor">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="AnimationTitle"
+                                        Margin="220,380,0,0"
+                                        Text="Animation Design"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="40"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,430,0,0"
+                                        Text="Denijad"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="ArtDesignTitle"
+                                        Margin="280,480,0,0"
+                                        Text="Art Design"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="40"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,530,0,0"
+                                        Text="Ulrika"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Margin="320,570,0,0"
+                                        Text="Viktor"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25"
+                                        Foreground="White">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Name="MusicAndSFXTitle"
+                                        Margin="270,610,0,0"
+                                        Text="Music/SFX"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="40">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Jump Sound"
+                                        Margin="300,660,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="30">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="https://freesound.org/people/simoneyoh3998/sounds/500675/"
+                                        Margin="100,710,0,0"
+                                        Foreground="WhiteSmoke"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Background Music"
+                                        Margin="270,760,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="30">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="https://opengameart.org/content/neocrey-jump-to-win"
+                                        Margin="140,810,0,0"
+                                        Foreground="WhiteSmoke"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="Winner Music"
+                                        Margin="290,860,0,0"
+                                        Foreground="White"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="30">
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="https://opengameart.org/content/victory-1"
+                                        Margin="200,900,0,0"
+                                        Foreground="WhiteSmoke"
+                                        FontFamily="Monotype Corsiva"
+                                        FontSize="25">
+                                    </TextBlock>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </Viewbox>
+            </Grid>
+        </RelativePanel>
+    </Grid>
 </Page>

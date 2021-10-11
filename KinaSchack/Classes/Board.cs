@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using KinaSchack.Enums;
 
 namespace KinaSchack.Classes
 {
+    /// <summary>
+    /// <c>Board </c> Represents the gameboard. Contains the cells in a 2D-array with a <c>BoardStatus</c> and a <c>Rect</c>
+    /// </summary>
     public class Board
     {
         public (BoardStatus, Rect bounds)[,] Cells;
@@ -23,8 +23,6 @@ namespace KinaSchack.Classes
                 Cells[i, 4] = (BoardStatus.Empty, new Rect(new Point(100 + (115 * i), 540), new Point(160 + (115 * i), 620)));
                 Cells[i, 5] = (BoardStatus.Empty, new Rect(new Point(100 + (115 * i), 655), new Point(160 + (115 * i), 735)));
                 Cells[i, 6] = (BoardStatus.Empty, new Rect(new Point(100 + (115 * i), 775), new Point(160 + (115 * i), 845)));
-
-
             }
             Cells[0, 0].Item1 = BoardStatus.Player2;
             Cells[1, 1].Item1 = BoardStatus.Player2;
@@ -47,10 +45,46 @@ namespace KinaSchack.Classes
             Cells[4, 5].Item1 = BoardStatus.Player1;
             Cells[4, 6].Item1 = BoardStatus.Player1;
             Cells[3, 6].Item1 = BoardStatus.Player1;
-
-            //positions[5, 5].occupied = true;
-
         }
-
+        /// <summary>
+        /// Gets the player positions from the Cells array
+        /// </summary>
+        /// <returns>A comma seperated string with the BoardStatuses</returns>
+        public string GetPlayerPositions()
+        {
+            StringBuilder positions = new StringBuilder();
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    positions.Append(Cells[i, j].Item1.ToString() + ",");
+                }
+            }
+            positions.Remove(positions.Length - 1, 1);
+            return positions.ToString();
+        }
+        /// <summary>
+        /// Gets the player positions to the Cells array
+        /// </summary>
+        /// <param name="saveString">A comma seperated string with the boardstatuses</param>
+        public void SetPlayerPositions(string saveString)
+        {
+            if (saveString is null)
+            {
+                return;
+            }
+            string[] positions = saveString.Split(",");
+            if (positions.Length != 49)
+            {
+                return;
+            }
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    Cells[i, j].Item1 = (BoardStatus)Enum.Parse(typeof(BoardStatus), positions[(i * Cells.GetLength(0)) + j]);
+                }
+            }
+        }
     }
 }
