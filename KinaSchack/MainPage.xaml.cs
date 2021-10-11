@@ -57,13 +57,13 @@ namespace KinaSchack
         /// </summary>
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            Scaling.boundsScaling = ApplicationView.GetForCurrentView().VisibleBounds;
+            Scaling.BoundsScaling = ApplicationView.GetForCurrentView().VisibleBounds;
             Scaling.SetScale();
 
         }
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
-            args.DrawingSession.DrawImage(Scaling.img(_BG));
+            args.DrawingSession.DrawImage(Scaling.Img(_BG));
             ///Go through all the cells in the gameboard and draw the appropriate image
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
