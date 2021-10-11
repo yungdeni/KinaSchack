@@ -421,6 +421,12 @@ namespace KinaSchack
             }
         }
 
+        private void CreditsPopup(object sender, RoutedEventArgs e)
+        {
+            Credits_Popup.Height = Window.Current.Bounds.Height;
+            Credits_Popup.IsOpen = true;
+        }
+
         private void SetDefaultStartPlayerText()
         {
             P1.Visibility = Visibility.Collapsed;
