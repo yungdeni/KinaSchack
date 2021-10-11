@@ -41,14 +41,15 @@ namespace KinaSchack
         private CanvasBitmap _winner;
         private CanvasBitmap _tombstone;
         private GameState _currentGameState;
+        private CanvasBitmap orangeHover;
+        private CanvasBitmap blueHover;
         private int x, y;
         public static Audio audio;
         private Players _players;
         private double _currVolume;
         static public bool isWinner = false;
         private string _theWinner;
-        private CanvasBitmap orangeHover;
-        private CanvasBitmap blueHover;
+        
         private (int x, int y) hoverSelect;
         private AnimatePiece _currentAnimation;
         private bool _showHints;
