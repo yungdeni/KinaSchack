@@ -16,11 +16,9 @@ namespace KinaSchack.Classes
     /// </summary>
     public class Players : INotifyPropertyChanged
     {
-        //Declare variables
         private string _player1;
         private string _player2;
 
-        //Declare event
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Players()
