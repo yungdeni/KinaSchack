@@ -254,27 +254,12 @@ namespace KinaSchack
             this.Frame.Navigate(typeof(MainMenu));
         }
 
-        private void Player1Input_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
         //Displays the Audio settings Content Dialog
         private void AudioSettings_Click(object sender, RoutedEventArgs e)
         {
            AudioSettingsDialog.ShowAsync();
         }
-
-        private void AudioSettingsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-
-        }
-
-        private void AudioSettingsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-
-        }
-
+ 
         private void StartMusic_Click(object sender, RoutedEventArgs e)
         {
             MainMenu.player.Play();
