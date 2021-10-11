@@ -3,28 +3,19 @@ using KinaSchack.Enums;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Microsoft.Graphics.Canvas.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Core;
-using System.ComponentModel;
-using System.Text.Json;
-using System.Text.RegularExpressions;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,17 +29,16 @@ namespace KinaSchack
         private CanvasBitmap _BG;
         private CanvasBitmap _piece;
         private CanvasBitmap _piece2;
-        private CanvasBitmap _winner;
         private CanvasBitmap _tombstone;
         private GameState _currentGameState;
-        private int x, y;
-        public static Audio audio;
-        private Players _players;
-        private double _currVolume;
-        static public bool isWinner = false;
-        private string _theWinner;
         private CanvasBitmap orangeHover;
         private CanvasBitmap blueHover;
+        private int x, y;
+        public static Audio Audio;
+        private Players _players;
+        private double _currVolume;
+        public static bool IsWInner;
+        private string _theWinner;
         private (int x, int y) hoverSelect;
         private AnimatePiece _currentAnimation;
         private bool _showHints;
@@ -60,8 +50,11 @@ namespace KinaSchack
             Scaling.SetScale();
             SetDefaultStartPlayerText();
             _showHints = true;
+            IsWInner = false;
         }
-
+        /// <summary>
+        /// Gets called when the window is resized.
+        /// </summary>
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
             Scaling.boundsScaling = ApplicationView.GetForCurrentView().VisibleBounds;
@@ -70,10 +63,11 @@ namespace KinaSchack
         }
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
-
             args.DrawingSession.DrawImage(Scaling.img(_BG));
+            ///Go through all the cells in the gameboard and draw the appropriate image
             foreach ((BoardStatus, Rect bounds) pos in _currentGameState.GameBoard.Cells)
             {
+                ///Skip the positions where we animate the piece
                 if (!(_currentAnimation is null))
                 {
                     if (_currentAnimation.EndPosition == pos.bounds && !_currentAnimation.Done)
@@ -85,7 +79,6 @@ namespace KinaSchack
                         continue;
                     }
                 }
-                //args.DrawingSession.DrawRectangle(pos.bounds, Colors.Red);
                 if (pos.Item1 == BoardStatus.Player2)
                 {
                     args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(pos.bounds));
@@ -98,8 +91,8 @@ namespace KinaSchack
                 {
                     args.DrawingSession.DrawImage(_tombstone, Scaling.GetScaledRect(pos.bounds));
                 }
-
             }
+            ///If we are hovering a piece, draw the highlighted version of it
             if (hoverSelect != (-1, -1))
             {
                 if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
@@ -112,8 +105,7 @@ namespace KinaSchack
                 }
 
             }
-
-
+            ///Draw a highlighted piece if its selected by a player
             if (_currentGameState.PieceSelected)
             {
                 if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
@@ -124,7 +116,7 @@ namespace KinaSchack
                 {
                     args.DrawingSession.DrawImage(orangeHover, Scaling.GetScaledRect(_currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds));
                 }
-
+                ///Draw the possible moves the selected piece can make
                 if (_showHints)
                 {
                     foreach (var move in _currentGameState.PossibleMoves)
@@ -134,18 +126,15 @@ namespace KinaSchack
                         args.DrawingSession.DrawCircle((float)(cellToDraw.X + (cellToDraw.Width / 2)), (float)(cellToDraw.Y + (cellToDraw.Height / 2)), (float)radius / 2, Colors.Green, 5);
                     }
                 }
-
-
             }
-            //args.DrawingSession.DrawImage(Scaling.img(_winner));
             //Do something if a player wins
-            if (isWinner)
+            if (IsWInner)
             {
                 //gets the main CoreApplicationView so it is always available
                 //source: https://stackoverflow.com/questions/16477190/correct-way-to-get-the-coredispatcher-in-a-windows-store-app
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
-                    {         
+                    {
                         if (_currentGameState.CurrentPlayer == BoardStatus.Player1)
                         {
                             _theWinner = _players.Player1;
@@ -166,8 +155,9 @@ namespace KinaSchack
                         Winner.Visibility = Visibility.Visible;
                     }
                 );
-                isWinner = false;
+                IsWInner = false;
             }
+            ///Draw the animated pieces
             if (!(_currentAnimation is null))
             {
                 if (!_currentAnimation.Done)
@@ -180,41 +170,36 @@ namespace KinaSchack
                     {
                         args.DrawingSession.DrawImage(_piece, Scaling.GetScaledRect(_currentAnimation.DrawPosition));
                     }
-
-                    //Debug.WriteLine("Drawing Animation");
                 }
             }
-            //Rect selectedPiece = _currentGameState.GameBoard.Cells[_currentGameState.SelectedCell.x, _currentGameState.SelectedCell.y].bounds;
-            //if (_currentGameState.PieceSelected)
-            //{
-            //    args.DrawingSession.DrawCircle((float)(selectedPiece.X + (selectedPiece.Width / 2)), (float)(selectedPiece.Y + (selectedPiece.Height / 2)), 30, Colors.Green, 5);
         }
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
-
+        /// <summary>
+        /// Load the resources required for the game
+        /// </summary>
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
             _BG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/BG_Glow.png"));
             _piece = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin.png"));
             _piece2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/Pumpkin2.png"));
-            _winner = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/winner1.png"));
             _tombstone = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/tombstone.png"));
             _currentGameState = new GameState();
-            audio = new Audio();
+            Audio = new Audio();
             _players = new Players();
             _currVolume = MainMenu.player.Volume * 1000;
             VolumeSlider.Value = _currVolume;
             //Content dialog with textbox to enter players name 
-
             ContentDialogResult result = await InputPlayersNameDialog.ShowAsync();
             orangeHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin.png"));
             blueHover = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Images/selectedPumpkin2.png"));
-            //_testAnimation = new AnimatePiece(_currentGameState.GameBoard.Cells[1, 1].bounds, _currentGameState.GameBoard.Cells[5, 5].bounds, BoardStatus.Player1);
         }
-
+        /// <summary>
+        /// Gets called when you press the mousebutton
+        /// </summary>
         private void Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertPressed");
@@ -224,12 +209,16 @@ namespace KinaSchack
             _currentGameState.HandleTurn(newPoint.x, newPoint.y);
             ChangePlayerEffect();
         }
-
+        /// <summary>
+        /// Gets called when you release the mousebutton
+        /// </summary>
         private void Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             Debug.WriteLine("PoinertReleased");
         }
-
+        /// <summary>
+        /// Gets called every time you move the mouse within the game
+        /// </summary>
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             x = (int)e.GetCurrentPoint(Canvas).Position.X;
@@ -243,11 +232,10 @@ namespace KinaSchack
                     hoverSelect = selectedCellTemp;
                 }
             }
-
-
-            //Debug.WriteLine("PoinertMoved");
         }
-
+        /// <summary>
+        /// Gets called when you press the hint button
+        /// </summary>
         private void HintButton_Click(object sender, RoutedEventArgs e)
         {
             var item = (MenuFlyoutItem)sender;
@@ -268,7 +256,7 @@ namespace KinaSchack
 
         private void Player1Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            
         }
 
         //Displays the Audio settings Content Dialog
@@ -299,9 +287,6 @@ namespace KinaSchack
         //Volume slider changes the background music.
         private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            Debug.WriteLine(MainMenu.player.Volume);
-            Debug.WriteLine(VolumeSlider.Value / 1000 + "    slider");
-
             if (VolumeSlider.Value < _currVolume)
             {
                 Debug.WriteLine("minskar");
@@ -314,18 +299,16 @@ namespace KinaSchack
                 MainMenu.player.Volume = VolumeSlider.Value / 1000;
                 _currVolume = VolumeSlider.Value;
             }
-
         }
         private void WinnerButton_Click(object sender, RoutedEventArgs e)
         {
-            audio.mediaPlayer.Pause();
+            Audio.mediaPlayer.Pause();
             this.Frame.Navigate(typeof(MainMenu));
         }
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
-            
-
+            ///Gets the next animation from the animation queue if its ready
             if (_currentGameState.AnimationQueue.Count != 0 && _currentAnimation is null)
             {
                 _currentAnimation = _currentGameState.AnimationQueue.Dequeue();
@@ -336,7 +319,6 @@ namespace KinaSchack
                 if (_currentAnimation.Done)
                 {
                     _currentAnimation = null;
-                    //Debug.WriteLine("Updating Animation");
                 }
                 else
                 {
@@ -420,7 +402,6 @@ namespace KinaSchack
                 Instruction_Popup.IsOpen = true;
             }
         }
-
         private void CreditsPopup(object sender, RoutedEventArgs e)
         {
             Credits_Popup.Height = Window.Current.Bounds.Height;

@@ -10,18 +10,25 @@
         <Border.Background>
             <ImageBrush ImageSource="Assets/Images/BackGround.png"/>
         </Border.Background>
-
-    <Viewbox MaxWidth="1920" MaxHeight="1080" Stretch="Uniform" StretchDirection="Both">
+        <Viewbox
+            MaxWidth="1920"
+            MaxHeight="1080"
+            Stretch="Uniform"
+            StretchDirection="Both">
             <Grid          
-              Width="1920"
-              Height="1080">
+                Width="1920"
+                Height="1080">
                 <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="0*" />
-            </Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                    <ColumnDefinition
+                        Width="0*">
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
+                    <RowDefinition
+                        Height="Auto">
+                    </RowDefinition>
+                    <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel>
                 <TextBlock
@@ -37,38 +44,55 @@
                     <Run Text=" PUMPKIN CHECKERS"/>
                 </TextBlock>
             </StackPanel>
-            <StackPanel Grid.Row="0" Margin="254,529,0,0" Orientation="Vertical">
-                    <Button 
+            <StackPanel 
+                Grid.Row="0"
+                Margin="254,529,0,0"
+                Orientation="Vertical">
+                <Button
                     Content="Start Game"
                     Height="52"
                     Width="253"
                     Background="Transparent"
-                    Foreground="White"    
+                    Foreground="White"
                     FontFamily="Monotype Corsiva"
                     FontSize="26"
                     BorderThickness="0"
                     Click="MainMenuStartGame">
-                        <Button.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.ThemeDictionaries>
-                                    <ResourceDictionary x:Key="Dark">
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
-                                    </ResourceDictionary>
-                                    <ResourceDictionary x:Key="Light">
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
-                                    </ResourceDictionary>
-                                </ResourceDictionary.ThemeDictionaries>
-                            </ResourceDictionary>
-                        </Button.Resources>
-                    </Button>
-                
-
-
-                </StackPanel>
-            <StackPanel Grid.Row="0" Margin="254,614,0,0" Orientation="Vertical">
-                    <Button
+                    <Button.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.ThemeDictionaries>
+                                <ResourceDictionary
+                                    x:Key="Dark">
+                                    <SolidColorBrush
+                                        x:Key="ButtonForegroundPointerOver"
+                                        Color="Red">
+                                    </SolidColorBrush>
+                                    <SolidColorBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        Color="Transparent">
+                                    </SolidColorBrush>
+                                </ResourceDictionary>
+                                <ResourceDictionary
+                                    x:Key="Light">
+                                    <SolidColorBrush
+                                        x:Key="ButtonForegroundPointerOver"
+                                        Color="Red">
+                                    </SolidColorBrush>
+                                    <SolidColorBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        Color="Transparent">
+                                    </SolidColorBrush>
+                                </ResourceDictionary>
+                            </ResourceDictionary.ThemeDictionaries>
+                        </ResourceDictionary>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="0"
+                Margin="254,614,0,0"
+                Orientation="Vertical">
+                <Button
                     Content="Game Instructions"
                     Height="52"
                     Width="253"
@@ -78,26 +102,39 @@
                     FontSize="26"
                     BorderThickness="0"
                     Click="LoadInstructionPage">
-                        <Button.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.ThemeDictionaries>
-                                    <ResourceDictionary x:Key="Dark">
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
-                                    </ResourceDictionary>
-                                    <ResourceDictionary x:Key="Light">
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
-                                    </ResourceDictionary>
-                                </ResourceDictionary.ThemeDictionaries>
-                            </ResourceDictionary>
-                        </Button.Resources>
-                    </Button>
-
-
-                </StackPanel>
-                <StackPanel Grid.Row="0" Margin="254,698,0,0" Orientation="Vertical">
-                    <Button
+                    <Button.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.ThemeDictionaries>
+                                <ResourceDictionary
+                                    x:Key="Dark">
+                                    <SolidColorBrush
+                                        x:Key="ButtonForegroundPointerOver"
+                                        Color="Red"/>
+                                    <SolidColorBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        Color="Transparent"/>
+                                </ResourceDictionary>
+                                <ResourceDictionary
+                                    x:Key="Light">
+                                    <SolidColorBrush
+                                        x:Key="ButtonForegroundPointerOver"
+                                        Color="Red">
+                                    </SolidColorBrush>
+                                    <SolidColorBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        Color="Transparent">
+                                    </SolidColorBrush>
+                                </ResourceDictionary>
+                            </ResourceDictionary.ThemeDictionaries>
+                        </ResourceDictionary>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="0"
+                Margin="254,698,0,0"
+                Orientation="Vertical">
+                <Button
                     Content="Quit"
                     Height="52"
                     VerticalAlignment="Top"
@@ -108,79 +145,99 @@
                     FontSize="26"
                     BorderThickness="0"
                     Click="MainMenuQuit">
-                        <Button.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.ThemeDictionaries>
-                                    <ResourceDictionary x:Key="Dark">
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                    <Button.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.ThemeDictionaries>
+                                <ResourceDictionary
+                                    x:Key="Dark">
+                                    <SolidColorBrush
+                                        x:Key="ButtonForegroundPointerOver"
+                                        Color="Red">
+                                    </SolidColorBrush>
+                                    <SolidColorBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        Color="Transparent">
+                                    </SolidColorBrush>
+                                </ResourceDictionary>
+                                <ResourceDictionary
+                                    x:Key="Light">
+                                    <SolidColorBrush
+                                        x:Key="ButtonForegroundPointerOver"
+                                        Color="Red">
+                                    </SolidColorBrush>
+                                    <SolidColorBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        Color="Transparent">
+                                    </SolidColorBrush>
                                     </ResourceDictionary>
-                                    <ResourceDictionary x:Key="Light">
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
-                                    </ResourceDictionary>
-                                </ResourceDictionary.ThemeDictionaries>
-                            </ResourceDictionary>
-                        </Button.Resources>
-                    </Button>
-                </StackPanel>
-                <Popup x:Name="Instruction_Popup" 
-                       IsOpen="False" 
-                       Width="720" 
-                       Height="800" 
-                       IsLightDismissEnabled="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                       Margin="0,100,0,0">
-
-                <Border BorderBrush="LightSlateGray" 
+                            </ResourceDictionary.ThemeDictionaries>
+                        </ResourceDictionary>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+                <Popup 
+                    x:Name="Instruction_Popup" 
+                    IsOpen="False" 
+                    Width="720" 
+                    Height="800" 
+                    IsLightDismissEnabled="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Margin="0,100,0,0">
+                    <Border
+                        BorderBrush="LightSlateGray" 
                         BorderThickness="4" 
                         CornerRadius="30" 
                         Height="800"
                         Background="DarkSlateGray">
-
-                    <StackPanel Height="{Binding ElementName=Instruction_Popup , Path=Height}" 
-                                Width="{Binding ElementName=Instruction_Popup , Path=Width}">
-
-                            <TextBlock Text="Game Instructions" 
-                                       Foreground="White" 
-                                       FontWeight="Bold" 
-                                       HorizontalAlignment="Center" 
-                                       FontSize="50" 
-                                       FontFamily="Monotype Corsiva"
-                                       Margin="0,20,0,0"/>
-
-                            <Image Source="/Assets/Images/Jump_Ins.png" 
-                                   Height="380" 
-                                   HorizontalAlignment="Left"
-                                   Margin="15,150,0,0"></Image>
-                        <Image Name="RuleImage"/>
-
-                        <Grid Margin="420,-400,0,0"
-                              Width="300"
-                              Height="400">
-
-                            <TextBlock Margin="-400,-100,10,0"
-                                       FontSize="18"
-                                       TextWrapping="Wrap"
-                                       Foreground="White"
-                                       FontWeight="Bold"
-                                       Text="The aim is to race to the opposite corner of the board before the opponent. 
-                                       Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
+                        <StackPanel
+                            Height="{Binding ElementName=Instruction_Popup , Path=Height}" 
+                            Width="{Binding ElementName=Instruction_Popup , Path=Width}">
+                            <TextBlock
+                                Text="Game Instructions" 
+                                Foreground="White" 
+                                FontWeight="Bold" 
+                                HorizontalAlignment="Center" 
+                                FontSize="50" 
+                                FontFamily="Monotype Corsiva"
+                                Margin="0,20,0,0">
                             </TextBlock>
-                                <Image Source="/Assets/Images/jumptombstone.png"
-                                       Height="200"
-                                       Width="200"
-                                       Margin="0,200,0,0">
-                                       
+                            <Image
+                                Source="/Assets/Images/Jump_Ins.png" 
+                                Height="380" 
+                                HorizontalAlignment="Left"
+                                Margin="15,150,0,0">
+                            </Image>
+                            <Image
+                                Name="RuleImage">
+                            </Image>
+                            <Grid
+                                Margin="420,-400,0,0"
+                                Width="300"
+                                Height="400">
+                                <TextBlock
+                                    Margin="-400,-100,10,0"
+                                    FontSize="18"
+                                    TextWrapping="Wrap"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Text="The aim is to race to the opposite corner of the board before the opponent. 
+                                    Players take turns moving a pumpkin piece by moving one step to an empty space or by jumping over other pumpkins once or several times in a row.">
+                                </TextBlock>
+                                <Image
+                                    Source="/Assets/Images/jumptombstone.png"
+                                    Height="200"
+                                    Width="200"
+                                    Margin="0,200,0,0">
                                 </Image>
-                        </Grid>
-                        <TextBlock FontSize="18" 
-                                   FontWeight="Bold"
-                                   Foreground="White"
-                                   Margin="20,20,20,0" 
-                                   TextWrapping="Wrap"
-                                   Text="The green circles indicates all possible moves when selecting a pumpkin. 
-                                   The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
+                            </Grid>
+                        <TextBlock
+                            FontSize="18" 
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Margin="20,20,20,0" 
+                            TextWrapping="Wrap"
+                            Text="The green circles indicates all possible moves when selecting a pumpkin. 
+                            The game will random place tombstone as obstacle on the board to prevent players to stand on that place. It is possible to jump over the tombstone as if it were like a pumpkin piece.">
                         </TextBlock>
                     </StackPanel>
                 </Border>

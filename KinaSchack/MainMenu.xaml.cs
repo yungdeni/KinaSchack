@@ -23,7 +23,7 @@ using Windows.UI.ViewManagement;
 namespace KinaSchack
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Menu page. Holds MediaPlayer for background music.
     /// </summary>
     public sealed partial class MainMenu : Page
     {
@@ -37,19 +37,15 @@ namespace KinaSchack
             player.Volume = 0.005;
             player.IsLoopingEnabled = true;
             player.Play();
-           
         }
-
         private void MainMenuStartGame(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
         }
-
         private void MainMenuQuit(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();
         }
-
         private void LoadInstructionPage(object sender, RoutedEventArgs e)
         {
             if (!Instruction_Popup.IsOpen)
